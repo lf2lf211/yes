@@ -1084,6 +1084,7 @@
 									</table>
 								</div>
 							</div>
+							
 							<div id="menu11" class="tab-pane fade">
 								<div class="model content-panel ">
 								<h4>
@@ -1165,6 +1166,7 @@
 									
 
 									</table>
+									
 									<div class="changeMember" style="display: none;">
 										<hr>
 										<h4>
@@ -2063,7 +2065,7 @@
 								</div>
 							</div>
 						 </c:if>
-						
+							<c:if test="${type.contains(\"1\") }">
 							<div id="menu29" class="tab-pane fade">
 								<div class="model content-panel ">
 									<h4>
@@ -2146,6 +2148,7 @@
 									<%-- <jsp:include page="/page/page2.file"></jsp:include> --%>	
 
 									</table>
+									
 									<div class="changeMember" style="display: none;">
 										<hr>
 										<h4>
@@ -2271,7 +2274,7 @@
 										</form>
 									</div>
 								</div>
-							</div>
+							</div></c:if>
 							<!-- ==================================系统管理=================================== -->
 							<div id="menu30" class="tab-pane fade">
 								<div class="model content-panel ">
