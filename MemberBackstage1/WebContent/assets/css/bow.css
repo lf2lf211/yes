@@ -1,0 +1,32 @@
+.menu_General{
+	/*display: none;*/
+}
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding: 10px 20px 10px 15px;
+}
+legend{
+	width: fit-content;
+	border-bottom: none;
+}
+.model{
+	padding: 10px;
+}
+#main-content th{
+	text-align: center;
+	vertical-align: inherit;
+	background: #ffa500;
+}
+/*.model table thead tr th{
+	text-align: center;
+	vertical-align: inherit;
+	background: #ffa500;
+}
+*//*.model table tbody tr td{
+	text-align: center;
+	vertical-align: inherit;	
+}*/
+textarea{
+	resize: none;
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.member.model.MemberVO" table="member" >
+        
+        <id name="memberNo" column="memberNo">
+            <generator class="sequence" >
+              <param name="sequence">emp_seq</param>
+            </generator>  
+        </id>
+        
+        <property name="account" column="account" />
+        <property name="password" column="password" />
+        <property name="name" column="name" />
+        <property name="balance" column="balance" />
+        <property name="loginIP" column="loginIP" />
+        <property name="loginTime" column="loginTime" />
+        <property name="level" column="level" />
+        <property name="state" column="state" />
+    
+    </class>
+</hibernate-mapping>
