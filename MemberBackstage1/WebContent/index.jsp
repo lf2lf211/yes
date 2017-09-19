@@ -140,7 +140,7 @@
 									会员列表
 							</a></li>
 							<li><a href="#" id="changeAgent"> <i class="fa fa-users"></i>
-									更换/新增 代理
+									管理代理
 							</a></li>
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;" class="menu_arrow">
@@ -187,7 +187,7 @@
 									开奖结果
 							</a></li>
 						</ul></li>
-					<li class="sub-menu"><a href="javascript:;" class="menu_arrow">
+					<!-- <li class="sub-menu"><a href="javascript:;" class="menu_arrow">
 							<i class=" fa fa-desktop"></i> <span>系统记录</span> <img
 							src="assets/img/down.png" style="float: right;">
 					</a>
@@ -198,15 +198,15 @@
 							<li><a href="#" id="dailyRecord"> <i
 									class="fa fa-file-text-o"></i> 日志
 							</a></li>
-						</ul></li>
+						</ul></li> -->
 					<li class="sub-menu"><a href="javascript:;" class="menu_arrow">
 							<i class=" fa fa-desktop"></i> <span>系统管理</span> <img
 							src="assets/img/down.png" style="float: right;">
 					</a>
 						<ul class="sub">
-							<li><a href="#" id="rightSet"> <i class="fa fa-key"></i>
+							<!-- <li><a href="#" id="rightSet"> <i class="fa fa-key"></i>
 									权限设定
-							</a></li>
+							</a></li> -->
 							<!-- 							<li> -->
 							<!-- 								<a href="#" id="changePSD"> -->
 							<!-- 									<i class="fa fa-unlock"></i> -->
@@ -216,9 +216,9 @@
 							<li><a href="#" id="LogInRecord"> <i
 									class="fa fa-file-text-o"></i> 登陆日志
 							</a></li>
-							<li><a href="#" id="BetLimSet"> <i class="fa fa-cogs"></i>
+							<!-- <li><a href="#" id="BetLimSet"> <i class="fa fa-cogs"></i>
 									下注限额设置
-							</a></li>
+							</a></li> -->
 							<li><a href="#" id="ReceiptSet"> <i class="fa fa-cogs"></i>
 									收款设置
 							</a></li>
