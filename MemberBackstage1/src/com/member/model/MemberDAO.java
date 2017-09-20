@@ -15,7 +15,7 @@ public class MemberDAO implements MemberInterface {
 	private static final String DRIVER = "org.gjt.mm.mysql.Driver";
 	private static final String URL = "jdbc:mysql://localhost:3306/memberbackstage";
 	private static final String USER = "root";
-	private static final String PASSWORD = "";
+	private static final String PASSWORD = "@hkhs7396";
 
 	private static final String INSERT_STMT = "INSERT INTO member"
 			+ "( account, password, name, balance,loginIP, loginTime,level,state,superior,commission)"
