@@ -23,8 +23,8 @@ public class Jdbcmysql {
 			Class.forName("org.gjt.mm.mysql.Driver");
 
 			// 嚙踝蕭Udriver
-//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mari", "root", "");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mari", "root", "@hkhs7396");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mari", "root", "");
+//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mari", "root", "@hkhs7396");
 
 			// 嚙踝蕭oconnection
 		} catch (ClassNotFoundException e) {
@@ -76,7 +76,6 @@ public class Jdbcmysql {
 				System.out.println("");
 			}
 		} catch (Exception exception) {
-			System.out.println("bbbbbbb :" + exception.toString());
 			System.out.println("Exception:  " + exception);
 			exception.printStackTrace();
 		}
