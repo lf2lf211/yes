@@ -2,8 +2,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<jsp:useBean id="search" scope="session" type="java.util.List" />
 
+<jsp:useBean id="search" scope="session" type="java.util.List" />
 <jsp:useBean id="memSvc" scope="page"
 	class="com.member.model.MemberService" />
 <!DOCTYPE html>
