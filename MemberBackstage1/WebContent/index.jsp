@@ -4,8 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:useBean id="search" scope="session" type="java.util.List" />
 
-<jsp:useBean id="memSvc" scope="page"
-	class="com.member.model.MemberService" />
+<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />
+<jsp:useBean id="ttp" scope="page" class="com.member.model.MemberService" />
 <!DOCTYPE html>
 <html lang="en">
 
@@ -998,15 +998,15 @@
 										<c:forEach var="member" items="${memSvc.all}">
 										<tbody>
 											<tr>
-												<td>${member.memberNo }123</td>
 												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
+												<td>${member.memberNo }</td>
+												<td>${member.level }</td>
+												<td>${member.name }</td>
+												<td>${member.loginIP }</td>
+												<td>交易号</td>
+												<td>进款</td>
+												<td>出款</td>
+												<td>${member.balance }</td>
 												<td></td>
 												<td></td>
 												<td></td>
