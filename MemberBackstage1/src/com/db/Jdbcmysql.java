@@ -26,6 +26,7 @@ public class Jdbcmysql {
 //			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mari", "root", "");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mari", "root", "@hkhs7396");
 
+
 			
 		} catch (ClassNotFoundException e) {
 			System.out.println("DriverClassNotFound :" + e.toString()); 
@@ -76,7 +77,6 @@ public class Jdbcmysql {
 				System.out.println("");
 			}
 		} catch (Exception exception) {
-			System.out.println("bbbbbbb :" + exception.toString());
 			System.out.println("Exception:  " + exception);
 			exception.printStackTrace();
 		}

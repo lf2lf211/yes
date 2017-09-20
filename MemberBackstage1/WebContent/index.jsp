@@ -995,9 +995,10 @@
 												<th>支付帐号</th>
 											</tr>
 										</thead>
+										<c:forEach var="member" items="${memSvc.all}">
 										<tbody>
 											<tr>
-												<td></td>
+												<td>${member.memberNo }123</td>
 												<td></td>
 												<td></td>
 												<td></td>
@@ -1018,6 +1019,7 @@
 												<td></td>
 											</tr>
 										</tbody>
+											</c:forEach>
 									</table>
 								</div>
 							</div>
