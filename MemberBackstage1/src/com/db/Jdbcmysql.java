@@ -22,14 +22,14 @@ public class Jdbcmysql {
 		try {
 			Class.forName("org.gjt.mm.mysql.Driver");
 
-			// 嚙踝蕭Udriver
+			
 //			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mari", "root", "");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mari", "root", "@hkhs7396");
 
-			// 嚙踝蕭oconnection
+			
 		} catch (ClassNotFoundException e) {
 			System.out.println("DriverClassNotFound :" + e.toString()); 
-		} // 嚙踝蕭嚙箠嚙踝蕭|嚙踝蕭嚙踝蕭sqlexception
+		} 
 		catch (SQLException x) {
 			System.out.println("Exception :" + x.toString());
 		}

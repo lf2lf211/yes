@@ -48,6 +48,12 @@ $(document).ready(function(){
 			$('#recharge').trigger('click');
 		});
 	
+	$('#recharge_con').click(function(){
+		$('.menu_recharge_con').fadeIn();
+		$('.menu_recharge_con').trigger('click');
+
+	});
+	
 
 	//-------------cash--------------------------	
 	$('#cash').click(function(){
@@ -84,10 +90,11 @@ $(document).ready(function(){
 		});
 	//-------------memList--------------------------	
 	$('#memList').click(function(){
-			$('.menu_memList').fadeIn();
-			$('.menu_memList').trigger('click');
+		$('.menu_memList').fadeIn();
+		$('.menu_memList').trigger('click');
 
-		});
+	});
+	
 	//-------------changeAgent--------------------------	
 	$('#changeAgent').click(function(){
 			$('.menu_changeAgent').fadeIn();
@@ -353,7 +360,9 @@ $('.nav-tabs a').on('shown.bs.tab', function (e) {
 	if (url.match('#menu5')) {
 		$('.menu_recharge').fadeIn();
 	}
-
+	if (url.match('#menu39')) {
+		$('.menu_recharge_con').fadeIn();
+	}
    	if (url.match('#menu6')) {
 			$('.menu_cash').fadeIn();
 		}

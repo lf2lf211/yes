@@ -70,6 +70,9 @@ public class MemberServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		
 
+		
+		
+
 		if ("login".equals(action)) {
 			List<String> checkMsgs = new LinkedList<String>();
 			req.setAttribute("checkMsgs", checkMsgs);
@@ -139,7 +142,18 @@ public class MemberServlet extends HttpServlet {
 		}
 ///////////////
 
-			
+		if("searchMyMember".equals(action)){
+
+			String url =req.getParameter("url");
+			MemberService memberService = new MemberService();
+			Integer memberNo =new Integer( req.getParameter("memberNo"));
+		MemberVO mem=memberService.getOneMemberVO(memberNo);
+	//String	applyTime = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime());
+	req.getSession().setAttribute("myMem", mem);
+//	req.getSession().setAttribute("applyTime", applyTime);
+			res.sendRedirect("index.jsp#" + url);
+			return;
+		}
 		
 		
 		
@@ -152,7 +166,7 @@ public class MemberServlet extends HttpServlet {
 				
 			String a="1";
 			 try {
-				  String pathname = "D:\\別刪我.txt"; // 绝对路径或相对路径都可以，这里是绝对路径，写入文件时演示相对路径  
+				  String pathname = "D:\\don.txt"; // 绝对路径或相对路径都可以，这里是绝对路径，写入文件时演示相对路径  
 		          File filename = new File(pathname); // 要读取以上路径的input。txt文件  
 		          InputStreamReader reader = new InputStreamReader(  
 		                  new FileInputStream(filename)); // 建立一个输入流对象reader  
@@ -163,7 +177,7 @@ public class MemberServlet extends HttpServlet {
 		          intValue=intValue+1;
 		          a=String.valueOf(intValue);
 			} catch (Exception e) {
-				 File writename = new File("D:\\別刪我.txt"); // 相对路径，如果没有则要建立一个新的output。txt文件  
+				 File writename = new File("D:\\don.txt"); // 相对路径，如果没有则要建立一个新的output。txt文件  
 		          writename.createNewFile(); // 创建新文件  
 		          BufferedWriter out = new BufferedWriter(new FileWriter(writename));  
 		          out.write("1"); // \r\n即为换行  
@@ -181,7 +195,7 @@ public class MemberServlet extends HttpServlet {
 
 							 account=("YB"+outString);  
 							  
-							 File writename = new File("D:\\別刪我.txt"); // 相对路径，如果没有则要建立一个新的output。txt文件  
+							 File writename = new File("D:\\don.txt"); // 相对路径，如果没有则要建立一个新的output。txt文件  
 					          writename.createNewFile(); // 创建新文件  
 					          BufferedWriter out = new BufferedWriter(new FileWriter(writename));  
 					          out.write(a); // \r\n即为换行  

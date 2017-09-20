@@ -15,7 +15,7 @@ public class MemberDAO implements MemberInterface {
 	private static final String DRIVER = "org.gjt.mm.mysql.Driver";
 	private static final String URL = "jdbc:mysql://localhost:3306/memberbackstage";
 	private static final String USER = "root";
-	private static final String PASSWORD = "@hkhs7396";
+	private static final String PASSWORD = "";
 
 	private static final String INSERT_STMT = "INSERT INTO member"
 			+ "( account, password, name, balance,loginIP, loginTime,level,state,superior,commission)"
@@ -35,7 +35,8 @@ public class MemberDAO implements MemberInterface {
 	private static final String DELETE_STMT = "DELETE FROM member WHERE memberNO = ?";
 	private static final String FIND_BY_PK = "SELECT * FROM MEMber WHERE memberNO = ?";
 	private static final String FIND_BY_ACCOUNT = "SELECT * FROM MEMber WHERE account = ?";
-	private static final String GET_ALL = "SELECT * FROM MEMber where superior like ?  order by memberNO";
+	private static final String GET_ALL_BY_SUPERIOR = "SELECT * FROM MEMber where superior like ?  order by memberNO";
+	private static final String GET_ALL = "SELECT * FROM MEMber ";
 
 	@Override
 	public void add(MemberVO memberVO) {
@@ -379,7 +380,7 @@ public class MemberDAO implements MemberInterface {
 
 			Class.forName(DRIVER);
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			pstmt = con.prepareStatement(GET_ALL);
+			pstmt = con.prepareStatement(GET_ALL_BY_SUPERIOR);
 			pstmt.setString(1,"%"+account+"%");
 			rs = pstmt.executeQuery();
 

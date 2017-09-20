@@ -2,8 +2,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <jsp:useBean id="search" scope="session" type="java.util.List" />
+
 <jsp:useBean id="memSvc" scope="page"
 	class="com.member.model.MemberService" />
 <!DOCTYPE html>
@@ -118,6 +118,7 @@
 							<li><a href="#" id="recharge"> <i class="fa fa-jpy"></i>
 									上分申请
 							</a></li>
+
 							<li><a href="#" id="cash"> <i class="fa fa-jpy"></i>
 									下分申请
 							</a></li>
@@ -275,6 +276,12 @@
 							<li class="menu_recharge" style="display: none;"><a
 								data-toggle="tab" href="#menu5" class="menu_recharge"> <i
 									class="fa fa-jpy"></i> 上分申请
+							</a> <b class="menu_del fa fa-times"
+								style="position: absolute; top: 5px; right: 2px; cursor: pointer; padding: 5px;"></b>
+							</li>
+							<li class="menu_recharge_con" style="display: none;"><a
+								data-toggle="tab" href="#menu39" class="menu_recharge_con"> <i
+									class="fa fa-jpy"></i>上分申请
 							</a> <b class="menu_del fa fa-times"
 								style="position: absolute; top: 5px; right: 2px; cursor: pointer; padding: 5px;"></b>
 							</li>
@@ -762,6 +769,27 @@
 									<h4>
 										<i class="fa fa-angle-right"></i> 上分申请
 									</h4>
+									我的下线:
+									<form action="member.do" method="Post" style='display: inline-block'>
+									
+									<select size="1" name="memberNo">
+										<c:forEach var="member" items="${search}">
+											<option value="${member.memberNo}" ${(member.account==member.account)? 'selected':'' } >帳號:${member.account}名稱:${member.name} 
+										</c:forEach>
+									</select>
+									<input type="hidden" name="url" value="menu39">
+									<input type="hidden" name="action" value="searchMyMember" >
+									<input type="submit" id="recharge_con">
+									</form>
+									
+								</div>
+							</div>
+							<div id="menu39" class="tab-pane fade">
+								<div class="model content-panel ">
+									<h4>
+										<i class="fa fa-angle-right"></i> 上分申请
+									</h4>
+									
 									<table
 										class="table table-bordered table-striped table-condensed">
 										<thead>
@@ -772,43 +800,41 @@
 												<th rowspan="2">用户暱称</th>
 												<th rowspan="2">类型</th>
 												<th rowspan="2">登录IP</th>
-												<th rowspan="2">交易号</th>
-												<th rowspan="2">进款</th>
-												<th rowspan="2">用户馀额</th>
-												<th rowspan="2">状态</th>
-												<th colspan="4">支付信息</th>
-												<th rowspan="2">描述</th>
-												<th rowspan="2">操作人</th>
-												<th rowspan="2">申请时间</th>
+<!-- 												<th rowspan="2">用户馀额</th> -->
+<!-- 												<th colspan="4">支付信息</th> -->
+<!-- 												<th rowspan="2">描述</th> -->
+<!-- 												<th rowspan="2">操作人</th> -->
+												<th rowspan="2">分數</th>
 												<th rowspan="2">操作</th>
+												<th rowspan="2">交提</th>
 											</tr>
-											<tr>
-												<th>支付方式</th>
-												<th>支付标题</th>
-												<th>支付名称</th>
-												<th>支付帐号</th>
-											</tr>
+<!-- 											<tr> -->
+<!-- 												<th>支付方式</th> -->
+<!-- 												<th>支付标题</th> -->
+<!-- 												<th>支付名称</th> -->
+<!-- 												<th>支付帐号</th> -->
+<!-- 											</tr> -->
 										</thead>
 										<tbody>
 											<tr>
 												<td></td>
 												<!-- <td></td> -->
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
+												<td>${myMem.memberNo }</td>
+												<td>${myMem.name }</td>
+												<td>${myMem.level }</td>
+												<td>${myMem.loginIP }</td>
+			
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+
+<!-- 												<td></td> -->
+												<td>${memberVO.account }</td>
+												<td><input type="text" name=""></td>
+												<td><input type="submit"></td>
 											</tr>
 										</tbody>
 									</table>
@@ -1495,17 +1521,17 @@
 												<th>操作</th>
 											</tr>
 										</thead>
+										
 										<tbody>
 											<tr>
 												<form action="scrollingtext.do" method='get'>
 													<td></td>
-													<td><textarea class="Marquee" cols="150" rows="3"
+													<td><textarea class="Marquee" cols="100" rows="3"
 															name='scrollingText'>${scrollingText}</textarea></td>
 													<td>${updateTime}</td>
-													<td><input type="hidden" name='action'
-														value='updateScoll'> <input type="hidden"
-														name='url' value='menu15'> <input type="submit"
-														class="btn btn-warning change_Btn" value='修改'></td>
+													<td><input type="hidden" name='action'value='updateScoll'>
+													<input type="hidden"name='url' value='menu15'> 
+													<input type="submit"class="btn btn-warning change_Btn" value='修改'></td>
 												</form>
 											</tr>
 										</tbody>

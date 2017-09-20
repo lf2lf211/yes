@@ -43,8 +43,7 @@ public class ScrollingtextServlet extends HttpServlet {
 				// out.print(json);
 				// System.out.println(json) ;
 
-				request.getSession().setAttribute("scrollingText", scrollingText);
-				request.getSession().setAttribute("updateTime", updateTime);
+
 				response.sendRedirect("index.jsp#" + url);
 
 			} catch (Exception e) {
@@ -64,6 +63,7 @@ public class ScrollingtextServlet extends HttpServlet {
 				System.out.println(scrollingText);
 				sql = "update  mari.scrollingtext set textContent = '" +scrollingText + "' , updateTime =  '"+ updateTime +"' "; 
 				db.doSqlUpdate(sql);
+
 				response.sendRedirect("index.jsp#" + url);
 
 			} catch (Exception e) {
