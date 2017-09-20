@@ -1092,7 +1092,7 @@
 									<table
 										class="table table-bordered table-striped table-condensed">
 										<thead>
-											<tr>
+											<tr> 
 												<th></th>
 												<th>所属上级</th>
 												<th>用户编号</th>
