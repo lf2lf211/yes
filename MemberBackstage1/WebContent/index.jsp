@@ -107,7 +107,7 @@
 									单日注单
 							</a></li>
 							<li><a href="#" id="welcome"> <i class="fa fa-comment-o"></i>
-									欢迎语录
+									生成推广连结
 							</a></li>
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;" class="menu_arrow">
@@ -121,9 +121,7 @@
 							<li><a href="#" id="cash"> <i class="fa fa-jpy"></i>
 									下分申请
 							</a></li>
-							<li><a href="#" id="thirdPay"> <i
-									class="fa fa-credit-card"></i> 第三方支付
-							</a></li>
+							
 							<li><a href="#" id="chargeRecord"> <i
 									class="fa fa-file-text-o"></i> 交易纪录
 							</a></li>
@@ -136,11 +134,9 @@
 							<li><a href="#" id="agentLV"> <i class="fa fa-code-fork"></i>
 									代理层级
 							</a></li>
-							<li><a href="#" id="memList"> <i class="fa fa-users"></i>
-									会员列表
-							</a></li>
+							
 							<li><a href="#" id="changeAgent"> <i class="fa fa-users"></i>
-									管理代理
+									管理下线
 							</a></li>
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;" class="menu_arrow">
@@ -149,16 +145,22 @@
 					</a>
 						<ul class="sub">
 							<li><a href="#" id="cashAsk"> <i class="fa fa-money"></i>
-									提现请求
+<!-- 									提现请求 -->
+										输赢列表
 							</a></li>
 							<li><a href="#" id="cashRecord"> <i
-									class="fa fa-file-text-o"></i> 提现纪录
+									class="fa fa-file-text-o"></i> 
+<!-- 									提现纪录 -->
+										反佣列表
 							</a></li>
+							<li><a href="#" id="thirdPay"> <i
+									class="fa fa-credit-card"></i> 结算纪录
+							</a></li>
+							
+							
+							
 						</ul></li>
-					<!-- <li><a  href="#" id="businessNO"><i class="fa fa-align-left"></i>业务流水</a></li>
-                  <li><a  href="#" id="cashAsk"><i class="fa fa-money"></i>提现请求</a></li>
-                  <li><a  href="#" id="cashRecord"><i class="fa fa-file-text-o"></i>提现纪录</a></li> -->
-					<li class="sub-menu"><a href="javascript:;" class="menu_arrow">
+						<li class="sub-menu"><a href="javascript:;" class="menu_arrow">
 							<i class="fa fa-cogs"></i> <span>大厅设置</span> <img
 							src="assets/img/down.png" style="float: right;">
 					</a>
@@ -170,7 +172,7 @@
 							<!-- <li><a  href="#" id="gameRule"><i class="fa fa-exclamation-triangle"></i>游戏规则</a></li> -->
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;" class="menu_arrow">
-							<i class="fa fa-th"></i> <span>帳務</span> <img
+							<i class="fa fa-th"></i> <span>帐务</span> <img
 							src="assets/img/down.png" style="float: right;">
 					</a>
 						<ul class="sub">
@@ -183,9 +185,7 @@
 							<li><a href="#" id="BetList"> <i
 									class="fa fa-file-text-o"></i> 注单列表
 							</a></li>
-							<li><a href="#" id="prizeResult"> <i class="fa fa-gift"></i>
-									开奖结果
-							</a></li>
+							
 						</ul></li>
 					<!-- <li class="sub-menu"><a href="javascript:;" class="menu_arrow">
 							<i class=" fa fa-desktop"></i> <span>系统记录</span> <img
@@ -267,7 +267,7 @@
 							</li>
 							<li class="menu_welcome" style="display: none;"><a
 								data-toggle="tab" href="#menu4" class="menu_welcome"> <i
-									class="fa fa-comment-o"></i> 欢迎语录
+									class="fa fa-comment-o"></i> 生成推广连结
 							</a> <b class="menu_del fa fa-times"
 								style="position: absolute; top: 5px; right: 2px; cursor: pointer; padding: 5px;"></b>
 							</li>
@@ -284,12 +284,7 @@
 							</a> <b class="menu_del fa fa-times"
 								style="position: absolute; top: 5px; right: 2px; cursor: pointer; padding: 5px;"></b>
 							</li>
-							<li class="menu_thirdPay" style="display: none;"><a
-								data-toggle="tab" href="#menu7" class="menu_thirdPay"> <i
-									class="fa fa-credit-card"></i> 第三方支付
-							</a> <b class="menu_del fa fa-times"
-								style="position: absolute; top: 5px; right: 2px; cursor: pointer; padding: 5px;"></b>
-							</li>
+							
 							<li class="menu_chargeRecord" style="display: none;"><a
 								data-toggle="tab" href="#menu8" class="menu_chargeRecord"> <i
 									class="fa fa-file-text-o"></i> 交易纪录
@@ -303,34 +298,41 @@
 							</a> <b class="menu_del fa fa-times"
 								style="position: absolute; top: 5px; right: 2px; cursor: pointer; padding: 5px;"></b>
 							</li>
-							<li class="menu_memList" style="display: none;"><a
-								data-toggle="tab" href="#menu10" class="menu_memList"> <i
-									class="fa fa-users"></i> 会员列表
+
+							<li class="menu_changeAgent" style="display: none;"><a
+								data-toggle="tab" href="#menu11" class="menu_changeAgent"> <i
+									class="fa fa-users"></i> 管理下线
 							</a> <b class="menu_del fa fa-times"
 								style="position: absolute; top: 5px; right: 2px; cursor: pointer; padding: 5px;"></b>
 							</li>
-							<li class="menu_changeAgent" style="display: none;"><a
-								data-toggle="tab" href="#menu11" class="menu_changeAgent"> <i
-									class="fa fa-users"></i> 更换/新增 代理
+							<li class="menu_thirdPay" style="display: none;"><a
+								data-toggle="tab" href="#menu7" class="menu_thirdPay"> <i
+									class="fa fa-credit-card"></i> 结算纪录
 							</a> <b class="menu_del fa fa-times"
 								style="position: absolute; top: 5px; right: 2px; cursor: pointer; padding: 5px;"></b>
 							</li>
 							<!-- ==========================else============================ -->
-							<li class="menu_businessNO" style="display: none;"><a
-								data-toggle="tab" href="#menu12" class="menu_businessNO"> <i
-									class="fa fa-align-left"></i> 业务流水
-							</a> <b class="menu_del fa fa-times"
-								style="position: absolute; top: 5px; right: 2px; cursor: pointer; padding: 5px;"></b>
-							</li>
+							
 							<li class="menu_cashAsk" style="display: none;"><a
 								data-toggle="tab" href="#menu13" class="menu_cashAsk"> <i
-									class="fa fa-money"></i> 提现请求
+									class="fa fa-money"></i> 输赢列表
 							</a> <b class="menu_del fa fa-times"
 								style="position: absolute; top: 5px; right: 2px; cursor: pointer; padding: 5px;"></b>
 							</li>
 							<li class="menu_cashRecord" style="display: none;"><a
 								data-toggle="tab" href="#menu14" class="menu_cashRecord"> <i
-									class="fa fa-file-text-o"></i> 提现纪录
+									class="fa fa-file-text-o"></i> 反佣列表
+							</a> <b class="menu_del fa fa-times"
+								style="position: absolute; top: 5px; right: 2px; cursor: pointer; padding: 5px;"></b>
+							</li>
+							
+							
+							
+							
+							
+							<li class="menu_businessNO" style="display: none;"><a
+								data-toggle="tab" href="#menu7" class="menu_businessNO"> <i
+									class="fa fa-align-left"></i> 结算纪录
 							</a> <b class="menu_del fa fa-times"
 								style="position: absolute; top: 5px; right: 2px; cursor: pointer; padding: 5px;"></b>
 							</li>
@@ -702,12 +704,12 @@
 							<div id="menu4" class="tab-pane fade">
 								<div class="model content-panel ">
 									<h4>
-										<i class="fa fa-angle-right"></i> 欢迎语录
+										<i class="fa fa-angle-right"></i> 生成推广连结
 									</h4>
 									<fieldset
 										style="border: solid 1px #aaa; margin-top: 8px; margin-left: 15px; position: relative; width: 600px;">
 										<legend>
-											<h3>【客服欢迎语设置】</h3>
+											<h3>【生成推广连结】</h3>
 										</legend>
 										<!--     <div class="div">
                 <table>
@@ -872,7 +874,7 @@
 							<div id="menu7" class="tab-pane fade">
 								<div class="model content-panel ">
 									<h4>
-										<i class="fa fa-angle-right"></i> 第三方支付
+										<i class="fa fa-angle-right"></i> 结算纪录
 									</h4>
 									<table
 										class="table table-bordered table-striped table-condensed">
@@ -999,97 +1001,9 @@
 									<h4>
 										<i class="fa fa-angle-right"></i> 代理层级
 									</h4>
-									<table
-										class="table table-bordered table-striped table-condensed">
-										<thead>
-											<tr>
-												<th></th>
-												<th>用户编号</th>
-												<th>所属上级</th>
-												<th>用户帐号</th>
-												<th>用户名称</th>
-												<th>登录IP</th>
-												<th>阶层</th>
-												<th>帐户馀额</th>
-												<th>总馀额</th>
-												<th>状态</th>
-												<th>返水状态</th>
-												<th>赔率比例</th>
-												<th>备注</th>
-												<th>绑定IP</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							<div id="menu10" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 会员列表
-									</h4>
-									<table
-										class="table table-bordered table-striped table-condensed">
-										<thead>
-											<tr>
-												<th></th>
-												<th>所属上级</th>
-												<th>用户编号</th>
-												<th>用户暱称</th>
-												<th>馀额</th>
-												<th>总输赢</th>
-												<th>状态</th>
-												<th>备注</th>
-												<th>最后登入IP</th>
-												<th>登录时间</th>
-												<th>间格时间</th>
-												<th>创建时间</th>
-												<th>注单明细</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							
-							<div id="menu11" class="tab-pane fade">
-								<div class="model content-panel ">
-								<h4>
-										<i class="fa fa-angle-right"></i> 会员管理
-									</h4>
+									
+									
+									
 									<table
 										class="table table-bordered table-striped table-condensed">
 										<thead>
@@ -1166,6 +1080,98 @@
 									
 
 									</table>
+								</div>
+							</div>
+							<div id="menu10" class="tab-pane fade">
+								<div class="model content-panel ">
+									<h4>
+										<i class="fa fa-angle-right"></i> 会员列表
+									</h4>
+									<table
+										class="table table-bordered table-striped table-condensed">
+										<thead>
+											<tr>
+												<th></th>
+												<th>所属上级</th>
+												<th>用户编号</th>
+												<th>用户暱称</th>
+												<th>馀额</th>
+												<th>总输赢</th>
+												<th>状态</th>
+												<th>备注</th>
+												<th>最后登入IP</th>
+												<th>登录时间</th>
+												<th>间格时间</th>
+												<th>创建时间</th>
+												<th>注单明细</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							
+							<div id="menu11" class="tab-pane fade">
+								<div class="model content-panel ">
+								<h4>
+										<i class="fa fa-angle-right"></i> 会员管理
+									</h4>
+									<table
+										class="table table-bordered table-striped table-condensed">
+										<thead>
+											<tr>
+												<th></th>
+												<th>用户编号</th>
+												<th>所属上级</th>
+												<th>用户帐号</th>
+												<th>用户名称</th>
+												<th>登录IP</th>
+												<th>阶层</th>
+												<th>帐户馀额</th>
+												<th>总馀额</th>
+												<th>状态</th>
+												<th>返水状态</th>
+												<th>赔率比例</th>
+												<th>备注</th>
+												<th>绑定IP</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+									
 									
 									<div class="changeMember" style="display: none;">
 										<hr>
@@ -1294,13 +1300,64 @@
 								</div>
 							</div>
 							<!-- =========================else=============================== -->
-							<div id="menu12" class="tab-pane fade">
+<!-- 							<div id="menu12" class="tab-pane fade"> -->
+<!-- 								<div class="model content-panel "> -->
+<!-- 									<h4> -->
+<!-- 										<i class="fa fa-angle-right"></i> 业务流水 -->
+<!-- 									</h4> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+
+<div id="menu12" class="tab-pane fade">
 								<div class="model content-panel ">
 									<h4>
-										<i class="fa fa-angle-right"></i> 业务流水
+										<i class="fa fa-angle-right"></i> 结算纪录
 									</h4>
+									<table
+										class="table table-bordered table-striped table-condensed">
+										<thead>
+											<tr>
+												<th></th>
+												<th>用户编号</th>
+												<th>所属上级</th>
+												<th>用户帐号</th>
+												<th>用户名称</th>
+												<th>阶层</th>
+												<th>帐户馀额</th>
+												<th>总馀额</th>
+												<th>提现金额</th>
+												<th>银行类型</th>
+												<th>持卡人</th>
+												<th>银行帐号</th>
+												<th>开户行</th>
+												<th>时间</th>
+												<th>操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
 							</div>
+
+
 							<div id="menu13" class="tab-pane fade">
 								<div class="model content-panel ">
 									<h4>
@@ -2274,7 +2331,7 @@
 										</form>
 									</div>
 								</div>
-							</div></c:if> 
+							</div></c:if>  
 							<!-- ==================================系统管理=================================== -->
 							<div id="menu30" class="tab-pane fade">
 								<div class="model content-panel ">
@@ -2321,7 +2378,7 @@
 									<h4>
 										<i class="fa fa-angle-right"></i> 权限不足
 									</h4>
-								
+							 	  
 								</div>
 							</div>
 							<div id="menu21" class="tab-pane fade">
