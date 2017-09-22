@@ -11,6 +11,7 @@ public class MemberVO {
 	private String level;
 	private String state;
 	private String superior;
+	private String superior2;
 	private int commission ; 
 
 	
@@ -18,7 +19,8 @@ public class MemberVO {
 		super();
 	}
 	
-	public MemberVO(int memberNo, String account, String password, String name, double balance, String loginIP, String loginTime, String level, String state, String superior, int commission) {
+	public MemberVO(int memberNo, String account, String password, String name, double balance, String loginIP, String loginTime, String level, String state, String superior,String 
+			superior2, int commission) {
 		super();
 		this.memberNo = memberNo;
 		this.account = account;
@@ -30,7 +32,16 @@ public class MemberVO {
 		this.level = level;
 		this.state = state;
 		this.superior = superior;
+		this.superior = superior2;
 		this.commission = commission;
+	}
+
+	public String getSuperior2() {
+		return superior2;
+	}
+
+	public void setSuperior2(String superior2) {
+		this.superior2 = superior2;
 	}
 
 	public int getCommission() {

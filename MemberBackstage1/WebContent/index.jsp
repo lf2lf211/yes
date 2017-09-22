@@ -3,7 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:useBean id="search" scope="session" type="java.util.List" />
-
+<jsp:useBean id="search2" scope="session" type="java.util.List" />
+<%@ page import="java.util.*"%>
+<jsp:useBean id="uppointsSvc" scope="page"
+	class="com.UpPoints.model.UpPointsService" />
 <jsp:useBean id="memSvc" scope="page"
 	class="com.member.model.MemberService" />
 <!DOCTYPE html>
@@ -764,6 +767,7 @@
 								</div>
 							</div>
 							<!-- =================================储值============================== -->
+							<c:if test="${type.contains(\"2\")||type.contains(\"1\")}">
 							<div id="menu5" class="tab-pane fade">
 								<div class="model content-panel ">
 									<h4>
@@ -789,7 +793,7 @@
 									<h4>
 										<i class="fa fa-angle-right"></i> 上分申请
 									</h4>
-									
+									<form action="UpPointsServlet.do" method="post">
 									<table
 										class="table table-bordered table-striped table-condensed">
 										<thead>
@@ -804,9 +808,9 @@
 <!-- 												<th colspan="4">支付信息</th> -->
 <!-- 												<th rowspan="2">描述</th> -->
 <!-- 												<th rowspan="2">操作人</th> -->
-												<th rowspan="2">分數</th>
+												<th rowspan="2">分数</th>
 												<th rowspan="2">操作</th>
-												<th rowspan="2">交提</th>
+											
 											</tr>
 <!-- 											<tr> -->
 <!-- 												<th>支付方式</th> -->
@@ -815,6 +819,7 @@
 <!-- 												<th>支付帐号</th> -->
 <!-- 											</tr> -->
 										</thead>
+										
 										<tbody>
 											<tr>
 												<td></td>
@@ -832,14 +837,23 @@
 <!-- 												<td></td> -->
 
 <!-- 												<td></td> -->
-												<td>${memberVO.account }</td>
-												<td><input type="text" name=""></td>
-												<td><input type="submit"></td>
+												
+												<td  align="center"><input type="text" name="points"></td>
+												<td><input type="submit">
+												<input type="hidden" name="action" value="addUpPoints" >
+												<input type="hidden" name="memberNo" value="${myMem.memberNo }" >
+												<input type="hidden" name="name" value="${myMem.name }">
+												<input type="hidden" name="level" value="${myMem.level }">
+												<input type="hidden" name="loginIP" value="${myMem.loginIP }">
+												</td>
+												
 											</tr>
 										</tbody>
-									</table>
+										
+									</table></form>
 								</div>
 							</div>
+							</c:if>
 							<div id="menu6" class="tab-pane fade">
 								<div class="model content-panel ">
 									<h4>
@@ -855,36 +869,16 @@
 												<th rowspan="2">用户暱称</th>
 												<th rowspan="2">类型</th>
 												<th rowspan="2">登录IP</th>
-												<th rowspan="2">交易号</th>
-												<th rowspan="2">出款</th>
 												<th rowspan="2">用户馀额</th>
-												<th rowspan="2">状态</th>
-												<th colspan="4">支付信息</th>
-												<th rowspan="2">描述</th>
 												<th rowspan="2">操作人</th>
-												<th rowspan="2">申请时间</th>
 												<th rowspan="2">操作</th>
 											</tr>
-											<tr>
-												<th>支付方式</th>
-												<th>支付标题</th>
-												<th>支付名称</th>
-												<th>支付帐号</th>
-											</tr>
+											
 										</thead>
 										<tbody>
 											<tr>
 												<td></td>
 												<!--  <td></td> -->
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
 												<td></td>
 												<td></td>
 												<td></td>
@@ -1029,14 +1023,11 @@
 									<h4>
 										<i class="fa fa-angle-right"></i> 代理层级
 									</h4>
-									
-									
-									
 									<table
 										class="table table-bordered table-striped table-condensed">
 										<thead>
 											<tr>
-												<th></th>
+												<th> </th>
 												<th>用户编号</th>
 												<th>用户账户</th>
 												<th>用户密码</th>
@@ -1046,8 +1037,9 @@
 												<th>登录时间</th>
 												<th>身分</th>
 												<th>状态</th>
-												<th>上級</th>
-												<th>操作</th>
+												<th>层级</th>
+												<th>上级</th>
+												
 
 											</tr>
 										</thead>
@@ -1055,7 +1047,7 @@
 												<%@ include file="/page/page1.file" %> 
 										
 										<c:forEach var="member" items="${search}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-
+												
 											<tbody>
 												<tr>
 													<td></td>
@@ -1069,37 +1061,8 @@
 													<td class='level'>${member.level}</td>
 													<td>${member.state }</td>
 													<td>${member.superior}</td>
-
-													<td><input type="submit"
-														class="btn btn-warning change_Btn" value='修改'>
-														<form action="member.do" method="Post"
-															style='display: inline-block'>
-															<input type="hidden" name='memberNo'
-																value="${member.memberNo}"> <input type="hidden"
-																name='action' value="deleteMember"> <input
-																type="hidden" name='url' value="menu29"> <input
-																type="submit" class="btn btn-danger" value='删除'>
-														</form>
-														<form action="member.do" method="Post"
-															style='display: inline-block'>
-															<input type="hidden" name='memberNo'
-																value="${member.memberNo}"> <input type="hidden"
-																name='action' value="enableMember"> <input
-																type="hidden" name='state' value="启用"> <input
-																type="hidden" name='url' value="menu29"> <input
-																type="submit" class="nobtn btn btn-primary btn-sm"
-																value='复权'>
-														</form>
-														<form action="member.do" method="Post"
-															style='display: inline-block'>
-															<input type="hidden" name='memberNo'
-																value="${member.memberNo}"> <input type="hidden"
-																name='action' value="disableMember"> <input
-																type="hidden" name='state' value="停用"> <input
-																type="hidden" name='url' value="menu29"> <input
-																type="submit" class="yesbtn btn btn-primary btn-sm"
-																value='停权'>
-														</form></td>
+													<td>${member.superior2}</td>
+													
 												</tr>
 											</tbody>
 
@@ -1164,40 +1127,71 @@
 										class="table table-bordered table-striped table-condensed">
 										<thead>
 											<tr>
-												<th></th>
+												<th> </th>
 												<th>用户编号</th>
-												<th>所属上级</th>
-												<th>用户帐号</th>
-												<th>用户名称</th>
+												<th>用户账户</th>
+												<th>用户密码</th>
+												<th>用户昵称</th>
+												<th>余额</th>
 												<th>登录IP</th>
-												<th>阶层</th>
-												<th>帐户馀额</th>
-												<th>总馀额</th>
+												<th>登录时间</th>
+												<th>身分</th>
 												<th>状态</th>
-												<th>返水状态</th>
-												<th>赔率比例</th>
-												<th>备注</th>
-												<th>绑定IP</th>
+												<th>上級</th>
+												<th>上級</th>
+												<th>操作</th>
+
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-										</tbody>
+							
+									
+										
+										<c:forEach var="member" items="${search2}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+												
+											<tbody>
+												<tr>
+													<td></td>
+													<td class='memberNo'>${member.memberNo}</td>
+													<td class='account'>${member.account}</td>
+													<td class='password'>${member.password}</td>
+													<td class='name'>${member.name}</td>
+													<td>${member.balance }</td>
+													<td>${member.loginIP }</td>
+													<td>${member.loginTime }</td>
+													<td class='level'>${member.level}</td>
+													<td>${member.state }</td>
+													<td>${member.superior}</td>
+													<td>${member.superior2}</td>
+													<td><input type="submit"
+														class="btn btn-warning change_Btn" value='修改'>
+														
+														<form action="member.do" method="Post"
+															style='display: inline-block'>
+															<input type="hidden" name='memberNo'
+																value="${member.memberNo}"> <input type="hidden"
+																name='action' value="enableMember"> <input
+																type="hidden" name='state' value="启用"> <input
+																type="hidden" name='url' value="menu29"> <input
+																type="submit" class="nobtn btn btn-primary btn-sm"
+																value='复权'>
+														</form>
+														<form action="member.do" method="Post"
+															style='display: inline-block'>
+															<input type="hidden" name='memberNo'
+																value="${member.memberNo}"> <input type="hidden"
+																name='action' value="disableMember"> <input
+																type="hidden" name='state' value="停用"> <input
+																type="hidden" name='url' value="menu29"> <input
+																type="submit" class="yesbtn btn btn-primary btn-sm"
+																value='停权'>
+														</form></td>
+												</tr>
+											</tbody>
+
+										</c:forEach>
+						
+									
+
 									</table>
 									
 									
@@ -1313,7 +1307,9 @@
 													<tr>
 														<td><input
 															type="hidden" name="superior"
-															value="${memberVO.superior},"> <input
+															value="${memberVO.superior},">
+															<input type="hidden" name="superior2"
+															value="${memberVO.account}"> <input
 															type="hidden" name="acc" value="${memberVO.account}">
 															<input type="hidden" name="action" value="memInsert">
 															<input type="hidden" name="url" value="menu11">
@@ -1621,29 +1617,28 @@
 										<thead>
 											<tr>
 												<th></th>
-												<th>用户编号</th>
-												<th>用户暱称</th>
-												<th>用户类型</th>
-												<th>会员人数</th>
-												<th>投注积分</th>
-												<th>会员结果</th>
-												<th>团队赚水</th>
-												<th>备注</th>
+												<th rowspan="2">用户编号</th>
+												<th rowspan="2">用户暱称</th>
+												<th rowspan="2">类型</th>
+												<th rowspan="2">登录IP</th>
+												<th rowspan="2">分数</th>
+												<th rowspan="2">状态</th>
+												<th rowspan="2">申请时间</th>
 											</tr>
 										</thead>
+										<c:forEach var="uppoints" items="${uppointsSvc.all}">
 										<tbody>
 											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
+												<td>${uppoints.memberNo }</td>
+												<td>${uppoints.name }</td>
+												<td>${uppoints.level }</td>
+												<td>${uppoints.loginIP }</td>
+												<td>${uppoints.points }</td>
+												<td>${uppoints.status }</td>
+												<td>${uppoints.time }</td>
 											</tr>
 										</tbody>
+										</c:forEach>
 									</table>
 								</div>
 							</div>
@@ -2375,7 +2370,20 @@
 									<p>会员/用户：玩家</p>
 								</div>
 							</div>
-							
+							 <c:if test="${type.contains(\"3\")}">
+							 
+							 <div id="menu5" class="tab-pane fade">
+								<div class="model content-panel ">
+									<h4>
+										<i class="fa fa-angle-right"></i> 权限不足
+									</h4>
+								
+								</div>
+							</div>
+							 
+							 
+							 </c:if>
+							 
 							 <c:if test="${type.contains(\"2\")||type.contains(\"3\")}">
 						 <div id="menu15" class="tab-pane fade">
 								<div class="model content-panel ">

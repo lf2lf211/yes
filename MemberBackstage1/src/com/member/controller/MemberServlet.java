@@ -118,10 +118,13 @@ public class MemberServlet extends HttpServlet {
 					System.out.println("QQ");
 					List<MemberVO> list = memberService.getAllSuperior(account);
 					session.setAttribute("search", list);
-					int i = 00001;
-					String str = "YB" + i;
-					System.out.println(str);
+					List<MemberVO> list2 = memberService.getAllSuperior2(account);
+					
+					
+					session.setAttribute("search2", list2);
+
 					memberService.updateMemberVO(mem);
+		
 					req.getSession().setAttribute("memberVO", mem);
 					res.sendRedirect("index.jsp");
 					return;
@@ -147,6 +150,7 @@ public class MemberServlet extends HttpServlet {
 			MemberService memberService = new MemberService();
 			Integer memberNo =new Integer( req.getParameter("memberNo"));
 		MemberVO mem=memberService.getOneMemberVO(memberNo);
+		
 	//String	applyTime = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime());
 	req.getSession().setAttribute("myMem", mem);
 //	req.getSession().setAttribute("applyTime", applyTime);
@@ -182,25 +186,19 @@ public class MemberServlet extends HttpServlet {
 		          out.write("1"); // \r\n即为换行  
 		          out.flush(); // 把缓存区内容压入文件  
 		          out.close(); // 最后记得关闭文件  
-			}
-					
-			//			if(true){
-							  
+			}	
+			String outString="";  
 							
-							
-							  String outString="";  
-							
-							  outString=fillStr(a, 5, false, "0");  
+			outString=fillStr(a, 5, false, "0");  
 
-							 account=("YB"+outString);  
+			account=("YB"+outString);  
 							  
-							 File writename = new File("D:\\don.txt"); // 相对路径，如果没有则要建立一个新的output。txt文件  
-					          writename.createNewFile(); // 创建新文件  
-					          BufferedWriter out = new BufferedWriter(new FileWriter(writename));  
-					          out.write(a); // \r\n即为换行  
-					          out.flush(); // 把缓存区内容压入文件  
-					          out.close(); // 最后记得关闭文件  
-					//	}
+			File writename = new File("D:\\don.txt"); // 相对路径，如果没有则要建立一个新的output。txt文件  
+			writename.createNewFile(); // 创建新文件  
+			BufferedWriter out = new BufferedWriter(new FileWriter(writename));  
+			out.write(a); // \r\n即为换行  
+			out.flush(); // 把缓存区内容压入文件  
+			out.close(); // 最后记得关闭文件  
 				
 
 			List<String> checkMsgs = new LinkedList<String>();
@@ -215,14 +213,19 @@ public class MemberServlet extends HttpServlet {
 			String state = "启用";
 			String url = req.getParameter("url");
 			String superior = req.getParameter("superior") + account;
+			String superior2 = req.getParameter("superior2");
 			int comcommission = 0;
 
 			MemberService memberService = new MemberService();
-			memberService.addMemberVO(account, password, name, balance, loginIP, loginTime, level, state, superior, comcommission);
+			
+			memberService.addMemberVO(account, password, name, balance, loginIP, loginTime, level, state, superior,superior2, comcommission);
 
 			String acc = req.getParameter("acc");// 查看下線
 			List<MemberVO> list = memberService.getAllSuperior(memberService.CheckOneMemberVO(acc).getAccount());
+			List<MemberVO> list2 = memberService.getAllSuperior2(memberService.CheckOneMemberVO(acc).getAccount());
+			
 			session.setAttribute("search", list);
+			session.setAttribute("search2", list2);
 
 			res.sendRedirect("index.jsp#" + url);
 
@@ -247,6 +250,7 @@ public class MemberServlet extends HttpServlet {
 				req.getRequestDispatcher("login.jsp").forward(req, res);
 			}
 		}
+		
 		if ("enableMember".equals(action) || "disableMember".equals(action)) {
 
 			List<String> checkMsgs = new LinkedList<String>();
@@ -274,6 +278,7 @@ public class MemberServlet extends HttpServlet {
 			String password = req.getParameter("password");
 			String name = req.getParameter("name");
 			String level = req.getParameter("level");
+			String superior2 = req.getParameter("superior2");
 
 			MemberService memberService = new MemberService();
 			MemberVO memberVO = memberService.getOneMemberVO(memberNo);
@@ -281,7 +286,7 @@ public class MemberServlet extends HttpServlet {
 			memberVO.setPassword(password);
 			memberVO.setName(name);
 			memberVO.setLevel(level);
-
+		
 			memberService.updateMemberVO(memberVO);
 			String url = req.getParameter("url");
 

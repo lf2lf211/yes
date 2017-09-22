@@ -11,4 +11,5 @@ public interface MemberInterface {
 	MemberVO findByAC(String account);
 	List<MemberVO> getAll();
 	List<MemberVO> getAllSuperior(String account);
+	List<MemberVO> getAllSuperior2(String account);
 }

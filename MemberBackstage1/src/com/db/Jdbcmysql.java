@@ -22,6 +22,7 @@ public class Jdbcmysql {
 		try {
 			Class.forName("org.gjt.mm.mysql.Driver");
 
+
 			
 //			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mari", "root", "");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mari", "root", "@hkhs7396");
