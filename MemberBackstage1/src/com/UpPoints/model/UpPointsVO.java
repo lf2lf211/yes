@@ -35,12 +35,14 @@ public class UpPointsVO {
 		this.time = time;
 	}
 
-	public String getStstus() {
+	
+
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStstus(String ststus) {
-		this.status = ststus;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public int getMemberNo() {

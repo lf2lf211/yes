@@ -210,6 +210,8 @@ public class UpPointsDAO implements UpPointsInterface {
 				uppointsVO.setLoginIP(rs.getString("loginIP"));
 				uppointsVO.setLevel(rs.getString("level"));
 				uppointsVO.setPoints(rs.getInt("points"));
+				uppointsVO.setStatus(rs.getString("status"));
+				uppointsVO.setTime(rs.getString("time"));
 				uppointsList.add(uppointsVO);
 				}
 

@@ -3,9 +3,12 @@ package com.UpPoints.controller;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,10 +39,18 @@ public class UpPointsServlet extends HttpServlet {
 	
 	
 		if("addUpPoints".equals(action)){
-			List<String> checkMsgs = new LinkedList<String>();
-			req.setAttribute("checkMsgs", checkMsgs);
+			Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
+			req.setAttribute("errorMsgs", errorMsgs);
 			
-			int points = Integer.parseInt(req.getParameter("points"));
+			
+			Integer points = null;
+			try {
+				points = new Integer(req.getParameter("points").trim());
+			} catch (NumberFormatException e) {
+				errorMsgs.put("points","分数请输入数字");
+			}
+			
+			
 			int memberNo = Integer.parseInt(req.getParameter("memberNo"));
 			String name = req.getParameter("name");
 			String loginIP = req.getParameter("loginIP");
@@ -47,6 +58,12 @@ public class UpPointsServlet extends HttpServlet {
 			String url = req.getParameter("url");
 			String status = req.getParameter("status");
 			String time = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime());
+			
+			
+			if (!errorMsgs.isEmpty()) {
+				res.sendRedirect("index.jsp#" + url);
+				return;
+			}
 			
 			
 			UpPointsService upPointsSvc =new UpPointsService();

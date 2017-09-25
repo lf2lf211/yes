@@ -20,7 +20,7 @@ public class UpPointsService {
 		upPoints.setLoginIP(loginIP);
 		upPoints.setPoints(points);
 		upPoints.setLevel(level);
-		upPoints.setStstus(status);
+		upPoints.setStatus(status);
 		upPoints.setTime(time);
 		dao.add(upPoints);
 		return upPoints;

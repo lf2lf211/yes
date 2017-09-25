@@ -794,13 +794,14 @@
 										<i class="fa fa-angle-right"></i> 上分申请
 									</h4>
 									<form action="UpPointsServlet.do" method="post">
-									<table
+									<table 
 										class="table table-bordered table-striped table-condensed">
 										<thead>
 											<tr>
 												<th rowspan="2"></th>
 												<!-- <th rowspan="2">上分纪录</th> -->
 												<th rowspan="2">用户编号</th>
+												<th rowspan="2">会员帐号</th>
 												<th rowspan="2">用户暱称</th>
 												<th rowspan="2">类型</th>
 												<th rowspan="2">登录IP</th>
@@ -808,6 +809,7 @@
 <!-- 												<th colspan="4">支付信息</th> -->
 <!-- 												<th rowspan="2">描述</th> -->
 <!-- 												<th rowspan="2">操作人</th> -->
+												<th rowspan="2">上级</th>
 												<th rowspan="2">分数</th>
 												<th rowspan="2">操作</th>
 											
@@ -820,11 +822,12 @@
 <!-- 											</tr> -->
 										</thead>
 										
-										<tbody>
+										<tbody align="center">
 											<tr>
 												<td></td>
 												<!-- <td></td> -->
 												<td>${myMem.memberNo }</td>
+												<td>${myMem.account }</td>
 												<td>${myMem.name }</td>
 												<td>${myMem.level }</td>
 												<td>${myMem.loginIP }</td>
@@ -837,14 +840,15 @@
 <!-- 												<td></td> -->
 
 <!-- 												<td></td> -->
-												
-												<td  align="center"><input type="text" name="points"></td>
+												<td>${memberVO.account}</td>
+												<td  align="center">${errorMsgs.points}<input type="text" name="points"></td>
 												<td><input type="submit">
 												<input type="hidden" name="action" value="addUpPoints" >
 												<input type="hidden" name="memberNo" value="${myMem.memberNo }" >
 												<input type="hidden" name="name" value="${myMem.name }">
 												<input type="hidden" name="level" value="${myMem.level }">
 												<input type="hidden" name="loginIP" value="${myMem.loginIP }">
+												<input type="hidden" name="url" value="menu39">
 												</td>
 												
 											</tr>
@@ -992,15 +996,15 @@
 										<c:forEach var="member" items="${memSvc.all}">
 										<tbody>
 											<tr>
-												<td>${member.memberNo }123</td>
 												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
+												<td>${member.memberNo }</td>
+												<td>${member.level }</td>
+												<td>${member.name }</td>
+												<td>${member.loginIP }</td>
+												<td>交易号</td>
+												<td>进款</td>
+												<td>出款</td>
+												<td>${member.balance }</td>
 												<td></td>
 												<td></td>
 												<td></td>
@@ -1628,7 +1632,7 @@
 										</thead>
 										<c:forEach var="uppoints" items="${uppointsSvc.all}">
 										<tbody>
-											<tr>
+											<tr><td></td>
 												<td>${uppoints.memberNo }</td>
 												<td>${uppoints.name }</td>
 												<td>${uppoints.level }</td>

@@ -71,9 +71,6 @@ public class MemberServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		String action = req.getParameter("action");
 
-		
-		
-
 		if ("login".equals(action)) {
 			List<String> checkMsgs = new LinkedList<String>();
 			req.setAttribute("checkMsgs", checkMsgs);
@@ -115,7 +112,6 @@ public class MemberServlet extends HttpServlet {
 
 						session.setAttribute("type", "3");
 					}
-					System.out.println("QQ");
 					List<MemberVO> list = memberService.getAllSuperior(account);
 					session.setAttribute("search", list);
 					List<MemberVO> list2 = memberService.getAllSuperior2(account);
