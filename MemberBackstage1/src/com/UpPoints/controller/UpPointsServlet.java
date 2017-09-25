@@ -86,6 +86,9 @@ public class UpPointsServlet extends HttpServlet {
 			Integer addPointsNo = new Integer(req.getParameter("addPointsNo"));
 			UpPointsService upPointsSvc = new UpPointsService();
 			upPointsSvc.updateStatus(status, addPointsNo);
+			
+			res.sendRedirect("index.jsp#menu18");
+			return;
 		
 		}	
 

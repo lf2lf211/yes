@@ -1705,14 +1705,37 @@
 										<tbody>
 											<tr>
 												<td></td>
+												<td>oxvo01ajSFA36Iu5nLWe3M8UA1Bk</td>
+												<td>良</td>
+												<td>aaa</td>
+												<td>1</td>
+												<td>2000</td>
+												<td>-2000</td>
+												<td>1</td>
+												<td>2000</td>
+											</tr>
+											
+											<tr>
 												<td></td>
+												<td>oxvo01aMwBVqXk1PX0fJ0ySmjWTU</td>
+												<td>阿正~~胖帥</td>
+												<td>aaa</td>
+												<td>1</td>
+												<td>9</td>
+												<td>40</td>
+												<td>1</td>
+												<td>9</td>
+											</tr>
+											<tr>
 												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
+												<td>oxvo01blvnE7wFCYe6vX1Qu6fPr4</td>
+												<td>東樂	</td>
+												<td>aaa</td>
+												<td>1</td>
+												<td>10</td>
+												<td>-10</td>
+												<td>1</td>
+												<td>10</td>
 											</tr>
 										</tbody>
 									</table>
@@ -1776,21 +1799,52 @@
 										</thead>
 										<tbody>
 											<tr>
-												
 												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
+												<td>4714367</td>
+												<td>龙虎</td>
+												<td>2017092500017</td>
+												<td>red,2,black,10</td>
+												<td>良</td>
+												<td>oxvo01ajSFA36Iu5nLWe3M8UA1Bk</td>
+												<td>1</td>
+												<td>1000,0,0,0,0,0,1000,0,0,0,0</td>
+												<td>2000</td>
+												<td>-2000</td>
+												<td>已结</td>
+												<td>2017-09-25 09:48:39</td>
 											</tr>
+											
+											<tr>
+												<td></td>
+												<td>5109234</td>
+												<td>小玛莉</td>
+												<td>2017092500089</td>
+												<td>旗幟</td>
+												<td>阿正~~胖帥</td>
+												<td>oxvo01aMwBVqXk1PX0fJ0ySmjWTU</td>
+												<td>0</td>
+												<td>0,1,1,0,2,0,4,1</td>
+												<td>9</td>
+												<td>40</td>
+												<td>已结</td>
+												<td>2017-09-25 10:28:59</td>
+											</tr>
+											
+											<tr>
+												<td></td>
+												<td>5930123</td>
+												<td>小玛莉</td>
+												<td>2017092502910</td>
+												<td>炸彈</td>
+												<td>東樂</td>
+												<td>oxvo01blvnE7wFCYe6vX1Qu6fPr4</td>
+												<td>0</td>
+												<td>0,0,0,0,0,0,1,0</td>
+												<td>10</td>
+												<td>-10</td>
+												<td>已结</td>
+												<td>2017-09-25 14:48:01</td>
+											</tr>												
 										</tbody>
 									</table>
 								</div>
