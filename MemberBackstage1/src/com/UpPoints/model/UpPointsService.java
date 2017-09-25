@@ -27,10 +27,10 @@ public class UpPointsService {
 
 	}
 
-	public UpPointsVO updateUpPointsVO(String name,String loginIP, String level,int points) {
+	public UpPointsVO updateUpPointsVO(int addPointsNo, String name,String loginIP, String level,int points) {
 		UpPointsVO upPoints = new UpPointsVO();
 
-
+		upPoints.setAddPointsNo(addPointsNo);
 		upPoints.setName(name);
 		upPoints.setLoginIP(loginIP);
 		upPoints.setPoints(points);
@@ -44,13 +44,22 @@ public class UpPointsService {
 		dao.update(upPoints);
 	}
 	
+	
+	public UpPointsVO updateStatus(String status,int addPointsNo){
+		UpPointsVO uppointsVO = new UpPointsVO();
+		uppointsVO.setStatus(status);
+		uppointsVO.setAddPointsNo(addPointsNo);
+		dao.updateStatus(uppointsVO);
+		return uppointsVO;
+	}
+	
 
-	public void deleteMemberVO(Integer mem_id) {
-		dao.delete(mem_id);
+	public void deleteMemberVO(int addPointsNo) {
+		dao.delete(addPointsNo);
 	}
 
-	public UpPointsVO getOneUpPointsVO(Integer mem_id) {
-		return dao.findByPK(mem_id);
+	public UpPointsVO getOneUpPointsVO(int addPointsNo) {
+		return dao.findByPK(addPointsNo);
 	}
 
 	public List<UpPointsVO> getAll() {

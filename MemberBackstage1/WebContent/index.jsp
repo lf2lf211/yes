@@ -1628,10 +1628,13 @@
 												<th rowspan="2">分数</th>
 												<th rowspan="2">状态</th>
 												<th rowspan="2">申请时间</th>
+												<th rowspan="2">更新状态</th>
+												<th rowspan="2">操作</th>
 											</tr>
 										</thead>
 										<c:forEach var="uppoints" items="${uppointsSvc.all}">
-										<tbody>
+										<form action="UpPointsServlet.do" method="post">
+										<tbody align="center">
 											<tr><td></td>
 												<td>${uppoints.memberNo }</td>
 												<td>${uppoints.name }</td>
@@ -1640,8 +1643,17 @@
 												<td>${uppoints.points }</td>
 												<td>${uppoints.status }</td>
 												<td>${uppoints.time }</td>
+												<td><select name="status">
+														<option value="成功"> 成功</option>
+														<option value="未付款"> 未付款</option>
+														<option value="失败"> 失败</option>
+													</select></td>
+												<td><input type="submit">
+												<input type="hidden" name="action" value="updateStatus" >
+												<input type="hidden" name="addPointsNo" value="${uppoints.addPointsNo}" ></td>
 											</tr>
 										</tbody>
+										</form>
 										</c:forEach>
 									</table>
 								</div>

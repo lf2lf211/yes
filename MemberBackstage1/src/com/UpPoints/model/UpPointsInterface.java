@@ -7,7 +7,8 @@ public interface UpPointsInterface  {
 		
 	void add(UpPointsVO uppointsVO);
 	void update(UpPointsVO uppointsVO);
-	void delete(Integer memberNO);
-	UpPointsVO findByPK(Integer memberNO);
+	void updateStatus(UpPointsVO uppointsVO);
+	void delete(int addPointsNo);
+	UpPointsVO findByPK(int addPointsNo);
 	List<UpPointsVO> getAll();
 }
