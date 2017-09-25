@@ -29,8 +29,7 @@ import com.member.model.MemberVO;
  */
 @WebServlet("/member.do")
 public class MemberServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
@@ -259,6 +258,11 @@ public class MemberServlet extends HttpServlet {
 				MemberVO memberVO = memberService.getOneMemberVO(memberNo);
 				memberVO.setState(state);
 				memberService.updateMemberVO(memberVO);
+				List<MemberVO> list = memberService.getAllSuperior(memberVO.getAccount());
+				session.setAttribute("search", list);
+				List<MemberVO> list2 = memberService.getAllSuperior2(memberVO.getAccount());
+				
+				session.setAttribute("search2", list2);
 				System.out.println("update member succes");
 				res.sendRedirect("index.jsp#" + url);
 

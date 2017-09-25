@@ -9,6 +9,7 @@
 	class="com.UpPoints.model.UpPointsService" />
 <jsp:useBean id="memSvc" scope="page"
 	class="com.member.model.MemberService" />
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -895,44 +896,45 @@
 									</table>
 								</div>
 							</div>
-							<div id="menu7" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 结算纪录
-									</h4>
-									<table
-										class="table table-bordered table-striped table-condensed">
-										<thead>
-											<tr>
-												<th></th>
-												<th>用户类型</th>
-												<th>用户编号</th>
-												<th>用户暱称</th>
-												<th>馀额</th>
-												<th>状态</th>
-												<th>登录IP</th>
-												<th>登录时间</th>
-												<th>创建时间</th>
-												<th>操作</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
+<!-- 							<div id="menu7" class="tab-pane fade"> -->
+<!-- 								<div class="model content-panel "> -->
+<!-- 									<h4> -->
+<!-- 										<i class="fa fa-angle-right"></i> 结算纪录 -->
+<!-- 									</h4> -->
+<!-- 									<table -->
+<!-- 										class="table table-bordered table-striped table-condensed"> -->
+<!-- 										<thead> -->
+<!-- 											<tr> -->
+<!-- 												<th></th> -->
+<!-- 												<th>用户类型</th> -->
+<!-- 												<th>用户编号</th> -->
+<!-- 												<th>用户暱称</th> -->
+<!-- 												<th>馀额</th> -->
+<!-- 												<th>状态</th> -->
+<!-- 												<th>登录IP</th> -->
+<!-- 												<th>登录时间</th> -->
+<!-- 												<th>创建时间</th> -->
+<!-- 												<th>操作</th> -->
+<!-- 											</tr> -->
+<!-- 										</thead> -->
+<!-- 										<tbody> -->
+<!-- 											<tr> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 											</tr> -->
+<!-- 										</tbody> -->
+<!-- 									</table> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+
 							<div id="menu8" class="tab-pane fade">
 								<div class="model content-panel ">
 									<div class="col-xs-12 col-sm-6">
@@ -949,17 +951,16 @@
 										<span>用户编号:</span> <span> <input type="text"
 											placeholder="请输入用户编号" name="">
 										</span> <span>方式</span> <select class="newObj" name="newObj">
-											<option value="" disabled selected>支付方式</option>
-											<option value="">123</option>
-											<option value="">321</option>
-											<option value="">9453</option>
-											<option value="">9487</option>
+											<option value="" disabled selected>支付方式</option>									
+											<option value="微信">微信</option>
+											<option value="支付宝">支付宝</option>
+											<option value="银行卡">银行卡</option>
+											<option value="QQ钱包">QQ钱包</option>
 										</select> <select class="newObj" name="newObj">
-											<option value="" disabled selected>成功</option>
-											<option value="">123</option>
-											<option value="">321</option>
-											<option value="">9453</option>
-											<option value="">9487</option>
+											<option value="" disabled selected>状态</option>
+											<option value="成功">成功</option>
+											<option value="失敗">失敗</option>
+
 										</select> <span> 时间： <input type="text" class="datepicker">
 										</span> <span> 至 <input type="text" class="datepicker">
 										</span> <span> <input type="button" name="" value="查询">
@@ -979,32 +980,32 @@
 												<th rowspan="2">出款</th>
 												<th rowspan="2">馀额</th>
 												<th rowspan="2">状态</th>
-												<th colspan="4">支付信息</th>
+												<th colspan="2">支付信息</th>
 												<th rowspan="2">描述</th>
 												<th rowspan="2">操作人</th>
-												<th rowspan="2">修改时间</th>
+<!-- 												<th rowspan="2">修改时间</th> -->
 												<th rowspan="2">申请时间</th>
 												<th rowspan="2">操作</th>
 											</tr>
 											<tr>
 												<th>支付方式</th>
-												<th>支付标题</th>
-												<th>支付名称</th>
+<!-- 												<th>支付标题</th> -->
+<!-- 												<th>支付名称</th> -->
 												<th>支付帐号</th>
 											</tr>
 										</thead>
-										<c:forEach var="member" items="${memSvc.all}">
+										<c:forEach var="tppSvc" items="${memSvc.all}">
 										<tbody>
 											<tr>
 												<td></td>
-												<td>${member.memberNo }</td>
-												<td>${member.level }</td>
-												<td>${member.name }</td>
-												<td>${member.loginIP }</td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td>${tppSvc.loginIP }</td>
 												<td>交易号</td>
 												<td>进款</td>
 												<td>出款</td>
-												<td>${member.balance }</td>
+												<td>${tppSvc.balance }</td>
 												<td></td>
 												<td></td>
 												<td></td>
@@ -1012,9 +1013,7 @@
 												<td></td>
 												<td></td>
 												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
+											
 											</tr>
 										</tbody>
 											</c:forEach>
@@ -1172,7 +1171,9 @@
 														<form action="member.do" method="Post"
 															style='display: inline-block'>
 															<input type="hidden" name='memberNo'
-																value="${member.memberNo}"> <input type="hidden"
+																value="${member.memberNo}">
+																<input type="hidden" name='memberVONo'
+																value="${memberVO.account}"> <input type="hidden"
 																name='action' value="enableMember"> <input
 																type="hidden" name='state' value="启用"> <input
 																type="hidden" name='url' value="menu29"> <input
@@ -1181,12 +1182,13 @@
 														</form>
 														<form action="member.do" method="Post"
 															style='display: inline-block'>
-															<input type="hidden" name='memberNo'
-																value="${member.memberNo}"> <input type="hidden"
-																name='action' value="disableMember"> <input
-																type="hidden" name='state' value="停用"> <input
-																type="hidden" name='url' value="menu29"> <input
-																type="submit" class="yesbtn btn btn-primary btn-sm"
+															<input type="hidden" name='memberNo' value="${member.memberNo}"> 
+																<input type="hidden" name='memberVONo'
+																value="${memberVO.account}">
+																<input type="hidden" name='action' value="disableMember"> 
+																<input type="hidden" name='state' value="停用"> 
+																<input type="hidden" name='url' value="menu29"> 
+																<input type="submit" class="yesbtn btn btn-primary btn-sm"
 																value='停权'>
 														</form></td>
 												</tr>
@@ -1660,17 +1662,18 @@
 									</div>
 									<div class="col-xs-12 col-sm-6">
 										<span>会员编号:</span> <span> <input type="text"
-											placeholder="请输入用户编号" name="">
-										</span> <span>排序</span> <select class="newObj" name="newObj">
-											<option value="" disabled selected>排序方式</option>
-											<option value="">123</option>
-											<option value="">321</option>
-											<option value="">9453</option>
-											<option value="">9487</option>
-										</select> <span> 时间： <input type="text" class="datepicker">
-										</span> <span> 至 <input type="text" class="datepicker">
-										</span> <span> <input type="button" name="" value="查询">
-										</span>
+											placeholder="请输入用户编号" name=""></span>
+<!-- 										 <span>排序</span> <select class="newObj" name="newObj"> -->
+<!-- 											<option value="" disabled selected>排序方式</option> -->
+<!-- 											<option value="">123</option> -->
+<!-- 											<option value="">321</option> -->
+<!-- 											<option value="">9453</option> -->
+<!-- 											<option value="">9487</option> -->
+<!-- 										</select> -->
+<!-- 										<span> 时间： <input type="text" class="datepicker">  -->
+<!-- 										</span> <span> 至 <input type="text" class="datepicker"> -->
+<!-- 										</span> --><span> <input type="button" name="" value="查询"> 
+	 										</span> 
 									</div>
 									<table
 										class="table table-bordered table-striped table-condensed">
@@ -1718,19 +1721,20 @@
 									<div class="col-xs-12 col-sm-7">
 										<span>游戏彩种：</span> <select class="newObj" name="newObj">
 											<option value="" disabled selected>游戏彩种...</option>
-											<option value="">123</option>
-											<option value="">321</option>
-											<option value="">9453</option>
-											<option value="">9487</option>
-										</select> <span>注单号</span> <span> <input type="text"
-											placeholder="注单号" name="">
-										</span> <select class="newObj" name="newObj">
-											<option value="" disabled selected>状态...</option>
-											<option value="">123</option>
-											<option value="">321</option>
-											<option value="">9453</option>
-											<option value="">9487</option>
-										</select> <span> <input type="text" placeholder="会员编号" name="">
+											<option value="">小玛莉</option>
+											<option value="">龙虎</option>
+
+<!-- 										</select> <span>注单号</span> <span> <input type="text" -->
+<!-- 											placeholder="注单号" name=""> -->
+<!-- 										</span>  -->
+<!-- 										<select class="newObj" name="newObj"> -->
+<!-- 											<option value="" disabled selected>状态...</option> -->
+<!-- 											<option value="">123</option> -->
+<!-- 											<option value="">321</option> -->
+<!-- 											<option value="">9453</option> -->
+<!-- 											<option value="">9487</option> -->
+<!-- 										</select>  -->
+										<span> <input type="text" placeholder="会员编号" name="">
 										</span> <span> 时间： <input type="text" class="datepicker">
 										</span> <span> 至 <input type="text" class="datepicker">
 										</span> <span> <input type="button" name="" value="查询">
@@ -1743,11 +1747,11 @@
 												<th></th>
 												<th>注单号</th>
 												<th>游戏类型</th>
-												<th>游戏风格</th>
-												<th>游戏主键</th>
+<!-- 												<th>游戏风格</th> -->
+<!-- 												<th>游戏主键</th> -->
 												<th>游戏期号</th>
 												<th>开奖结果</th>
-												<th>游戏状态</th>
+<!-- 												<th>游戏状态</th> -->
 												<th>用户昵称</th>
 												<th>用户编号</th>
 												<th>投注类型</th>
@@ -1760,9 +1764,7 @@
 										</thead>
 										<tbody>
 											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
+												
 												<td></td>
 												<td></td>
 												<td></td>
@@ -1781,76 +1783,76 @@
 									</table>
 								</div>
 							</div>
-							<div id="menu21" class="tab-pane fade">
-								<div class="model content-panel ">
-									<div class="col-xs-12 col-sm-5">
-										<h4 style="display: inline-block;">
-											<i class="fa fa-angle-right"></i> 开奖结果
-										</h4>
-										<div class="btn-group">
-											<a href="#" class="btn btn-default" role="button"> <i
-												class="fa fa-arrow-down"></i> 导出EXCEL
-											</a>
-										</div>
-									</div>
-									<div class="col-xs-12 col-sm-7">
-										<span>游戏彩种：</span> <select class="newObj" name="newObj">
-											<option value="" disabled selected>游戏彩种...</option>
-											<option value="">123</option>
-											<option value="">321</option>
-											<option value="">9453</option>
-											<option value="">9487</option>
-										</select> <span>期号：</span> <span> <input type="text"
-											placeholder="期号" name="">
-										</span> <select class="newObj" name="newObj">
-											<option value="" disabled selected>状态</option>
-											<option value="">123</option>
-											<option value="">321</option>
-											<option value="">9453</option>
-											<option value="">9487</option>
-										</select> <span> 时间： <input type="text" class="datepicker">
-										</span> <span> 至 <input type="text" class="datepicker">
-										</span> <span> <input type="button" name="" value="查询">
-										</span>
-									</div>
-									<table
-										class="table table-bordered table-striped table-condensed">
-										<thead>
-											<tr>
-												<th rowspan="2"></th>
-												<th rowspan="2">主键</th>
-												<th rowspan="2">游戏类型</th>
-												<th rowspan="2">游戏风格</th>
-												<th rowspan="2">期号</th>
-												<th rowspan="2">开奖结果</th>
-												<th rowspan="2">期状态</th>
-												<th colspan="3">周期合计</th>
-												<th rowspan="2">开奖时间</th>
-											</tr>
-											<tr>
-												<th>注单数</th>
-												<th>下注金额</th>
-												<th>用户结果</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
+<!-- 							<div id="menu21" class="tab-pane fade"> -->
+<!-- 								<div class="model content-panel "> -->
+<!-- 									<div class="col-xs-12 col-sm-5"> -->
+<!-- 										<h4 style="display: inline-block;"> -->
+<!-- 											<i class="fa fa-angle-right"></i> 开奖结果 -->
+<!-- 										</h4> -->
+<!-- 										<div class="btn-group"> -->
+<!-- 											<a href="#" class="btn btn-default" role="button"> <i -->
+<!-- 												class="fa fa-arrow-down"></i> 导出EXCEL -->
+<!-- 											</a> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									<div class="col-xs-12 col-sm-7"> -->
+<!-- 										<span>游戏彩种：</span> <select class="newObj" name="newObj"> -->
+<!-- 											<option value="" disabled selected>游戏彩种...</option> -->
+<!-- 											<option value="">123</option> -->
+<!-- 											<option value="">321</option> -->
+<!-- 											<option value="">9453</option> -->
+<!-- 											<option value="">9487</option> -->
+<!-- 										</select> <span>期号：</span> <span> <input type="text" -->
+<!-- 											placeholder="期号" name=""> -->
+<!-- 										</span> <select class="newObj" name="newObj"> -->
+<!-- 											<option value="" disabled selected>状态</option> -->
+<!-- 											<option value="">123</option> -->
+<!-- 											<option value="">321</option> -->
+<!-- 											<option value="">9453</option> -->
+<!-- 											<option value="">9487</option> -->
+<!-- 										</select> <span> 时间： <input type="text" class="datepicker"> -->
+<!-- 										</span> <span> 至 <input type="text" class="datepicker"> -->
+<!-- 										</span> <span> <input type="button" name="" value="查询"> -->
+<!-- 										</span> -->
+<!-- 									</div> -->
+<!-- 									<table -->
+<!-- 										class="table table-bordered table-striped table-condensed"> -->
+<!-- 										<thead> -->
+<!-- 											<tr> -->
+<!-- 												<th rowspan="2"></th> -->
+<!-- 												<th rowspan="2">主键</th> -->
+<!-- 												<th rowspan="2">游戏类型</th> -->
+<!-- 												<th rowspan="2">游戏风格</th> -->
+<!-- 												<th rowspan="2">期号</th> -->
+<!-- 												<th rowspan="2">开奖结果</th> -->
+<!-- 												<th rowspan="2">期状态</th> -->
+<!-- 												<th colspan="3">周期合计</th> -->
+<!-- 												<th rowspan="2">开奖时间</th> -->
+<!-- 											</tr> -->
+<!-- 											<tr> -->
+<!-- 												<th>注单数</th> -->
+<!-- 												<th>下注金额</th> -->
+<!-- 												<th>用户结果</th> -->
+<!-- 											</tr> -->
+<!-- 										</thead> -->
+<!-- 										<tbody> -->
+<!-- 											<tr> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 												<td></td> -->
+<!-- 											</tr> -->
+<!-- 										</tbody> -->
+<!-- 									</table> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
 							<!-- ==================================系统记录================================== -->
 							
 							<div id="menu22" class="tab-pane fade">

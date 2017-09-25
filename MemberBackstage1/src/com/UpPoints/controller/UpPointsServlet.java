@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpSession;
 
 import com.UpPoints.model.UpPointsService;
 import com.UpPoints.model.UpPointsVO;
+import com.db.Jdbcmysql;
 
 /**
  * Servlet implementation class UpPointsServlet
@@ -84,19 +86,15 @@ public class UpPointsServlet extends HttpServlet {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	}
 
 
 
-
+//	public static void main(String[] args) {
+//		Jdbcmysql test = new Jdbcmysql();
+//	Vector	all=test.doSqlSelect("SELECT * FROM thirdpartypayment", 11, false);
+//		System.out.println(all);
+//	}
 
 
 
