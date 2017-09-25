@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.UpPoints.model.UpPointsService;
+import com.db.Jdbcmysql;
 
 
 /**
@@ -54,7 +55,7 @@ public class UpPointsServlet extends HttpServlet {
 			String url = req.getParameter("url");
 			String status = req.getParameter("status");
 			String time = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime());
-			
+			String type = req.getParameter("type");
 			
 			
 			if (!errorMsgs.isEmpty()) {
@@ -67,7 +68,7 @@ public class UpPointsServlet extends HttpServlet {
 			
 			UpPointsService upPointsSvc =new UpPointsService();
 			
-			upPointsSvc.addUpPointsVO(memberNo,name, loginIP, level, points,status,time);
+			upPointsSvc.addUpPointsVO(memberNo,name, loginIP, level, points,status,time,type);
 			
 			
 			session.removeAttribute("errorMsgs");

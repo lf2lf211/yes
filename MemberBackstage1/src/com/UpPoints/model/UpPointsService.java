@@ -13,7 +13,7 @@ public class UpPointsService {
 	}
 	
 	
-	public  UpPointsVO addUpPointsVO(int memberNo,String name,String loginIP, String level,int points,String status,String time) {
+	public  UpPointsVO addUpPointsVO(int memberNo,String name,String loginIP, String level,int points,String status,String time,String type) {
 		UpPointsVO upPoints = new UpPointsVO();
 		upPoints.setMemberNo(memberNo);
 		upPoints.setName(name);
@@ -22,6 +22,7 @@ public class UpPointsService {
 		upPoints.setLevel(level);
 		upPoints.setStatus(status);
 		upPoints.setTime(time);
+		upPoints.setType(type);
 		dao.add(upPoints);
 		return upPoints;
 

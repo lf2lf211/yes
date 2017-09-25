@@ -9,6 +9,8 @@
 	class="com.UpPoints.model.UpPointsService" />
 <jsp:useBean id="memSvc" scope="page"
 	class="com.member.model.MemberService" />
+<jsp:useBean id="ttpSvc" scope="page"
+	class="com.thirdpartypayment.model.ThirdPartyPaymentSvc" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -802,7 +804,7 @@
 												<th rowspan="2"></th>
 												<!-- <th rowspan="2">上分纪录</th> -->
 												<th rowspan="2">用户编号</th>
-												<th rowspan="2">会员帐号</th>
+												<th rowspan="2">用户帐号</th>
 												<th rowspan="2">用户暱称</th>
 												<th rowspan="2">类型</th>
 												<th rowspan="2">登录IP</th>
@@ -849,6 +851,7 @@
 												<input type="hidden" name="name" value="${myMem.name }">
 												<input type="hidden" name="level" value="${myMem.level }">
 												<input type="hidden" name="loginIP" value="${myMem.loginIP }">
+												<input type="hidden" name="type" value="上分">
 												<input type="hidden" name="url" value="menu39">
 												</td>
 												
@@ -869,8 +872,8 @@
 										<thead>
 											<tr>
 												<th rowspan="2"></th>
-												<!-- <th rowspan="2">下分纪录</th> -->
 												<th rowspan="2">用户编号</th>
+												<th rowspan="2">用户帐号</th>
 												<th rowspan="2">用户暱称</th>
 												<th rowspan="2">类型</th>
 												<th rowspan="2">登录IP</th>
@@ -880,19 +883,22 @@
 											</tr>
 											
 										</thead>
+										
 										<tbody>
 											<tr>
 												<td></td>
-												<!--  <td></td> -->
+												<td>${memberVO.memberNo }</td>
+												<td>${memberVO.account }</td>
+												<td>${memberVO.name }</td>
+												<td>${memberVO.level }</td>
+												<td>${memberVO.loginIP }</td>
+												<td>${memberVO.balance }</td>
+												<td>${memberVO.account }</td>
 												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
+											
 											</tr>
 										</tbody>
+										
 									</table>
 								</div>
 							</div>
@@ -966,58 +972,9 @@
 										</span> <span> <input type="button" name="" value="查询">
 										</span>
 									</div>
-									<table
-										class="table table-bordered table-striped table-condensed">
-										<thead>
-											<tr>
-												<th rowspan="2"></th>
-												<th rowspan="2">用户编号</th>
-												<th rowspan="2">用户类型</th>
-												<th rowspan="2">暱称</th>
-												<th rowspan="2">登录IP</th>
-												<th rowspan="2">交易号</th>
-												<th rowspan="2">进款</th>
-												<th rowspan="2">出款</th>
-												<th rowspan="2">馀额</th>
-												<th rowspan="2">状态</th>
-												<th colspan="2">支付信息</th>
-												<th rowspan="2">描述</th>
-												<th rowspan="2">操作人</th>
-<!-- 												<th rowspan="2">修改时间</th> -->
-												<th rowspan="2">申请时间</th>
-												<th rowspan="2">操作</th>
-											</tr>
-											<tr>
-												<th>支付方式</th>
-<!-- 												<th>支付标题</th> -->
-<!-- 												<th>支付名称</th> -->
-												<th>支付帐号</th>
-											</tr>
-										</thead>
-										<c:forEach var="tppSvc" items="${memSvc.all}">
-										<tbody>
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td>${tppSvc.loginIP }</td>
-												<td>交易号</td>
-												<td>进款</td>
-												<td>出款</td>
-												<td>${tppSvc.balance }</td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-											
-											</tr>
-										</tbody>
-											</c:forEach>
-									</table>
+									<div>
+									<%@ include file="transactionRecord.jsp"%>
+									</div>
 								</div>
 							</div>
 							<!-- =========================层级===================================== -->
@@ -1176,7 +1133,7 @@
 																value="${memberVO.account}"> <input type="hidden"
 																name='action' value="enableMember"> <input
 																type="hidden" name='state' value="启用"> <input
-																type="hidden" name='url' value="menu29"> <input
+																type="hidden" name='url' value="menu11"> <input
 																type="submit" class="nobtn btn btn-primary btn-sm"
 																value='复权'>
 														</form>
@@ -1187,7 +1144,7 @@
 																value="${memberVO.account}">
 																<input type="hidden" name='action' value="disableMember"> 
 																<input type="hidden" name='state' value="停用"> 
-																<input type="hidden" name='url' value="menu29"> 
+																<input type="hidden" name='url' value="menu11"> 
 																<input type="submit" class="yesbtn btn btn-primary btn-sm"
 																value='停权'>
 														</form></td>
@@ -1630,6 +1587,7 @@
 												<th rowspan="2">分数</th>
 												<th rowspan="2">状态</th>
 												<th rowspan="2">申请时间</th>
+												<th rowspan="2">类别</th>
 												<th rowspan="2">更新状态</th>
 												<th rowspan="2">操作</th>
 											</tr>
@@ -1645,6 +1603,7 @@
 												<td>${uppoints.points }</td>
 												<td>${uppoints.status }</td>
 												<td>${uppoints.time }</td>
+												<td>${uppoints.type }</td>
 												<td><select name="status">
 														<option value="成功"> 成功</option>
 														<option value="未付款"> 未付款</option>
@@ -2213,15 +2172,9 @@
 														<form action="member.do" method="Post"
 															style='display: inline-block'>
 															<input type="hidden" name='memberNo'
-																value="${member.memberNo}"> <input type="hidden"
-																name='action' value="deleteMember"> <input
-																type="hidden" name='url' value="menu29"> <input
-																type="submit" class="btn btn-danger" value='删除'>
-														</form>
-														<form action="member.do" method="Post"
-															style='display: inline-block'>
-															<input type="hidden" name='memberNo'
-																value="${member.memberNo}"> <input type="hidden"
+																value="${member.memberNo}">
+																<input type="hidden" name='memberVONo'
+																value="${memberVO.account}"> <input type="hidden"
 																name='action' value="enableMember"> <input
 																type="hidden" name='state' value="启用"> <input
 																type="hidden" name='url' value="menu29"> <input
@@ -2230,12 +2183,13 @@
 														</form>
 														<form action="member.do" method="Post"
 															style='display: inline-block'>
-															<input type="hidden" name='memberNo'
-																value="${member.memberNo}"> <input type="hidden"
-																name='action' value="disableMember"> <input
-																type="hidden" name='state' value="停用"> <input
-																type="hidden" name='url' value="menu29"> <input
-																type="submit" class="yesbtn btn btn-primary btn-sm"
+															<input type="hidden" name='memberNo' value="${member.memberNo}"> 
+																<input type="hidden" name='memberVONo'
+																value="${memberVO.account}">
+																<input type="hidden" name='action' value="disableMember"> 
+																<input type="hidden" name='state' value="停用"> 
+																<input type="hidden" name='url' value="menu29"> 
+																<input type="submit" class="yesbtn btn btn-primary btn-sm"
 																value='停权'>
 														</form></td>
 												</tr>

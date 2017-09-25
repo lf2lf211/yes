@@ -10,12 +10,14 @@ public class UpPointsVO {
 	private String status;
 	private String time;
 	private int addPointsNo;
+	private String type;
+	
 	
 	public UpPointsVO() {
 		super();
 	}
 	
-	public UpPointsVO(int memberNo,String name, String loginIP, String level,int points,String status,String time, int addPointsNo) {
+	public UpPointsVO(int memberNo,String name, String loginIP, String level,int points,String status,String time, int addPointsNo,String type) {
 		super();
 		this.memberNo = memberNo;
 		this.name = name;
@@ -25,10 +27,19 @@ public class UpPointsVO {
 		this.status = status;
 		this.time=time;
 		this.addPointsNo= addPointsNo;
+		this.type=type;
 	}
 
 	
 	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public int getAddPointsNo() {
 		return addPointsNo;
 	}

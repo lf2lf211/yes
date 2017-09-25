@@ -18,8 +18,8 @@ public class UpPointsDAO implements UpPointsInterface {
 	private static final String PASSWORD = "";
 	
 	private static final String INSERT_STMT = "INSERT INTO uppoints"
-			+ "(memberNo,name,loginIP,level,points,status,time)"
-			+ "VALUES(?,? , ? , ? , ?,'未付款',?)";
+			+ "(memberNo,name,loginIP,level,points,status,time,type)"
+			+ "VALUES(?,? , ? , ? , ?,'未付款',?,?)";
 	
 	private static final String UPDATE_STMT = "UPDATE uppoints SET "
 			+ "NAME = ?,"	
@@ -48,6 +48,8 @@ public class UpPointsDAO implements UpPointsInterface {
 			pstmt.setString(4, uppointsVO.getLevel());
 			pstmt.setInt(5, uppointsVO.getPoints());
 			pstmt.setString(6, uppointsVO.getTime());
+			pstmt.setString(7, uppointsVO.getType());
+			
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -184,6 +186,7 @@ public class UpPointsDAO implements UpPointsInterface {
 				uppointsVO.setLoginIP(rs.getString("loginIP"));
 				uppointsVO.setLevel(rs.getString("level"));
 				uppointsVO.setPoints(rs.getInt("points"));
+				uppointsVO.setType(rs.getString("type"));
 			}
 			//Area(area_code, area_adress, area_location, area_name)"
 			
@@ -248,6 +251,7 @@ public class UpPointsDAO implements UpPointsInterface {
 				uppointsVO.setPoints(rs.getInt("points"));
 				uppointsVO.setStatus(rs.getString("status"));
 				uppointsVO.setTime(rs.getString("time"));
+				uppointsVO.setType(rs.getString("type"));
 				uppointsList.add(uppointsVO);
 				}
 
