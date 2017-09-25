@@ -9,12 +9,13 @@ public class UpPointsVO {
 	private int points;
 	private String status;
 	private String time;
+	private int addPointsNo;
 	
 	public UpPointsVO() {
 		super();
 	}
 	
-	public UpPointsVO(int memberNo,String name, String loginIP, String level,int points,String status,String time) {
+	public UpPointsVO(int memberNo,String name, String loginIP, String level,int points,String status,String time, int addPointsNo) {
 		super();
 		this.memberNo = memberNo;
 		this.name = name;
@@ -23,10 +24,19 @@ public class UpPointsVO {
 		this.points=points;
 		this.status = status;
 		this.time=time;
+		this.addPointsNo= addPointsNo;
 	}
 
 	
 	
+	public int getAddPointsNo() {
+		return addPointsNo;
+	}
+
+	public void setAddPointsNo(int addPointsNo) {
+		this.addPointsNo = addPointsNo;
+	}
+
 	public String getTime() {
 		return time;
 	}

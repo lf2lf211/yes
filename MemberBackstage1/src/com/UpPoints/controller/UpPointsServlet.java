@@ -4,12 +4,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.UpPoints.model.UpPointsService;
-import com.UpPoints.model.UpPointsVO;
-import com.db.Jdbcmysql;
+
 
 /**
  * Servlet implementation class UpPointsServlet
@@ -42,8 +38,6 @@ public class UpPointsServlet extends HttpServlet {
 	
 		if("addUpPoints".equals(action)){
 			Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-			
 			
 			Integer points = null;
 			try {
@@ -62,31 +56,42 @@ public class UpPointsServlet extends HttpServlet {
 			String time = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime());
 			
 			
+			
 			if (!errorMsgs.isEmpty()) {
 				res.sendRedirect("index.jsp#" + url);
+				session.setAttribute("errorMsgs", errorMsgs);
 				return;
 			}
+			
 			
 			
 			UpPointsService upPointsSvc =new UpPointsService();
 			
 			upPointsSvc.addUpPointsVO(memberNo,name, loginIP, level, points,status,time);
 			
-			res.sendRedirect("index.jsp#" + url);
 			
+			session.removeAttribute("errorMsgs");
+			
+			res.sendRedirect("index.jsp#menu18");
+			return;	
 			
 		}
+
 	
 	
 	
-	
-	
-	
-	
-	
-	
+		if("updateStatus".equals(action)){
+			String status = req.getParameter("status").trim();
+			//Integer addPointsNo = Integer.parseInt(req.getParameter("addPointsNo"));
+			Integer addPointsNo = new Integer(req.getParameter("addPointsNo"));
+			UpPointsService upPointsSvc = new UpPointsService();
+			upPointsSvc.updateStatus(status, addPointsNo);
+		
+		}	
+
 	
 	}
+
 
 
 
@@ -95,6 +100,7 @@ public class UpPointsServlet extends HttpServlet {
 //	Vector	all=test.doSqlSelect("SELECT * FROM thirdpartypayment", 11, false);
 //		System.out.println(all);
 //	}
+
 
 
 
