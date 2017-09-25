@@ -894,7 +894,7 @@
 												<td>${memberVO.loginIP }</td>
 												<td>${memberVO.balance }</td>
 												<td>${memberVO.account }</td>
-												<td></td>
+												<td><input type="submit"></td>
 											
 											</tr>
 										</tbody>
