@@ -21,15 +21,13 @@ public class MemberDAO implements MemberInterface {
 			+ "( account, password, name, balance,loginIP, loginTime,level,state,superior,superior2,commission)"
 			+ "VALUES( ? , ? , ? , ? , ? , ? , ? , ? , ? ,?,?)";
 	private static final String UPDATE_STMT = "UPDATE member SET "
-			+ "Account = ?,"
 			+ "PASSWORD = ?,  "
 			+ "NAME = ?,"
-			+ "balance = ? ,"
 			+ "loginIP=?,"
 			+ "loginTime=?, "
 			+ "level = ?, "
 			+ "state = ?,  "
-			+ "superior = ?  ,"
+
 		
 			+ "commission = ?  "
 			+ "WHERE memberNO = ?";
@@ -100,17 +98,17 @@ public class MemberDAO implements MemberInterface {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
-			pstmt.setString(1, memberVO.getAccount());
-			pstmt.setString(2, memberVO.getPassword());
-			pstmt.setString(3, memberVO.getName());
-			pstmt.setDouble(4, memberVO.getBalance());
-			pstmt.setString(5, memberVO.getLoginIP());
-			pstmt.setString(6, memberVO.getLoginTime());
-			pstmt.setString(7, memberVO.getLevel());
-			pstmt.setString(8, memberVO.getState());
-			pstmt.setString(9, memberVO.getSuperior());
-			pstmt.setInt(10, memberVO.getCommission());
-			pstmt.setInt(11, memberVO.getMemberNo());
+		
+			pstmt.setString(1, memberVO.getPassword());
+			pstmt.setString(2, memberVO.getName());
+
+			pstmt.setString(3, memberVO.getLoginIP());
+			pstmt.setString(4, memberVO.getLoginTime());
+			pstmt.setString(5, memberVO.getLevel());
+			pstmt.setString(6, memberVO.getState());
+
+			pstmt.setInt(7, memberVO.getCommission());
+			pstmt.setInt(8, memberVO.getMemberNo());
 			pstmt.executeUpdate();
 
 			// Handle any driver errors

@@ -275,20 +275,26 @@ public class MemberServlet extends HttpServlet {
 
 		if ("memberUpdate".equals(action)) {
 			int memberNo = Integer.parseInt(req.getParameter("memberNo"));
-			String account = req.getParameter("account");
+			String memberVONo = req.getParameter("memberVONo");
 			String password = req.getParameter("password");
 			String name = req.getParameter("name");
 			String level = req.getParameter("level");
-			String superior2 = req.getParameter("superior2");
+		
 
 			MemberService memberService = new MemberService();
 			MemberVO memberVO = memberService.getOneMemberVO(memberNo);
-			memberVO.setAccount(account);
+
 			memberVO.setPassword(password);
 			memberVO.setName(name);
 			memberVO.setLevel(level);
-		
+			
+			
 			memberService.updateMemberVO(memberVO);
+			List<MemberVO> list = memberService.getAllSuperior(memberVONo);
+			session.setAttribute("search", list);
+			List<MemberVO> list2 = memberService.getAllSuperior2(memberVONo);
+			session.setAttribute("search2", list2);
+			
 			String url = req.getParameter("url");
 
 			res.sendRedirect("index.jsp#" + url);

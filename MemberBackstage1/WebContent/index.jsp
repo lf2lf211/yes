@@ -9,8 +9,7 @@
 	class="com.UpPoints.model.UpPointsService" />
 <jsp:useBean id="memSvc" scope="page"
 	class="com.member.model.MemberService" />
-<jsp:useBean id="ttpSvc" scope="page"
-	class="com.thirdpartypayment.model.ThirdPartyPaymentSvc" />
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,11 +38,14 @@
 <link href="assets/css/style-responsive.css" rel="stylesheet">
 <link href="assets/css/bow.css" rel="stylesheet">
 <script src="assets/js/chart-master/Chart.js"></script>
+<script src="assets/js/updown.js"></script>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+    
 </head>
 
 <body>
@@ -867,6 +869,7 @@
 									<h4>
 										<i class="fa fa-angle-right"></i> 下分申请
 									</h4>
+										<form action="UpPointsServlet.do" method="post">
 									<table
 										class="table table-bordered table-striped table-condensed">
 										<thead>
@@ -879,6 +882,7 @@
 												<th rowspan="2">登录IP</th>
 												<th rowspan="2">用户馀额</th>
 												<th rowspan="2">操作人</th>
+												<th rowspan="2">分數</th>
 												<th rowspan="2">操作</th>
 											</tr>
 											
@@ -894,12 +898,23 @@
 												<td>${memberVO.loginIP }</td>
 												<td>${memberVO.balance }</td>
 												<td>${memberVO.account }</td>
-												<td><input type="submit"></td>
+												<td><input type="text" name="points"></td>
+												<td>
+													<input type="submit">
+													<input type="hidden" name="action" value="addUpPoints" >
+													<input type="hidden" name="memberNo" value="${memberVO.memberNo }" >
+													<input type="hidden" name="name" value="${memberVO.name }">
+													<input type="hidden" name="level" value="${memberVO.level }">
+													<input type="hidden" name="loginIP" value="${memberVO.loginIP }">
+													<input type="hidden" name="type" value="下分">
+													<input type="hidden" name="url" value="menu6">
+												</td>
 											
 											</tr>
 										</tbody>
 										
 									</table>
+									</form>
 								</div>
 							</div>
 <!-- 							<div id="menu7" class="tab-pane fade"> -->
@@ -972,8 +987,9 @@
 										</span> <span> <input type="button" name="" value="查询">
 										</span>
 									</div>
-									<div>
-									<%@ include file="transactionRecord.jsp"%>
+									<span onclick="up();">上分　　　</span>　　　<span onclick="down();">下分　　　</span>　　　<span onclick="three();">第三方交易　　　</span>
+									<div id="transactionRecord">
+<%-- 									<%@ include file="transactionRecord.jsp"%> --%>
 									</div>
 								</div>
 							</div>
@@ -1004,9 +1020,9 @@
 											</tr>
 										</thead>
 							
-												<%@ include file="/page/page1.file" %> 
+												<%@ include file="/page/page3.file" %> 
 										
-										<c:forEach var="member" items="${search}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+										<c:forEach var="member" items="${search}"  begin="<%=pageIndexs%>" end="<%=pageIndexs+rowsPerPages-1%>">
 												
 											<tbody>
 												<tr>
@@ -1027,7 +1043,7 @@
 											</tbody>
 
 										</c:forEach>
-										<%@include file="/page/page2.file"%> 
+										<%@include file="/page/page4.file"%> 
 									
 
 									</table>
@@ -1098,15 +1114,14 @@
 												<th>身分</th>
 												<th>状态</th>
 												<th>上級</th>
-												<th>上級</th>
 												<th>操作</th>
 
 											</tr>
 										</thead>
 							
-									
+									<%@ include file="/page/page5.file" %> 
 										
-										<c:forEach var="member" items="${search2}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+										<c:forEach var="member" items="${search2}"  begin="<%=pageIndex3%>" end="<%=pageIndex3+rowsPerPage3-1%>">
 												
 											<tbody>
 												<tr>
@@ -1120,7 +1135,7 @@
 													<td>${member.loginTime }</td>
 													<td class='level'>${member.level}</td>
 													<td>${member.state }</td>
-													<td>${member.superior}</td>
+									
 													<td>${member.superior2}</td>
 													<td><input type="submit"
 														class="btn btn-warning change_Btn" value='修改'>
@@ -1152,7 +1167,7 @@
 											</tbody>
 
 										</c:forEach>
-						
+						<%@ include file="/page/page6.file" %> 
 									
 
 									</table>
@@ -1213,7 +1228,10 @@
 
 														</tr>
 														<tr>
-															<td><input type="hidden" name="url" value="menu29">
+															<td>
+															<input type="hidden" name="url" value="menu11">
+																<input type="hidden" name='memberNo' value="${member.memberNo}"> 
+																<input type="hidden" name="memberVONo" value="${memberVO.account}">
 																<input type="hidden" name="action" value="memberUpdate">
 															</td>
 															<td><input type="submit" name="" value="送出">
@@ -1478,7 +1496,7 @@
 											<tr>
 												<th></th>
 												<th>内容</th>
-												<th>修改时间</th>
+<!-- 												<th>修改时间</th> -->
 												<th>操作</th>
 											</tr>
 										</thead>
@@ -1488,11 +1506,11 @@
 												<form action="scrollingtext.do" method='get'>
 													<td></td>
 													<td><textarea class="Marquee" cols="100" rows="3"
-															name='scrollingText'>${scrollingText}</textarea></td>
-													<td>${updateTime}</td>
+														id="scrollingtext"	name='scrollingText'>${scrollingText}</textarea></td>
+<%-- 													<td>${updateTime}</td> --%>
 													<td><input type="hidden" name='action'value='updateScoll'>
 													<input type="hidden"name='url' value='menu15'> 
-													<input type="submit"class="btn btn-warning change_Btn" value='修改'></td>
+													<input type="submit"class="btn btn-warning change_Btn" onclick="ok();"value='修改'></td>
 												</form>
 											</tr>
 										</tbody>
@@ -2203,7 +2221,7 @@
 
 											</tr>
 										</thead>
-										<%@ include file="/page/page3.file" %> 
+										<%@ include file="/page/page1.file" %> 
 										
 										<c:forEach var="member" items="${search}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 
@@ -2251,8 +2269,7 @@
 
 										</c:forEach>
 										<%@include file="/page/page2.file"%> 
-									<%-- <jsp:include page="/page/page2.file"></jsp:include> --%>	
-
+							
 									</table>
 									
 									<div class="changeMember" style="display: none;">
@@ -2310,7 +2327,10 @@
 
 														</tr>
 														<tr>
-															<td><input type="hidden" name="url" value="menu29">
+															<td>
+															<input type="hidden" name='memberNo' value="${member.memberNo}"> 
+															<input type="hidden" name="memberVONo" value="${memberVO.account}">
+															<input type="hidden" name="url" value="menu29">
 																<input type="hidden" name="action" value="memberUpdate">
 															</td>
 															<td><input type="submit" name="" value="送出">
