@@ -1151,9 +1151,7 @@
 												</tr>
 											</tbody>
 
-										</c:forEach>
-						
-									
+										</c:forEach>						
 
 									</table>
 									
@@ -1186,8 +1184,9 @@
 														</tr>
 														<tr>
 															<td>用户密码</td>
-															<td><input type="text" name="password"
-																class='password'></td>
+															<td><input type="text" name="password" 
+																required placeholder="請輸入3-12個英數字" pattern="[A-Z0-9a-z]{3,12}"
+																class='password'></td> 
 														</tr>
 														<tr>
 															<td>用户昵称</td>
@@ -2283,8 +2282,9 @@
 														</tr>
 														<tr>
 															<td>用户密码</td>
-															<td><input type="text" name="password"
-																class='password'></td>
+																
+															<td><input type="text" name="password" placeholder="请输入密码" 
+																 required pattern="[A-Za-z0-9]{3,12}" maxlength='12' title='由英文或数字所组成的3~12字元' ></td>
 														</tr>
 														<tr>
 															<td>用户昵称</td>
@@ -2490,7 +2490,6 @@
 									<h4>
 										<i class="fa fa-angle-right"></i> 权限不足
 									</h4>
-								
 								</div>
 							</div>
 							<div id="menu28" class="tab-pane fade">
