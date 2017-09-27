@@ -13,7 +13,7 @@ public class UpPointsService {
 	}
 	
 	
-	public  UpPointsVO addUpPointsVO(int memberNo,String name,String loginIP, String level,int points,String status,String time,String type) {
+	public  UpPointsVO addUpPointsVO(int memberNo,String name,String loginIP, String level,int points,String status,String time,String type,String account) {
 		UpPointsVO upPoints = new UpPointsVO();
 		upPoints.setMemberNo(memberNo);
 		upPoints.setName(name);
@@ -23,6 +23,7 @@ public class UpPointsService {
 		upPoints.setStatus(status);
 		upPoints.setTime(time);
 		upPoints.setType(type);
+		upPoints.setAccount(account);
 		dao.add(upPoints);
 		return upPoints;
 
@@ -72,6 +73,12 @@ public class UpPointsService {
 	}
 	public List<UpPointsVO> getAll_By_Down() {
 		return dao.getAll_By_Down();
+	}
+	public List<UpPointsVO> getAll_By_Up2(String account) {
+		return dao.getAll_By_Up2(account);
+	}
+	public List<UpPointsVO> getAll_By_Down2(String account) {
+		return dao.getAll_By_Down2(account);
 	}
 	
 	

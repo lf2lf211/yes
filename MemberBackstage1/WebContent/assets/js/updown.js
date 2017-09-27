@@ -1,29 +1,29 @@
-function up(){
+function up(p){
 	var req=new XMLHttpRequest();
 	req.open("get","http://localhost:8081/MemberBackstage1/transactionRecord.jsp");
 	req.onload=function(){
 		
-		var transactionRecord=document.getElementById("transactionRecord");
+		var transactionRecord=document.getElementById("transactionRecord"+p);
 		transactionRecord.innerHTML=this.responseText;
 	};
 	req.send();
 }
-function down(){
+function down(p){
 	var req=new XMLHttpRequest();
 	req.open("get","http://localhost:8081/MemberBackstage1/transactionRecord2.jsp");
 	req.onload=function(){
 		
-		var transactionRecord=document.getElementById("transactionRecord");
+		var transactionRecord=document.getElementById("transactionRecord"+p);
 		transactionRecord.innerHTML=this.responseText;
 	};
 	req.send();
 }
-function three(){
+function three(p){
 	var req=new XMLHttpRequest();
 	req.open("get","http://localhost:8081/MemberBackstage1/transactionRecord3.jsp");
 	req.onload=function(){
 		
-		var transactionRecord=document.getElementById("transactionRecord");
+		var transactionRecord=document.getElementById("transactionRecord"+p);
 		transactionRecord.innerHTML=this.responseText;
 	};
 	req.send();

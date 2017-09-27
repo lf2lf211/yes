@@ -16,7 +16,7 @@
 											<tr>
 												<th rowspan="2"></th>
 												<th rowspan="2">用户编号</th>
-												<th rowspan="2">用户类型</th>
+											
 												<th rowspan="2">暱称</th>
 												<th rowspan="2">登录IP</th>
 												<th rowspan="2">交易号</th>
@@ -39,11 +39,11 @@
 <!-- 											</tr> -->
 										</thead>
 										<c:forEach var="tppSvc" items="${ttpSvc.all}">
+											<c:if test="">
 										<tbody>
 											<tr>
 												<td></td>
 												<td>${tppSvc.orderNo}</td>
-												<td>${tppSvc.openId}</td>
 												<td>${tppSvc.name}</td>
 												<td>${tppSvc.loginIP }</td>
 												<td>交易号</td>
@@ -57,6 +57,7 @@
 											
 											</tr>
 										</tbody>
+										</c:if>
 											</c:forEach>
 									</table>
 </body>

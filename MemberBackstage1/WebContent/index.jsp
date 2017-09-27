@@ -837,24 +837,17 @@
 												<td>${myMem.level }</td>
 												<td>${myMem.loginIP }</td>
 			
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-
-<!-- 												<td></td> -->
-												<td>${memberVO.account}</td>
+												<td>${myMem.superior2}</td>
 												<td  align="center">${errorMsgs.points}<input type="text" name="points"></td>
 												<td><input type="submit">
 												<input type="hidden" name="action" value="addUpPoints" >
 												<input type="hidden" name="memberNo" value="${myMem.memberNo }" >
 												<input type="hidden" name="name" value="${myMem.name }">
 												<input type="hidden" name="level" value="${myMem.level }">
+
 												<input type="hidden" name="loginIP" value="${myMem.loginIP }">
 												<input type="hidden" name="type" value="上分">
-												<input type="hidden" name="url" value="menu39">
+												<input type="hidden" name="url" value="menu8">
 												</td>
 												
 											</tr>
@@ -907,7 +900,7 @@
 													<input type="hidden" name="level" value="${memberVO.level }">
 													<input type="hidden" name="loginIP" value="${memberVO.loginIP }">
 													<input type="hidden" name="type" value="下分">
-													<input type="hidden" name="url" value="menu6">
+													<input type="hidden" name="url" value="menu8">
 												</td>
 											
 											</tr>
@@ -987,8 +980,8 @@
 										</span> <span> <input type="button" name="" value="查询">
 										</span>
 									</div>
-									<span onclick="up();">上分　　　</span>　　　<span onclick="down();">下分　　　</span>　　　<span onclick="three();">第三方交易　　　</span>
-									<div id="transactionRecord">
+									<span onclick="up('1');">上分　　　</span>　　　<span onclick="down('1');">下分　　　</span>　　　<span onclick="three('1');">第三方交易　　　</span>
+									<div id="transactionRecord1">
 <%-- 									<%@ include file="transactionRecord.jsp"%> --%>
 									</div>
 								</div>
@@ -1593,48 +1586,15 @@
 										</span> <span> <input type="button" name="" value="查询">
 										</span>
 									</div>
-									<table
-										class="table table-bordered table-striped table-condensed">
-										<thead>
-											<tr>
-												<th></th>
-												<th rowspan="2">用户编号</th>
-												<th rowspan="2">用户暱称</th>
-												<th rowspan="2">类型</th>
-												<th rowspan="2">登录IP</th>
-												<th rowspan="2">分数</th>
-												<th rowspan="2">状态</th>
-												<th rowspan="2">申请时间</th>
-												<th rowspan="2">类别</th>
-												<th rowspan="2">更新状态</th>
-												<th rowspan="2">操作</th>
-											</tr>
-										</thead>
-										<c:forEach var="uppoints" items="${uppointsSvc.all}">
-										<form action="UpPointsServlet.do" method="post">
-										<tbody align="center">
-											<tr><td></td>
-												<td>${uppoints.memberNo }</td>
-												<td>${uppoints.name }</td>
-												<td>${uppoints.level }</td>
-												<td>${uppoints.loginIP }</td>
-												<td>${uppoints.points }</td>
-												<td>${uppoints.status }</td>
-												<td>${uppoints.time }</td>
-												<td>${uppoints.type }</td>
-												<td><select name="status">
-														<option value="成功"> 成功</option>
-														<option value="未付款"> 未付款</option>
-														<option value="失败"> 失败</option>
-													</select></td>
-												<td><input type="submit">
-												<input type="hidden" name="action" value="updateStatus" >
-												<input type="hidden" name="addPointsNo" value="${uppoints.addPointsNo}" ></td>
-											</tr>
-										</tbody>
-										</form>
-										</c:forEach>
-									</table>
+									
+									<div>
+									<span onclick="up('2');">上分　　　</span>　　　<span onclick="down('2');">下分　　　</span>　　　<span onclick="three('2');">第三方交易　　　</span>
+									<div id="transactionRecord2">
+								
+									</div>
+									
+									</div>
+									
 								</div>
 							</div>
 							<div id="menu19" class="tab-pane fade">

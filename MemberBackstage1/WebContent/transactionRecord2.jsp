@@ -28,6 +28,8 @@
 											</tr>
 										</thead>
 										<c:forEach var="uppoints" items="${uppointsSvc.all_By_Down}">
+											<c:if test="${uppoints.account==memberVO.account||uppoints.memberNo==memberVO.memberNo}">
+									
 										<form action="UpPointsServlet.do" method="post">
 										<tbody align="center">
 											<tr><td></td>
@@ -50,6 +52,7 @@
 											</tr>
 										</tbody>
 										</form>
+										</c:if>
 										</c:forEach>
 									</table>
 

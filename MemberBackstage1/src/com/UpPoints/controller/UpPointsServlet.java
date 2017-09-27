@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 
 import com.UpPoints.model.UpPointsService;
 import com.db.Jdbcmysql;
+import com.member.model.MemberService;
+import com.member.model.MemberVO;
 
 
 /**
@@ -56,6 +58,9 @@ public class UpPointsServlet extends HttpServlet {
 			String status = req.getParameter("status");
 			String time = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime());
 			String type = req.getParameter("type");
+			MemberService member =new MemberService();
+			
+			String account = member.getOneMemberVO(memberNo).getSuperior2();
 			
 			
 			if (!errorMsgs.isEmpty()) {
@@ -68,12 +73,12 @@ public class UpPointsServlet extends HttpServlet {
 			
 			UpPointsService upPointsSvc =new UpPointsService();
 			
-			upPointsSvc.addUpPointsVO(memberNo,name, loginIP, level, points,status,time,type);
+			upPointsSvc.addUpPointsVO(memberNo,name, loginIP, level, points,status,time,type,account);
 			
 			
 			session.removeAttribute("errorMsgs");
 			
-			res.sendRedirect("index.jsp#menu18");
+			res.sendRedirect("index.jsp#"+url);
 			return;	
 			
 		}

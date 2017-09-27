@@ -10,13 +10,15 @@
 </head>
 <body>
 <h3><b><center>上分纪录</center></b></h3>
+
+<c:if test="${type.contains(\"1\")}">
 <table
 										class="table table-bordered table-striped table-condensed">
 										<thead>
 											<tr>
 												<th></th>
 												<th rowspan="2">用户编号</th>
-												<th rowspan="2">用户帐号</th>
+												
 												<th rowspan="2">用户暱称</th>
 												<th rowspan="2">类型</th>
 												<th rowspan="2">登录IP</th>
@@ -28,13 +30,14 @@
 												<th rowspan="2">操作</th>
 											</tr>
 										</thead>
+										
 										<c:forEach var="uppoints" items="${uppointsSvc.all_By_Up}">
-										<c:if test=""></c:if>
+
 										<form action="UpPointsServlet.do" method="post">
 										<tbody align="center">
 											<tr><td></td>
 												<td>${uppoints.memberNo }</td>
-												<td>${uppoints.account }</td>
+												
 												<td>${uppoints.name }</td>
 												<td>${uppoints.level }</td>
 												<td>${uppoints.loginIP }</td>
@@ -53,7 +56,99 @@
 											</tr>
 										</tbody>
 										</form>
+										
 										</c:forEach>
 									</table>
+</c:if>
+
+
+
+<c:if test="${type.contains(\"2\")}">
+<table
+										class="table table-bordered table-striped table-condensed">
+										<thead>
+											<tr>
+												<th></th>
+												<th rowspan="2">用户编号</th>
+												
+												<th rowspan="2">用户暱称</th>
+												<th rowspan="2">类型</th>
+												<th rowspan="2">登录IP</th>
+												<th rowspan="2">分数</th>
+												<th rowspan="2">状态</th>
+												<th rowspan="2">申请时间</th>
+												<th rowspan="2">类别</th>
+												
+											</tr>
+										</thead>
+										
+										<c:forEach var="uppoints" items="${uppointsSvc.all_By_Up}">
+
+										<form action="UpPointsServlet.do" method="post">
+										<tbody align="center">
+											<tr><td></td>
+												<td>${uppoints.memberNo }</td>
+												
+												<td>${uppoints.name }</td>
+												<td>${uppoints.level }</td>
+												<td>${uppoints.loginIP }</td>
+												<td>${uppoints.points }</td>
+												<td>${uppoints.status }</td>
+												<td>${uppoints.time }</td>
+												<td>${uppoints.type }</td>
+											
+											</tr>
+										</tbody>
+										</form>
+										
+										</c:forEach>
+									</table>
+</c:if>
+
+
+
+<c:if test="${type.contains(\"3\")}">
+
+<table
+										class="table table-bordered table-striped table-condensed">
+										<thead>
+											<tr>
+												<th></th>
+												<th rowspan="2">用户编号</th>
+												
+												<th rowspan="2">用户暱称</th>
+												<th rowspan="2">类型</th>
+												<th rowspan="2">登录IP</th>
+												<th rowspan="2">分数</th>
+												<th rowspan="2">状态</th>
+												<th rowspan="2">申请时间</th>
+												<th rowspan="2">类别</th>
+												
+											</tr>
+										</thead>
+										
+										<c:forEach var="uppoints" items="${uppointsSvc.all_By_Up}">
+
+										<c:if test="${uppoints.account==memberVO.account||uppoints.memberNo==memberVO.memberNo}">
+										<form action="UpPointsServlet.do" method="post">
+										<tbody align="center">
+											<tr><td></td>
+												<td>${uppoints.memberNo }</td>
+												
+												<td>${uppoints.name }</td>
+												<td>${uppoints.level }</td>
+												<td>${uppoints.loginIP }</td>
+												<td>${uppoints.points }</td>
+												<td>${uppoints.status }</td>
+												<td>${uppoints.time }</td>
+												<td>${uppoints.type }</td>
+											
+											</tr>
+										</tbody>
+										</form>
+										</c:if>
+										</c:forEach>
+									</table>
+									</c:if>
 </body>
 </html>

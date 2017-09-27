@@ -202,7 +202,7 @@ public class MemberDAO implements MemberInterface {
 				memberVO.setLevel(rs.getString("level"));
 				memberVO.setState(rs.getString("state"));
 				memberVO.setSuperior(rs.getString("superior"));
-				memberVO.setSuperior(rs.getString("superior2"));
+				memberVO.setSuperior2(rs.getString("superior2"));
 				memberVO.setCommission(rs.getInt("Commission"));
 			}
 			//Area(area_code, area_adress, area_location, area_name)"

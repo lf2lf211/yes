@@ -29,10 +29,19 @@ public class UpPointsVO {
 		this.time=time;
 		this.addPointsNo= addPointsNo;
 		this.type=type;
+		this.account=account;
 	}
 
 	
 	
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
 	public String getType() {
 		return type;
 	}
