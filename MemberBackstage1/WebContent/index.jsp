@@ -9,8 +9,7 @@
 	class="com.UpPoints.model.UpPointsService" />
 <jsp:useBean id="memSvc" scope="page"
 	class="com.member.model.MemberService" />
-<jsp:useBean id="ttpSvc" scope="page"
-	class="com.thirdpartypayment.model.ThirdPartyPaymentSvc" />
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,11 +38,14 @@
 <link href="assets/css/style-responsive.css" rel="stylesheet">
 <link href="assets/css/bow.css" rel="stylesheet">
 <script src="assets/js/chart-master/Chart.js"></script>
+<script src="assets/js/updown.js"></script>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+
 </head>
 
 <body>
@@ -128,7 +130,7 @@
 							<li><a href="#" id="cash"> <i class="fa fa-jpy"></i>
 									下分申请
 							</a></li>
-							
+
 							<li><a href="#" id="chargeRecord"> <i
 									class="fa fa-file-text-o"></i> 交易纪录
 							</a></li>
@@ -141,7 +143,7 @@
 							<li><a href="#" id="agentLV"> <i class="fa fa-code-fork"></i>
 									代理层级
 							</a></li>
-							
+
 							<li><a href="#" id="changeAgent"> <i class="fa fa-users"></i>
 									管理下线
 							</a></li>
@@ -152,22 +154,19 @@
 					</a>
 						<ul class="sub">
 							<li><a href="#" id="cashAsk"> <i class="fa fa-money"></i>
-<!-- 									提现请求 -->
-										输赢列表
+									<!-- 									提现请求 --> 输赢列表
 							</a></li>
 							<li><a href="#" id="cashRecord"> <i
-									class="fa fa-file-text-o"></i> 
-<!-- 									提现纪录 -->
-										反佣列表
+									class="fa fa-file-text-o"></i> <!-- 									提现纪录 --> 反佣列表
 							</a></li>
 							<li><a href="#" id="thirdPay"> <i
 									class="fa fa-credit-card"></i> 结算纪录
 							</a></li>
-							
-							
-							
+
+
+
 						</ul></li>
-						<li class="sub-menu"><a href="javascript:;" class="menu_arrow">
+					<li class="sub-menu"><a href="javascript:;" class="menu_arrow">
 							<i class="fa fa-cogs"></i> <span>大厅设置</span> <img
 							src="assets/img/down.png" style="float: right;">
 					</a>
@@ -192,7 +191,7 @@
 							<li><a href="#" id="BetList"> <i
 									class="fa fa-file-text-o"></i> 注单列表
 							</a></li>
-							
+
 						</ul></li>
 					<!-- <li class="sub-menu"><a href="javascript:;" class="menu_arrow">
 							<i class=" fa fa-desktop"></i> <span>系统记录</span> <img
@@ -286,8 +285,8 @@
 								style="position: absolute; top: 5px; right: 2px; cursor: pointer; padding: 5px;"></b>
 							</li>
 							<li class="menu_recharge_con" style="display: none;"><a
-								data-toggle="tab" href="#menu39" class="menu_recharge_con"> <i
-									class="fa fa-jpy"></i>上分申请
+								data-toggle="tab" href="#menu39" class="menu_recharge_con">
+									<i class="fa fa-jpy"></i>上分申请
 							</a> <b class="menu_del fa fa-times"
 								style="position: absolute; top: 5px; right: 2px; cursor: pointer; padding: 5px;"></b>
 							</li>
@@ -297,7 +296,7 @@
 							</a> <b class="menu_del fa fa-times"
 								style="position: absolute; top: 5px; right: 2px; cursor: pointer; padding: 5px;"></b>
 							</li>
-							
+
 							<li class="menu_chargeRecord" style="display: none;"><a
 								data-toggle="tab" href="#menu8" class="menu_chargeRecord"> <i
 									class="fa fa-file-text-o"></i> 交易纪录
@@ -325,7 +324,7 @@
 								style="position: absolute; top: 5px; right: 2px; cursor: pointer; padding: 5px;"></b>
 							</li>
 							<!-- ==========================else============================ -->
-							
+
 							<li class="menu_cashAsk" style="display: none;"><a
 								data-toggle="tab" href="#menu13" class="menu_cashAsk"> <i
 									class="fa fa-money"></i> 输赢列表
@@ -338,11 +337,11 @@
 							</a> <b class="menu_del fa fa-times"
 								style="position: absolute; top: 5px; right: 2px; cursor: pointer; padding: 5px;"></b>
 							</li>
-							
-							
-							
-							
-							
+
+
+
+
+
 							<li class="menu_businessNO" style="display: none;"><a
 								data-toggle="tab" href="#menu7" class="menu_businessNO"> <i
 									class="fa fa-align-left"></i> 结算纪录
@@ -771,175 +770,194 @@
 							</div>
 							<!-- =================================储值============================== -->
 							<c:if test="${type.contains(\"2\")||type.contains(\"1\")}">
-							<div id="menu5" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 上分申请
-									</h4>
-									我的下线:
-									<form action="member.do" method="Post" style='display: inline-block'>
-									
-									<select size="1" name="memberNo">
-										<c:forEach var="member" items="${search}">
-											<option value="${member.memberNo}" ${(member.account==member.account)? 'selected':'' } >帳號:${member.account}名稱:${member.name} 
-										</c:forEach>
-									</select>
-									<input type="hidden" name="url" value="menu39">
-									<input type="hidden" name="action" value="searchMyMember" >
-									<input type="submit" id="recharge_con">
-									</form>
-									
-								</div>
-							</div>
-							<div id="menu39" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 上分申请
-									</h4>
-									<form action="UpPointsServlet.do" method="post">
-									<table 
-										class="table table-bordered table-striped table-condensed">
-										<thead>
-											<tr>
-												<th rowspan="2"></th>
-												<!-- <th rowspan="2">上分纪录</th> -->
-												<th rowspan="2">用户编号</th>
-												<th rowspan="2">用户帐号</th>
-												<th rowspan="2">用户暱称</th>
-												<th rowspan="2">类型</th>
-												<th rowspan="2">登录IP</th>
-<!-- 												<th rowspan="2">用户馀额</th> -->
-<!-- 												<th colspan="4">支付信息</th> -->
-<!-- 												<th rowspan="2">描述</th> -->
-<!-- 												<th rowspan="2">操作人</th> -->
-												<th rowspan="2">上级</th>
-												<th rowspan="2">分数</th>
-												<th rowspan="2">操作</th>
-											
-											</tr>
-<!-- 											<tr> -->
-<!-- 												<th>支付方式</th> -->
-<!-- 												<th>支付标题</th> -->
-<!-- 												<th>支付名称</th> -->
-<!-- 												<th>支付帐号</th> -->
-<!-- 											</tr> -->
-										</thead>
-										
-										<tbody align="center">
-											<tr>
-												<td></td>
-												<!-- <td></td> -->
-												<td>${myMem.memberNo }</td>
-												<td>${myMem.account }</td>
-												<td>${myMem.name }</td>
-												<td>${myMem.level }</td>
-												<td>${myMem.loginIP }</td>
-			
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
+								<div id="menu5" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 上分申请
+										</h4>
+										我的下线:
+										<form action="member.do" method="Post"
+											style='display: inline-block'>
 
-<!-- 												<td></td> -->
-												<td>${memberVO.account}</td>
-												<td  align="center">${errorMsgs.points}<input type="text" name="points"></td>
-												<td><input type="submit">
-												<input type="hidden" name="action" value="addUpPoints" >
-												<input type="hidden" name="memberNo" value="${myMem.memberNo }" >
-												<input type="hidden" name="name" value="${myMem.name }">
-												<input type="hidden" name="level" value="${myMem.level }">
-												<input type="hidden" name="loginIP" value="${myMem.loginIP }">
-												<input type="hidden" name="type" value="上分">
-												<input type="hidden" name="url" value="menu39">
-												</td>
-												
-											</tr>
-										</tbody>
-										
-									</table></form>
+											<select size="1" name="memberNo">
+												<c:forEach var="member" items="${search}">
+													<option value="${member.memberNo}"
+														${(member.account==member.account)? 'selected':'' }>帳號:${member.account}名稱:${member.name}
+
+													
+												</c:forEach>
+											</select> <input type="hidden" name="url" value="menu39"> <input
+												type="hidden" name="action" value="searchMyMember">
+											<input type="submit" id="recharge_con">
+										</form>
+
+									</div>
 								</div>
-							</div>
+								<div id="menu39" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 上分申请
+										</h4>
+										<form action="UpPointsServlet.do" method="post">
+											<table
+												class="table table-bordered table-striped table-condensed">
+												<thead>
+													<tr>
+														<th rowspan="2"></th>
+														<!-- <th rowspan="2">上分纪录</th> -->
+														<th rowspan="2">用户编号</th>
+														<th rowspan="2">用户帐号</th>
+														<th rowspan="2">用户暱称</th>
+														<th rowspan="2">类型</th>
+														<th rowspan="2">登录IP</th>
+														<!-- 												<th rowspan="2">用户馀额</th> -->
+														<!-- 												<th colspan="4">支付信息</th> -->
+														<!-- 												<th rowspan="2">描述</th> -->
+														<!-- 												<th rowspan="2">操作人</th> -->
+														<th rowspan="2">上级</th>
+														<th rowspan="2">分数</th>
+														<th rowspan="2">操作</th>
+
+													</tr>
+													<!-- 											<tr> -->
+													<!-- 												<th>支付方式</th> -->
+													<!-- 												<th>支付标题</th> -->
+													<!-- 												<th>支付名称</th> -->
+													<!-- 												<th>支付帐号</th> -->
+													<!-- 											</tr> -->
+												</thead>
+
+												<tbody align="center">
+													<tr>
+														<td></td>
+														<!-- <td></td> -->
+														<td>${myMem.memberNo }</td>
+														<td>${myMem.account }</td>
+														<td>${myMem.name }</td>
+														<td>${myMem.level }</td>
+														<td>${myMem.loginIP }</td>
+
+														<!-- 												<td></td> -->
+														<!-- 												<td></td> -->
+														<!-- 												<td></td> -->
+														<!-- 												<td></td> -->
+														<!-- 												<td></td> -->
+														<!-- 												<td></td> -->
+
+														<!-- 												<td></td> -->
+														<td>${memberVO.account}</td>
+														<td align="center">${errorMsgs.points}<input
+															type="text" name="points"></td>
+														<td><input type="submit"> <input
+															type="hidden" name="action" value="addUpPoints">
+															<input type="hidden" name="memberNo"
+															value="${myMem.memberNo }"> <input type="hidden"
+															name="name" value="${myMem.name }"> <input
+															type="hidden" name="level" value="${myMem.level }">
+															<input type="hidden" name="loginIP"
+															value="${myMem.loginIP }"> <input type="hidden"
+															name="type" value="上分"> <input type="hidden"
+															name="url" value="menu39"></td>
+
+													</tr>
+												</tbody>
+
+											</table>
+										</form>
+									</div>
+								</div>
 							</c:if>
 							<div id="menu6" class="tab-pane fade">
 								<div class="model content-panel ">
 									<h4>
 										<i class="fa fa-angle-right"></i> 下分申请
 									</h4>
-									<table
-										class="table table-bordered table-striped table-condensed">
-										<thead>
-											<tr>
-												<th rowspan="2"></th>
-												<th rowspan="2">用户编号</th>
-												<th rowspan="2">用户帐号</th>
-												<th rowspan="2">用户暱称</th>
-												<th rowspan="2">类型</th>
-												<th rowspan="2">登录IP</th>
-												<th rowspan="2">用户馀额</th>
-												<th rowspan="2">操作人</th>
-												<th rowspan="2">操作</th>
-											</tr>
-											
-										</thead>
-										
-										<tbody>
-											<tr>
-												<td></td>
-												<td>${memberVO.memberNo }</td>
-												<td>${memberVO.account }</td>
-												<td>${memberVO.name }</td>
-												<td>${memberVO.level }</td>
-												<td>${memberVO.loginIP }</td>
-												<td>${memberVO.balance }</td>
-												<td>${memberVO.account }</td>
-												<td><input type="submit"></td>
-											
-											</tr>
-										</tbody>
-										
-									</table>
+									<form action="UpPointsServlet.do" method="post">
+										<table
+											class="table table-bordered table-striped table-condensed">
+											<thead>
+												<tr>
+													<th rowspan="2"></th>
+													<th rowspan="2">用户编号</th>
+													<th rowspan="2">用户帐号</th>
+													<th rowspan="2">用户暱称</th>
+													<th rowspan="2">类型</th>
+													<th rowspan="2">登录IP</th>
+													<th rowspan="2">用户馀额</th>
+													<th rowspan="2">操作人</th>
+													<th rowspan="2">分數</th>
+													<th rowspan="2">操作</th>
+												</tr>
+
+											</thead>
+
+											<tbody>
+												<tr>
+													<td></td>
+													<td>${memberVO.memberNo }</td>
+													<td>${memberVO.account }</td>
+													<td>${memberVO.name }</td>
+													<td>${memberVO.level }</td>
+													<td>${memberVO.loginIP }</td>
+													<td>${memberVO.balance }</td>
+													<td>${memberVO.account }</td>
+													<td><input type="text" name="points"></td>
+													<td><input type="submit"> <input type="hidden"
+														name="action" value="addUpPoints"> <input
+														type="hidden" name="memberNo"
+														value="${memberVO.memberNo }"> <input
+														type="hidden" name="name" value="${memberVO.name }">
+														<input type="hidden" name="level"
+														value="${memberVO.level }"> <input type="hidden"
+														name="loginIP" value="${memberVO.loginIP }"> <input
+														type="hidden" name="type" value="下分"> <input
+														type="hidden" name="url" value="menu6"></td>
+
+												</tr>
+											</tbody>
+
+										</table>
+									</form>
 								</div>
 							</div>
-<!-- 							<div id="menu7" class="tab-pane fade"> -->
-<!-- 								<div class="model content-panel "> -->
-<!-- 									<h4> -->
-<!-- 										<i class="fa fa-angle-right"></i> 结算纪录 -->
-<!-- 									</h4> -->
-<!-- 									<table -->
-<!-- 										class="table table-bordered table-striped table-condensed"> -->
-<!-- 										<thead> -->
-<!-- 											<tr> -->
-<!-- 												<th></th> -->
-<!-- 												<th>用户类型</th> -->
-<!-- 												<th>用户编号</th> -->
-<!-- 												<th>用户暱称</th> -->
-<!-- 												<th>馀额</th> -->
-<!-- 												<th>状态</th> -->
-<!-- 												<th>登录IP</th> -->
-<!-- 												<th>登录时间</th> -->
-<!-- 												<th>创建时间</th> -->
-<!-- 												<th>操作</th> -->
-<!-- 											</tr> -->
-<!-- 										</thead> -->
-<!-- 										<tbody> -->
-<!-- 											<tr> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 											</tr> -->
-<!-- 										</tbody> -->
-<!-- 									</table> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
+							<!-- 							<div id="menu7" class="tab-pane fade"> -->
+							<!-- 								<div class="model content-panel "> -->
+							<!-- 									<h4> -->
+							<!-- 										<i class="fa fa-angle-right"></i> 结算纪录 -->
+							<!-- 									</h4> -->
+							<!-- 									<table -->
+							<!-- 										class="table table-bordered table-striped table-condensed"> -->
+							<!-- 										<thead> -->
+							<!-- 											<tr> -->
+							<!-- 												<th></th> -->
+							<!-- 												<th>用户类型</th> -->
+							<!-- 												<th>用户编号</th> -->
+							<!-- 												<th>用户暱称</th> -->
+							<!-- 												<th>馀额</th> -->
+							<!-- 												<th>状态</th> -->
+							<!-- 												<th>登录IP</th> -->
+							<!-- 												<th>登录时间</th> -->
+							<!-- 												<th>创建时间</th> -->
+							<!-- 												<th>操作</th> -->
+							<!-- 											</tr> -->
+							<!-- 										</thead> -->
+							<!-- 										<tbody> -->
+							<!-- 											<tr> -->
+							<!-- 												<td></td> -->
+							<!-- 												<td></td> -->
+							<!-- 												<td></td> -->
+							<!-- 												<td></td> -->
+							<!-- 												<td></td> -->
+							<!-- 												<td></td> -->
+							<!-- 												<td></td> -->
+							<!-- 												<td></td> -->
+							<!-- 												<td></td> -->
+							<!-- 												<td></td> -->
+							<!-- 											</tr> -->
+							<!-- 										</tbody> -->
+							<!-- 									</table> -->
+							<!-- 								</div> -->
+							<!-- 							</div> -->
 
 							<div id="menu8" class="tab-pane fade">
 								<div class="model content-panel ">
@@ -957,7 +975,7 @@
 										<span>用户编号:</span> <span> <input type="text"
 											placeholder="请输入用户编号" name="">
 										</span> <span>方式</span> <select class="newObj" name="newObj">
-											<option value="" disabled selected>支付方式</option>									
+											<option value="" disabled selected>支付方式</option>
 											<option value="微信">微信</option>
 											<option value="支付宝">支付宝</option>
 											<option value="银行卡">银行卡</option>
@@ -972,8 +990,10 @@
 										</span> <span> <input type="button" name="" value="查询">
 										</span>
 									</div>
-									<div>
-									<%@ include file="transactionRecord.jsp"%>
+									<span onclick="up();">上分 </span> <span onclick="down();">下分
+									</span> <span onclick="three();">第三方交易 </span>
+									<div id="transactionRecord">
+										<%-- 									<%@ include file="transactionRecord.jsp"%> --%>
 									</div>
 								</div>
 							</div>
@@ -987,7 +1007,7 @@
 										class="table table-bordered table-striped table-condensed">
 										<thead>
 											<tr>
-												<th> </th>
+												<th></th>
 												<th>用户编号</th>
 												<th>用户账户</th>
 												<th>用户密码</th>
@@ -999,15 +1019,16 @@
 												<th>状态</th>
 												<th>层级</th>
 												<th>上级</th>
-												
+
 
 											</tr>
 										</thead>
-							
-												<%@ include file="/page/page1.file" %> 
-										
-										<c:forEach var="member" items="${search}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-												
+
+										<%@ include file="/page/page3.file"%>
+
+										<c:forEach var="member" items="${search}"
+											begin="<%=pageIndexs%>" end="<%=pageIndexs+rowsPerPages-1%>">
+
 											<tbody>
 												<tr>
 													<td></td>
@@ -1022,13 +1043,13 @@
 													<td>${member.state }</td>
 													<td>${member.superior}</td>
 													<td>${member.superior2}</td>
-													
+
 												</tr>
 											</tbody>
 
 										</c:forEach>
-										<%@include file="/page/page2.file"%> 
-									
+										<%@include file="/page/page4.file"%>
+
 
 									</table>
 								</div>
@@ -1041,7 +1062,7 @@
 									<table
 										class="table table-bordered table-striped table-condensed">
 										<thead>
-											<tr> 
+											<tr>
 												<th></th>
 												<th>所属上级</th>
 												<th>用户编号</th>
@@ -1077,17 +1098,17 @@
 									</table>
 								</div>
 							</div>
-							
+
 							<div id="menu11" class="tab-pane fade">
 								<div class="model content-panel ">
-								<h4>
+									<h4>
 										<i class="fa fa-angle-right"></i> 会员管理
 									</h4>
 									<table
 										class="table table-bordered table-striped table-condensed">
 										<thead>
 											<tr>
-												<th> </th>
+												<th></th>
 												<th>用户编号</th>
 												<th>用户账户</th>
 												<th>用户密码</th>
@@ -1098,16 +1119,16 @@
 												<th>身分</th>
 												<th>状态</th>
 												<th>上級</th>
-												<th>上級</th>
 												<th>操作</th>
 
 											</tr>
 										</thead>
-							
-									
-										
-										<c:forEach var="member" items="${search2}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-												
+
+										<%@ include file="/page/page5.file"%>
+
+										<c:forEach var="member" items="${search2}"
+											begin="<%=pageIndex3%>" end="<%=pageIndex3+rowsPerPage3-1%>">
+
 											<tbody>
 												<tr>
 													<td></td>
@@ -1120,42 +1141,39 @@
 													<td>${member.loginTime }</td>
 													<td class='level'>${member.level}</td>
 													<td>${member.state }</td>
-													<td>${member.superior}</td>
+
 													<td>${member.superior2}</td>
 													<td><input type="submit"
 														class="btn btn-warning change_Btn" value='修改'>
-														
+
 														<form action="member.do" method="Post"
 															style='display: inline-block'>
 															<input type="hidden" name='memberNo'
-																value="${member.memberNo}">
-																<input type="hidden" name='memberVONo'
-																value="${memberVO.account}"> <input type="hidden"
-																name='action' value="enableMember"> <input
-																type="hidden" name='state' value="启用"> <input
+																value="${member.memberNo}"> <input type="hidden"
+																name='memberVONo' value="${memberVO.account}"> <input
+																type="hidden" name='action' value="enableMember">
+															<input type="hidden" name='state' value="启用"> <input
 																type="hidden" name='url' value="menu11"> <input
 																type="submit" class="nobtn btn btn-primary btn-sm"
 																value='复权'>
 														</form>
 														<form action="member.do" method="Post"
 															style='display: inline-block'>
-															<input type="hidden" name='memberNo' value="${member.memberNo}"> 
-																<input type="hidden" name='memberVONo'
-																value="${memberVO.account}">
-																<input type="hidden" name='action' value="disableMember"> 
-																<input type="hidden" name='state' value="停用"> 
-																<input type="hidden" name='url' value="menu11"> 
-																<input type="submit" class="yesbtn btn btn-primary btn-sm"
+															<input type="hidden" name='memberNo'
+																value="${member.memberNo}"> <input type="hidden"
+																name='memberVONo' value="${memberVO.account}"> <input
+																type="hidden" name='action' value="disableMember">
+															<input type="hidden" name='state' value="停用"> <input
+																type="hidden" name='url' value="menu11"> <input
+																type="submit" class="yesbtn btn btn-primary btn-sm"
 																value='停权'>
 														</form></td>
 												</tr>
 											</tbody>
-
-										</c:forEach>						
+										</c:forEach>
+										<%@ include file="/page/page6.file"%>
 
 									</table>
-									
-									
 									<div class="changeMember" style="display: none;">
 										<hr>
 										<h4>
@@ -1184,9 +1202,10 @@
 														</tr>
 														<tr>
 															<td>用户密码</td>
-															<td><input type="text" name="password" 
-																required placeholder="請輸入3-12個英數字" pattern="[A-Z0-9a-z]{3,12}"
-																class='password'></td> 
+															<td><input type="text" name="password"
+																	placeholder="请输入密码" required
+																	pattern="[A-Za-z0-9]{3,12}" maxlength='12'
+																	title='由英文或数字所组成的3~12字元'></td>
 														</tr>
 														<tr>
 															<td>用户昵称</td>
@@ -1212,8 +1231,11 @@
 
 														</tr>
 														<tr>
-															<td><input type="hidden" name="url" value="menu29">
-																<input type="hidden" name="action" value="memberUpdate">
+															<td><input type="hidden" name="url" value="menu11">
+																<input type="hidden" name='memberNo'
+																value="${member.memberNo}"> <input type="hidden"
+																name="memberVONo" value="${memberVO.account}"> <input
+																type="hidden" name="action" value="memberUpdate">
 															</td>
 															<td><input type="submit" name="" value="送出">
 															</td>
@@ -1267,15 +1289,13 @@
 														</c:if>
 													</tr>
 													<tr>
-														<td><input
-															type="hidden" name="superior"
-															value="${memberVO.superior},">
-															<input type="hidden" name="superior2"
-															value="${memberVO.account}"> <input
-															type="hidden" name="acc" value="${memberVO.account}">
-															<input type="hidden" name="action" value="memInsert">
-															<input type="hidden" name="url" value="menu11">
-														</td>
+														<td><input type="hidden" name="superior"
+															value="${memberVO.superior},"> <input
+															type="hidden" name="superior2"
+															value="${memberVO.account}"> <input type="hidden"
+															name="acc" value="${memberVO.account}"> <input
+															type="hidden" name="action" value="memInsert"> <input
+															type="hidden" name="url" value="menu11"></td>
 														<td><input type="submit" name="" value="新增">
 														</td>
 													</tr>
@@ -1286,15 +1306,15 @@
 								</div>
 							</div>
 							<!-- =========================else=============================== -->
-<!-- 							<div id="menu12" class="tab-pane fade"> -->
-<!-- 								<div class="model content-panel "> -->
-<!-- 									<h4> -->
-<!-- 										<i class="fa fa-angle-right"></i> 业务流水 -->
-<!-- 									</h4> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
+							<!-- 							<div id="menu12" class="tab-pane fade"> -->
+							<!-- 								<div class="model content-panel "> -->
+							<!-- 									<h4> -->
+							<!-- 										<i class="fa fa-angle-right"></i> 业务流水 -->
+							<!-- 									</h4> -->
+							<!-- 								</div> -->
+							<!-- 							</div> -->
 
-<div id="menu12" class="tab-pane fade">
+							<div id="menu12" class="tab-pane fade">
 								<div class="model content-panel ">
 									<h4>
 										<i class="fa fa-angle-right"></i> 结算纪录
@@ -1466,800 +1486,883 @@
 								</div>
 							</div>
 							<c:if test="${type.contains(\"1\")}">
-							<div id="menu15" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 跑马灯公告
-									</h4>
-									<table
-										class="table table-bordered table-striped table-condensed">
-										<thead>
-											<tr>
-												<th></th>
-												<th>内容</th>
-												<th>修改时间</th>
-												<th>操作</th>
-											</tr>
-										</thead>
-										
-										<tbody>
-											<tr>
-												<form action="scrollingtext.do" method='get'>
-													<td></td>
-													<td><textarea class="Marquee" cols="100" rows="3"
-															name='scrollingText'>${scrollingText}</textarea></td>
-													<td>${updateTime}</td>
-													<td><input type="hidden" name='action'value='updateScoll'>
-													<input type="hidden"name='url' value='menu15'> 
-													<input type="submit"class="btn btn-warning change_Btn" value='修改'></td>
-												</form>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							<div id="menu16" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 大厅排序
-									</h4>
-								</div>
-							</div>
-							<div id="menu17" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 游戏规则
-									</h4>
-									<table
-										class="table table-bordered table-striped table-condensed">
-										<thead>
-											<tr>
-												<th></th>
-												<th>游戏编号</th>
-												<th>游戏类型</th>
-												<th>游戏风格</th>
-												<th>标题</th>
-												<th>内容</th>
-												<th>位置</th>
-												<th>排序值</th>
-												<th>修改时间</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							<!-- ==================================帐务=================================== -->
-							<div id="menu18" class="tab-pane fade">
-								<div class="model content-panel ">
-									<div class="col-xs-12 col-sm-6">
-										<h4 style="display: inline-block;">
-											<i class="fa fa-angle-right"></i> 营收报表
+								<div id="menu15" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 跑马灯公告
 										</h4>
-										<div class="btn-group">
-											<a href="#" class="btn btn-default" role="button"> <i
-												class="fa fa-arrow-down"></i> 导出EXCEL
-											</a>
-										</div>
-									</div>
-									<div class="col-xs-12 col-sm-6">
-										<span>用户编号:</span> <span> <input type="text"
-											placeholder="请输入用户编号" name="">
-										</span> <span>方式</span> <select class="newObj" name="newObj">
-											<option value="" disabled selected>支付方式</option>
-											<option value="">123</option>
-											<option value="">321</option>
-											<option value="">9453</option>
-											<option value="">9487</option>
-										</select> <select class="newObj" name="newObj">
-											<option value="" disabled selected>成功</option>
-											<option value="">123</option>
-											<option value="">321</option>
-											<option value="">9453</option>
-											<option value="">9487</option>
-										</select> <span> 时间： <input type="text" class="datepicker">
-										</span> <span> 至 <input type="text" class="datepicker">
-										</span> <span> <input type="button" name="" value="查询">
-										</span>
-									</div>
-									<table
-										class="table table-bordered table-striped table-condensed">
-										<thead>
-											<tr>
-												<th></th>
-												<th rowspan="2">用户编号</th>
-												<th rowspan="2">用户暱称</th>
-												<th rowspan="2">类型</th>
-												<th rowspan="2">登录IP</th>
-												<th rowspan="2">分数</th>
-												<th rowspan="2">状态</th>
-												<th rowspan="2">申请时间</th>
-												<th rowspan="2">类别</th>
-												<th rowspan="2">更新状态</th>
-												<th rowspan="2">操作</th>
-											</tr>
-										</thead>
-										<c:forEach var="uppoints" items="${uppointsSvc.all}">
-										<form action="UpPointsServlet.do" method="post">
-										<tbody align="center">
-											<tr><td></td>
-												<td>${uppoints.memberNo }</td>
-												<td>${uppoints.name }</td>
-												<td>${uppoints.level }</td>
-												<td>${uppoints.loginIP }</td>
-												<td>${uppoints.points }</td>
-												<td>${uppoints.status }</td>
-												<td>${uppoints.time }</td>
-												<td>${uppoints.type }</td>
-												<td><select name="status">
-														<option value="成功"> 成功</option>
-														<option value="未付款"> 未付款</option>
-														<option value="失败"> 失败</option>
-													</select></td>
-												<td><input type="submit">
-												<input type="hidden" name="action" value="updateStatus" >
-												<input type="hidden" name="addPointsNo" value="${uppoints.addPointsNo}" ></td>
-											</tr>
-										</tbody>
-										</form>
-										</c:forEach>
-									</table>
-								</div>
-							</div>
-							<div id="menu19" class="tab-pane fade">
-								<div class="model content-panel ">
-									<div class="col-xs-12 col-sm-6">
-										<h4 style="display: inline-block;">
-											<i class="fa fa-angle-right"></i> 会员统计
-										</h4>
-										<div class="btn-group">
-											<a href="#" class="btn btn-default" role="button"> <i
-												class="fa fa-arrow-down"></i> 导出EXCEL
-											</a>
-										</div>
-									</div>
-									<div class="col-xs-12 col-sm-6">
-										<span>会员编号:</span> <span> <input type="text"
-											placeholder="请输入用户编号" name=""></span>
-<!-- 										 <span>排序</span> <select class="newObj" name="newObj"> -->
-<!-- 											<option value="" disabled selected>排序方式</option> -->
-<!-- 											<option value="">123</option> -->
-<!-- 											<option value="">321</option> -->
-<!-- 											<option value="">9453</option> -->
-<!-- 											<option value="">9487</option> -->
-<!-- 										</select> -->
-<!-- 										<span> 时间： <input type="text" class="datepicker">  -->
-<!-- 										</span> <span> 至 <input type="text" class="datepicker"> -->
-<!-- 										</span> --><span> <input type="button" name="" value="查询"> 
-	 										</span> 
-									</div>
-									<table
-										class="table table-bordered table-striped table-condensed">
-										<thead>
-											<tr>
-												<th></th>
-												<th>用户编号</th>
-												<th>用户暱称</th>
-												<th>上级代理</th>
-												<th>总笔数</th>
-												<th>总下注金额</th>
-												<th>总输赢金额</th>
-												<th>总期数</th>
-												<th>每期均额</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td></td>
-												<td>oxvo01ajSFA36Iu5nLWe3M8UA1Bk</td>
-												<td>良</td>
-												<td>aaa</td>
-												<td>1</td>
-												<td>2000</td>
-												<td>-2000</td>
-												<td>1</td>
-												<td>2000</td>
-											</tr>
-											
-											<tr>
-												<td></td>
-												<td>oxvo01aMwBVqXk1PX0fJ0ySmjWTU</td>
-												<td>阿正~~胖帥</td>
-												<td>aaa</td>
-												<td>1</td>
-												<td>9</td>
-												<td>40</td>
-												<td>1</td>
-												<td>9</td>
-											</tr>
-											<tr>
-												<td></td>
-												<td>oxvo01blvnE7wFCYe6vX1Qu6fPr4</td>
-												<td>東樂	</td>
-												<td>aaa</td>
-												<td>1</td>
-												<td>10</td>
-												<td>-10</td>
-												<td>1</td>
-												<td>10</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							<div id="menu20" class="tab-pane fade">
-								<div class="model content-panel ">
-									<div class="col-xs-12 col-sm-5">
-										<h4 style="display: inline-block;">
-											<i class="fa fa-angle-right"></i> 注单列表
-										</h4>
-										<div class="btn-group">
-											<a href="#" class="btn btn-default" role="button"> <i
-												class="fa fa-arrow-down"></i> 导出EXCEL
-											</a>
-										</div>
-									</div>
-									<div class="col-xs-12 col-sm-7">
-										<span>游戏彩种：</span> <select class="newObj" name="newObj">
-											<option value="" disabled selected>游戏彩种...</option>
-											<option value="">小玛莉</option>
-											<option value="">龙虎</option>
-
-<!-- 										</select> <span>注单号</span> <span> <input type="text" -->
-<!-- 											placeholder="注单号" name=""> -->
-<!-- 										</span>  -->
-<!-- 										<select class="newObj" name="newObj"> -->
-<!-- 											<option value="" disabled selected>状态...</option> -->
-<!-- 											<option value="">123</option> -->
-<!-- 											<option value="">321</option> -->
-<!-- 											<option value="">9453</option> -->
-<!-- 											<option value="">9487</option> -->
-<!-- 										</select>  -->
-										<span> <input type="text" placeholder="会员编号" name="">
-										</span> <span> 时间： <input type="text" class="datepicker">
-										</span> <span> 至 <input type="text" class="datepicker">
-										</span> <span> <input type="button" name="" value="查询">
-										</span>
-									</div>
-									<table
-										class="table table-bordered table-striped table-condensed">
-										<thead>
-											<tr>
-												<th></th>
-												<th>注单号</th>
-												<th>游戏类型</th>
-<!-- 												<th>游戏风格</th> -->
-<!-- 												<th>游戏主键</th> -->
-												<th>游戏期号</th>
-												<th>开奖结果</th>
-<!-- 												<th>游戏状态</th> -->
-												<th>用户昵称</th>
-												<th>用户编号</th>
-												<th>投注类型</th>
-												<th>投注点</th>
-												<th>投注金额</th>
-												<th>输赢情况</th>
-												<th>状态</th>
-												<th>投注时间</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td></td>
-												<td>4714367</td>
-												<td>龙虎</td>
-												<td>2017092500017</td>
-												<td>red,2,black,10</td>
-												<td>良</td>
-												<td>oxvo01ajSFA36Iu5nLWe3M8UA1Bk</td>
-												<td>1</td>
-												<td>1000,0,0,0,0,0,1000,0,0,0,0</td>
-												<td>2000</td>
-												<td>-2000</td>
-												<td>已结</td>
-												<td>2017-09-25 09:48:39</td>
-											</tr>
-											
-											<tr>
-												<td></td>
-												<td>5109234</td>
-												<td>小玛莉</td>
-												<td>2017092500089</td>
-												<td>旗幟</td>
-												<td>阿正~~胖帥</td>
-												<td>oxvo01aMwBVqXk1PX0fJ0ySmjWTU</td>
-												<td>0</td>
-												<td>0,1,1,0,2,0,4,1</td>
-												<td>9</td>
-												<td>40</td>
-												<td>已结</td>
-												<td>2017-09-25 10:28:59</td>
-											</tr>
-											
-											<tr>
-												<td></td>
-												<td>5930123</td>
-												<td>小玛莉</td>
-												<td>2017092502910</td>
-												<td>炸彈</td>
-												<td>東樂</td>
-												<td>oxvo01blvnE7wFCYe6vX1Qu6fPr4</td>
-												<td>0</td>
-												<td>0,0,0,0,0,0,1,0</td>
-												<td>10</td>
-												<td>-10</td>
-												<td>已结</td>
-												<td>2017-09-25 14:48:01</td>
-											</tr>												
-										</tbody>
-									</table>
-								</div>
-							</div>
-<!-- 							<div id="menu21" class="tab-pane fade"> -->
-<!-- 								<div class="model content-panel "> -->
-<!-- 									<div class="col-xs-12 col-sm-5"> -->
-<!-- 										<h4 style="display: inline-block;"> -->
-<!-- 											<i class="fa fa-angle-right"></i> 开奖结果 -->
-<!-- 										</h4> -->
-<!-- 										<div class="btn-group"> -->
-<!-- 											<a href="#" class="btn btn-default" role="button"> <i -->
-<!-- 												class="fa fa-arrow-down"></i> 导出EXCEL -->
-<!-- 											</a> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 									<div class="col-xs-12 col-sm-7"> -->
-<!-- 										<span>游戏彩种：</span> <select class="newObj" name="newObj"> -->
-<!-- 											<option value="" disabled selected>游戏彩种...</option> -->
-<!-- 											<option value="">123</option> -->
-<!-- 											<option value="">321</option> -->
-<!-- 											<option value="">9453</option> -->
-<!-- 											<option value="">9487</option> -->
-<!-- 										</select> <span>期号：</span> <span> <input type="text" -->
-<!-- 											placeholder="期号" name=""> -->
-<!-- 										</span> <select class="newObj" name="newObj"> -->
-<!-- 											<option value="" disabled selected>状态</option> -->
-<!-- 											<option value="">123</option> -->
-<!-- 											<option value="">321</option> -->
-<!-- 											<option value="">9453</option> -->
-<!-- 											<option value="">9487</option> -->
-<!-- 										</select> <span> 时间： <input type="text" class="datepicker"> -->
-<!-- 										</span> <span> 至 <input type="text" class="datepicker"> -->
-<!-- 										</span> <span> <input type="button" name="" value="查询"> -->
-<!-- 										</span> -->
-<!-- 									</div> -->
-<!-- 									<table -->
-<!-- 										class="table table-bordered table-striped table-condensed"> -->
-<!-- 										<thead> -->
-<!-- 											<tr> -->
-<!-- 												<th rowspan="2"></th> -->
-<!-- 												<th rowspan="2">主键</th> -->
-<!-- 												<th rowspan="2">游戏类型</th> -->
-<!-- 												<th rowspan="2">游戏风格</th> -->
-<!-- 												<th rowspan="2">期号</th> -->
-<!-- 												<th rowspan="2">开奖结果</th> -->
-<!-- 												<th rowspan="2">期状态</th> -->
-<!-- 												<th colspan="3">周期合计</th> -->
-<!-- 												<th rowspan="2">开奖时间</th> -->
-<!-- 											</tr> -->
-<!-- 											<tr> -->
-<!-- 												<th>注单数</th> -->
-<!-- 												<th>下注金额</th> -->
-<!-- 												<th>用户结果</th> -->
-<!-- 											</tr> -->
-<!-- 										</thead> -->
-<!-- 										<tbody> -->
-<!-- 											<tr> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 											</tr> -->
-<!-- 										</tbody> -->
-<!-- 									</table> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-							<!-- ==================================系统记录================================== -->
-							
-							<div id="menu22" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 在线会员
-									</h4>
-									<span style="float: right;"> <input type="button"
-										name="" value="查询">
-									</span> <input style="float: right;" type="text" placeholder="请输入用户编号"
-										name="">
-									<table
-										class="table table-bordered table-striped table-condensed">
-										<thead>
-											<tr>
-												<th></th>
-												<th>用户编号</th>
-												<th>用户昵称</th>
-												<th>用户状态</th>
-												<th>余额</th>
-												<th>最后登录IP</th>
-												<th>登录时间</th>
-												<th>创建时间</th>
-												<th>操作</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							<div id="menu23" class="tab-pane fade">
-								<div class="model content-panel ">
-									<div class="col-xs-12 col-sm-6">
-										<h4 style="display: inline-block;">
-											<i class="fa fa-angle-right"></i> 日志
-										</h4>
-										<div class="btn-group">
-											<a href="#" class="btn btn-default" role="button"> <i
-												class="fa fa-arrow-down"></i> 导出EXCEL
-											</a>
-										</div>
-									</div>
-									<div class="col-xs-12 col-sm-6">
-										<span> <input type="text" placeholder="请输入搜索内容" name="">
-										</span> <span> <input type="text" placeholder="请输入用户编号"
-											name="">
-										</span> <select class="newObj" name="newObj">
-											<option value="" disabled selected>记录类型</option>
-											<option value="">123</option>
-											<option value="">321</option>
-											<option value="">9453</option>
-											<option value="">9487</option>
-										</select> <span> 时间： <input type="text" class="datepicker">
-										</span> <span> 至 <input type="text" class="datepicker">
-										</span> <span> <input type="button" name="" value="查询">
-										</span>
-									</div>
-									<table
-										class="table table-bordered table-striped table-condensed">
-										<thead>
-											<tr>
-												<th></th>
-												<th>编号</th>
-												<th>用户类型</th>
-												<th>用户编号</th>
-												<th>用户昵称</th>
-												<th>类型</th>
-												<th>操作对象</th>
-												<th>描述</th>
-												<th>登录IP</th>
-												<th>登录时间</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							<!-- ==================================系统管理=================================== -->
-								
-							<div id="menu24" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 权限设定
-									</h4>
-								</div>
-							</div>
-							<!-- 							<div id="menu25" class="tab-pane fade"> -->
-							<!-- 								<div class="model content-panel "> -->
-							<!-- 									<h4> -->
-							<!-- 										<i class="fa fa-angle-right"></i> -->
-							<!-- 										密码修改 -->
-							<!-- 									</h4> -->
-							<!-- 									<div class="mini-toolbar" style="border-bottom: 0; padding: 0px; width: 100%;"> -->
-							<!-- 										<h1> -->
-							<!-- 											【 -->
-							<!-- 											<span id="name_title">a0808</span> -->
-							<!-- 											】密码修改 -->
-							<!-- 										</h1> -->
-							<!-- 										<form id="form1" method="post"> -->
-							<!-- 											<input type="hidden" class="mini-hidden" name="ID"> -->
-							<!-- 											<table> -->
-							<!-- 												<tbody> -->
-							<!-- 													<tr> -->
-							<!-- 														<td> -->
-							<!-- 															<label>账户名：</label> -->
-							<!-- 														</td> -->
-							<!-- 														<td> -->
-							<!-- 															<input name="loginname" readonly=""> -->
-							<!-- 														</td> -->
-							<!-- 													</tr> -->
-							<!-- 													<tr> -->
-							<!-- 														<td> -->
-							<!-- 															<label>*旧密码：</label> -->
-							<!-- 														</td> -->
-							<!-- 														<td> -->
-							<!-- 															<input type="password" name="pwd_o"> -->
-							<!-- 														</td> -->
-							<!-- 														<td id="pwdr_error" class="errorText"></td> -->
-							<!-- 													</tr> -->
-							<!-- 													<tr> -->
-							<!-- 														<td> -->
-							<!-- 															<label>*新密码：</label> -->
-							<!-- 														</td> -->
-							<!-- 														<td> -->
-							<!-- 															<input type="password" name="pwd"> -->
-							<!-- 														</td> -->
-							<!-- 														<td id="pwd_error" class="errorText"></td> -->
-							<!-- 													</tr> -->
-							<!-- 													<tr> -->
-							<!-- 														<td> -->
-							<!-- 															<label>*确认密码：</label> -->
-							<!-- 														</td> -->
-							<!-- 														<td> -->
-							<!-- 															<input type="password" name="pwd_r"> -->
-							<!-- 														</td> -->
-							<!-- 														<td id="pwd_r_error" class="errorText"></td> -->
-							<!-- 													</tr> -->
-							<!-- 													<tr> -->
-							<!-- 														<td></td> -->
-							<!-- 														<td> -->
-							<!-- 															<span> -->
-							<!-- 																<input type="button" name="" value="确定"> -->
-							<!-- 															</span> -->
-							<!-- 														</td> -->
-							<!-- 													</tr> -->
-							<!-- 												</tbody> -->
-							<!-- 											</table> -->
-							<!-- 										</form> -->
-							<!-- 									</div> -->
-							<!-- 									<hr width="500px" align="left" style="margin-left: 5px;"> -->
-							<!-- 									<div class="description"> -->
-							<!-- 										<h3>Description</h3> -->
-							<!-- 										<p>1、密码设置必须六位字符以上</p> -->
-							<!-- 										<p>2、密码修改后，敬请牢记密码，避免不必要的过失导致损失。</p> -->
-							<!-- 									</div> -->
-							<!-- 								</div> -->
-							<!-- 							</div> -->
-							<div id="menu26" class="tab-pane fade">
-								<div class="model content-panel ">
-									<div class="col-xs-12 col-sm-9">
-										<h4 style="display: inline-block;">
-											<i class="fa fa-angle-right"></i> 登陆日志
-										</h4>
-									</div>
-									<div class="col-xs-12 col-sm-3">
-										<span> 时间： <input type="text" class="datepicker">
-										</span> <span> 至 <input type="text" class="datepicker">
-										</span> <span> <input type="button" name="" value="查询">
-										</span>
-									</div>
-									<table
-										class="table table-bordered table-striped table-condensed">
-										<thead>
-											<tr>
-												<th></th>
-												<th>编号</th>
-												<th>用户类型</th>
-												<th>账号</th>
-												<th>登录IP</th>
-												<th>登录时间</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							<div id="menu27" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 下注限额设置
-									</h4>
-									<table
-										class="table table-bordered table-striped table-condensed">
-										<thead>
-											<tr>
-												<th></th>
-												<th>游戏类型</th>
-												<th>玩法组</th>
-												<th>下注组</th>
-												<th>下限</th>
-												<th>上限</th>
-												<th>状态</th>
-												<th>备注</th>
-												<th>操作</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							<div id="menu28" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 收款设置
-									</h4>
-									<table
-										class="table table-bordered table-striped table-condensed">
-										<thead>
-											<tr>
-												<th rowspan="2"></th>
-												<th rowspan="2">标示</th>
-												<th rowspan="2">银行</th>
-												<th rowspan="2">持卡人</th>
-												<th rowspan="2">帐号</th>
-												<th rowspan="2">状态</th>
-												<th colspan="3">操作</th>
-												<th rowspan="2">绑定</th>
-											</tr>
-											<tr>
-												<th>关闭</th>
-												<th>修改</th>
-												<th>删除</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						 </c:if>
-							<c:if test="${type.contains(\"1\") }">
-							<div id="menu29" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 会员管理
-									</h4>
-									
-									
-									<table
-										class="table table-bordered table-striped table-condensed">
-										<thead>
-											<tr>
-												<th></th>
-												<th>用户编号</th>
-												<th>用户账户</th>
-												<th>用户密码</th>
-												<th>用户昵称</th>
-												<th>余额</th>
-												<th>登录IP</th>
-												<th>登录时间</th>
-												<th>身分</th>
-												<th>状态</th>
-												<th>上級</th>
-												<th>操作</th>
-
-											</tr>
-										</thead>
-										<%@ include file="/page/page3.file" %> 
-										
-										<c:forEach var="member" items="${search}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+										<table
+											class="table table-bordered table-striped table-condensed">
+											<thead>
+												<tr>
+													<th></th>
+													<th>内容</th>
+													<!-- 												<th>修改时间</th> -->
+													<th>操作</th>
+												</tr>
+											</thead>
 
 											<tbody>
 												<tr>
-													<td></td>
-													<td class='memberNo'>${member.memberNo}</td>
-													<td class='account'>${member.account}</td>
-													<td class='password'>${member.password}</td>
-													<td class='name'>${member.name}</td>
-													<td>${member.balance }</td>
-													<td>${member.loginIP }</td>
-													<td>${member.loginTime }</td>
-													<td class='level'>${member.level}</td>
-													<td>${member.state }</td>
-													<td>${member.superior}</td>
-
-													<td><input type="submit"
-														class="btn btn-warning change_Btn" value='修改'>
-														<form action="member.do" method="Post"
-															style='display: inline-block'>
-															<input type="hidden" name='memberNo'
-																value="${member.memberNo}">
-																<input type="hidden" name='memberVONo'
-																value="${memberVO.account}"> <input type="hidden"
-																name='action' value="enableMember"> <input
-																type="hidden" name='state' value="启用"> <input
-																type="hidden" name='url' value="menu29"> <input
-																type="submit" class="nobtn btn btn-primary btn-sm"
-																value='复权'>
-														</form>
-														<form action="member.do" method="Post"
-															style='display: inline-block'>
-															<input type="hidden" name='memberNo' value="${member.memberNo}"> 
-																<input type="hidden" name='memberVONo'
-																value="${memberVO.account}">
-																<input type="hidden" name='action' value="disableMember"> 
-																<input type="hidden" name='state' value="停用"> 
-																<input type="hidden" name='url' value="menu29"> 
-																<input type="submit" class="yesbtn btn btn-primary btn-sm"
-																value='停权'>
-														</form></td>
+													<form action="scrollingtext.do" method='get'>
+														<td></td>
+														<td><textarea class="Marquee" cols="100" rows="3"
+																id="scrollingtext" name='scrollingText'>${scrollingText}</textarea></td>
+														<%-- 													<td>${updateTime}</td> --%>
+														<td><input type="hidden" name='action'
+															value='updateScoll'> <input type="hidden"
+															name='url' value='menu15'> <input type="submit"
+															class="btn btn-warning change_Btn" onclick="ok();"
+															value='修改'></td>
+													</form>
 												</tr>
 											</tbody>
+										</table>
+									</div>
+								</div>
+								<div id="menu16" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 大厅排序
+										</h4>
+									</div>
+								</div>
+								<div id="menu17" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 游戏规则
+										</h4>
+										<table
+											class="table table-bordered table-striped table-condensed">
+											<thead>
+												<tr>
+													<th></th>
+													<th>游戏编号</th>
+													<th>游戏类型</th>
+													<th>游戏风格</th>
+													<th>标题</th>
+													<th>内容</th>
+													<th>位置</th>
+													<th>排序值</th>
+													<th>修改时间</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<!-- ==================================帐务=================================== -->
+								<div id="menu18" class="tab-pane fade">
+									<div class="model content-panel ">
+										<div class="col-xs-12 col-sm-6">
+											<h4 style="display: inline-block;">
+												<i class="fa fa-angle-right"></i> 营收报表
+											</h4>
+											<div class="btn-group">
+												<a href="#" class="btn btn-default" role="button"> <i
+													class="fa fa-arrow-down"></i> 导出EXCEL
+												</a>
+											</div>
+										</div>
+										<div class="col-xs-12 col-sm-6">
+											<span>用户编号:</span> <span> <input type="text"
+												placeholder="请输入用户编号" name="">
+											</span> <span>方式</span> <select class="newObj" name="newObj">
+												<option value="" disabled selected>支付方式</option>
+												<option value="">123</option>
+												<option value="">321</option>
+												<option value="">9453</option>
+												<option value="">9487</option>
+											</select> <select class="newObj" name="newObj">
+												<option value="" disabled selected>成功</option>
+												<option value="">123</option>
+												<option value="">321</option>
+												<option value="">9453</option>
+												<option value="">9487</option>
+											</select> <span> 时间： <input type="text" class="datepicker">
+											</span> <span> 至 <input type="text" class="datepicker">
+											</span> <span> <input type="button" name="" value="查询">
+											</span>
+										</div>
+										<table
+											class="table table-bordered table-striped table-condensed">
+											<thead>
+												<tr>
+													<th></th>
+													<th rowspan="2">用户编号</th>
+													<th rowspan="2">用户暱称</th>
+													<th rowspan="2">类型</th>
+													<th rowspan="2">登录IP</th>
+													<th rowspan="2">分数</th>
+													<th rowspan="2">状态</th>
+													<th rowspan="2">申请时间</th>
+													<th rowspan="2">类别</th>
+													<th rowspan="2">更新状态</th>
+													<th rowspan="2">操作</th>
+												</tr>
+											</thead>
+											<c:forEach var="uppoints" items="${uppointsSvc.all}">
+												<form action="UpPointsServlet.do" method="post">
+													<tbody align="center">
+														<tr>
+															<td></td>
+															<td>${uppoints.memberNo }</td>
+															<td>${uppoints.name }</td>
+															<td>${uppoints.level }</td>
+															<td>${uppoints.loginIP }</td>
+															<td>${uppoints.points }</td>
+															<td>${uppoints.status }</td>
+															<td>${uppoints.time }</td>
+															<td>${uppoints.type }</td>
+															<td><select name="status">
+																	<option value="成功">成功</option>
+																	<option value="未付款">未付款</option>
+																	<option value="失败">失败</option>
+															</select></td>
+															<td><input type="submit"> <input
+																type="hidden" name="action" value="updateStatus">
+																<input type="hidden" name="addPointsNo"
+																value="${uppoints.addPointsNo}"></td>
+														</tr>
+													</tbody>
+												</form>
+											</c:forEach>
+										</table>
+									</div>
+								</div>
+								<div id="menu19" class="tab-pane fade">
+									<div class="model content-panel ">
+										<div class="col-xs-12 col-sm-6">
+											<h4 style="display: inline-block;">
+												<i class="fa fa-angle-right"></i> 会员统计
+											</h4>
+											<div class="btn-group">
+												<a href="#" class="btn btn-default" role="button"> <i
+													class="fa fa-arrow-down"></i> 导出EXCEL
+												</a>
+											</div>
+										</div>
+										<div class="col-xs-12 col-sm-6">
+											<span>会员编号:</span> <span> <input type="text"
+												placeholder="请输入用户编号" name=""></span>
+											<!-- 										 <span>排序</span> <select class="newObj" name="newObj"> -->
+											<!-- 											<option value="" disabled selected>排序方式</option> -->
+											<!-- 											<option value="">123</option> -->
+											<!-- 											<option value="">321</option> -->
+											<!-- 											<option value="">9453</option> -->
+											<!-- 											<option value="">9487</option> -->
+											<!-- 										</select> -->
+											<!-- 										<span> 时间： <input type="text" class="datepicker">  -->
+											<!-- 										</span> <span> 至 <input type="text" class="datepicker"> -->
+											<!-- 										</span> -->
+											<span> <input type="button" name="" value="查询">
+											</span>
+										</div>
+										<table
+											class="table table-bordered table-striped table-condensed">
+											<thead>
+												<tr>
+													<th></th>
+													<th>用户编号</th>
+													<th>用户暱称</th>
+													<th>上级代理</th>
+													<th>总笔数</th>
+													<th>总下注金额</th>
+													<th>总输赢金额</th>
+													<th>总期数</th>
+													<th>每期均额</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td></td>
+													<td>oxvo01ajSFA36Iu5nLWe3M8UA1Bk</td>
+													<td>良</td>
+													<td>aaa</td>
+													<td>1</td>
+													<td>2000</td>
+													<td>-2000</td>
+													<td>1</td>
+													<td>2000</td>
+												</tr>
 
-										</c:forEach>
-										<%@include file="/page/page2.file"%> 
-									<%-- <jsp:include page="/page/page2.file"></jsp:include> --%>	
+												<tr>
+													<td></td>
+													<td>oxvo01aMwBVqXk1PX0fJ0ySmjWTU</td>
+													<td>阿正~~胖帥</td>
+													<td>aaa</td>
+													<td>1</td>
+													<td>9</td>
+													<td>40</td>
+													<td>1</td>
+													<td>9</td>
+												</tr>
+												<tr>
+													<td></td>
+													<td>oxvo01blvnE7wFCYe6vX1Qu6fPr4</td>
+													<td>東樂</td>
+													<td>aaa</td>
+													<td>1</td>
+													<td>10</td>
+													<td>-10</td>
+													<td>1</td>
+													<td>10</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div id="menu20" class="tab-pane fade">
+									<div class="model content-panel ">
+										<div class="col-xs-12 col-sm-5">
+											<h4 style="display: inline-block;">
+												<i class="fa fa-angle-right"></i> 注单列表
+											</h4>
+											<div class="btn-group">
+												<a href="#" class="btn btn-default" role="button"> <i
+													class="fa fa-arrow-down"></i> 导出EXCEL
+												</a>
+											</div>
+										</div>
+										<div class="col-xs-12 col-sm-7">
+											<span>游戏彩种：</span> <select class="newObj" name="newObj">
+												<option value="" disabled selected>游戏彩种...</option>
+												<option value="">小玛莉</option>
+												<option value="">龙虎</option>
 
-									</table>
-									
-									<div class="changeMember" style="display: none;">
+												<!-- 										</select> <span>注单号</span> <span> <input type="text" -->
+												<!-- 											placeholder="注单号" name=""> -->
+												<!-- 										</span>  -->
+												<!-- 										<select class="newObj" name="newObj"> -->
+												<!-- 											<option value="" disabled selected>状态...</option> -->
+												<!-- 											<option value="">123</option> -->
+												<!-- 											<option value="">321</option> -->
+												<!-- 											<option value="">9453</option> -->
+												<!-- 											<option value="">9487</option> -->
+												<!-- 										</select>  -->
+												<span> <input type="text" placeholder="会员编号" name="">
+											</span>
+												<span> 时间： <input type="text" class="datepicker">
+											</span>
+												<span> 至 <input type="text" class="datepicker">
+											</span>
+												<span> <input type="button" name="" value="查询">
+											</span>
+										</div>
+										<table
+											class="table table-bordered table-striped table-condensed">
+											<thead>
+												<tr>
+													<th></th>
+													<th>注单号</th>
+													<th>游戏类型</th>
+													<!-- 												<th>游戏风格</th> -->
+													<!-- 												<th>游戏主键</th> -->
+													<th>游戏期号</th>
+													<th>开奖结果</th>
+													<!-- 												<th>游戏状态</th> -->
+													<th>用户昵称</th>
+													<th>用户编号</th>
+													<th>投注类型</th>
+													<th>投注点</th>
+													<th>投注金额</th>
+													<th>输赢情况</th>
+													<th>状态</th>
+													<th>投注时间</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td></td>
+													<td>4714367</td>
+													<td>龙虎</td>
+													<td>2017092500017</td>
+													<td>red,2,black,10</td>
+													<td>良</td>
+													<td>oxvo01ajSFA36Iu5nLWe3M8UA1Bk</td>
+													<td>1</td>
+													<td>1000,0,0,0,0,0,1000,0,0,0,0</td>
+													<td>2000</td>
+													<td>-2000</td>
+													<td>已结</td>
+													<td>2017-09-25 09:48:39</td>
+												</tr>
+
+												<tr>
+													<td></td>
+													<td>5109234</td>
+													<td>小玛莉</td>
+													<td>2017092500089</td>
+													<td>旗幟</td>
+													<td>阿正~~胖帥</td>
+													<td>oxvo01aMwBVqXk1PX0fJ0ySmjWTU</td>
+													<td>0</td>
+													<td>0,1,1,0,2,0,4,1</td>
+													<td>9</td>
+													<td>40</td>
+													<td>已结</td>
+													<td>2017-09-25 10:28:59</td>
+												</tr>
+
+												<tr>
+													<td></td>
+													<td>5930123</td>
+													<td>小玛莉</td>
+													<td>2017092502910</td>
+													<td>炸彈</td>
+													<td>東樂</td>
+													<td>oxvo01blvnE7wFCYe6vX1Qu6fPr4</td>
+													<td>0</td>
+													<td>0,0,0,0,0,0,1,0</td>
+													<td>10</td>
+													<td>-10</td>
+													<td>已结</td>
+													<td>2017-09-25 14:48:01</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<!-- 							<div id="menu21" class="tab-pane fade"> -->
+								<!-- 								<div class="model content-panel "> -->
+								<!-- 									<div class="col-xs-12 col-sm-5"> -->
+								<!-- 										<h4 style="display: inline-block;"> -->
+								<!-- 											<i class="fa fa-angle-right"></i> 开奖结果 -->
+								<!-- 										</h4> -->
+								<!-- 										<div class="btn-group"> -->
+								<!-- 											<a href="#" class="btn btn-default" role="button"> <i -->
+								<!-- 												class="fa fa-arrow-down"></i> 导出EXCEL -->
+								<!-- 											</a> -->
+								<!-- 										</div> -->
+								<!-- 									</div> -->
+								<!-- 									<div class="col-xs-12 col-sm-7"> -->
+								<!-- 										<span>游戏彩种：</span> <select class="newObj" name="newObj"> -->
+								<!-- 											<option value="" disabled selected>游戏彩种...</option> -->
+								<!-- 											<option value="">123</option> -->
+								<!-- 											<option value="">321</option> -->
+								<!-- 											<option value="">9453</option> -->
+								<!-- 											<option value="">9487</option> -->
+								<!-- 										</select> <span>期号：</span> <span> <input type="text" -->
+								<!-- 											placeholder="期号" name=""> -->
+								<!-- 										</span> <select class="newObj" name="newObj"> -->
+								<!-- 											<option value="" disabled selected>状态</option> -->
+								<!-- 											<option value="">123</option> -->
+								<!-- 											<option value="">321</option> -->
+								<!-- 											<option value="">9453</option> -->
+								<!-- 											<option value="">9487</option> -->
+								<!-- 										</select> <span> 时间： <input type="text" class="datepicker"> -->
+								<!-- 										</span> <span> 至 <input type="text" class="datepicker"> -->
+								<!-- 										</span> <span> <input type="button" name="" value="查询"> -->
+								<!-- 										</span> -->
+								<!-- 									</div> -->
+								<!-- 									<table -->
+								<!-- 										class="table table-bordered table-striped table-condensed"> -->
+								<!-- 										<thead> -->
+								<!-- 											<tr> -->
+								<!-- 												<th rowspan="2"></th> -->
+								<!-- 												<th rowspan="2">主键</th> -->
+								<!-- 												<th rowspan="2">游戏类型</th> -->
+								<!-- 												<th rowspan="2">游戏风格</th> -->
+								<!-- 												<th rowspan="2">期号</th> -->
+								<!-- 												<th rowspan="2">开奖结果</th> -->
+								<!-- 												<th rowspan="2">期状态</th> -->
+								<!-- 												<th colspan="3">周期合计</th> -->
+								<!-- 												<th rowspan="2">开奖时间</th> -->
+								<!-- 											</tr> -->
+								<!-- 											<tr> -->
+								<!-- 												<th>注单数</th> -->
+								<!-- 												<th>下注金额</th> -->
+								<!-- 												<th>用户结果</th> -->
+								<!-- 											</tr> -->
+								<!-- 										</thead> -->
+								<!-- 										<tbody> -->
+								<!-- 											<tr> -->
+								<!-- 												<td></td> -->
+								<!-- 												<td></td> -->
+								<!-- 												<td></td> -->
+								<!-- 												<td></td> -->
+								<!-- 												<td></td> -->
+								<!-- 												<td></td> -->
+								<!-- 												<td></td> -->
+								<!-- 												<td></td> -->
+								<!-- 												<td></td> -->
+								<!-- 												<td></td> -->
+								<!-- 												<td></td> -->
+								<!-- 											</tr> -->
+								<!-- 										</tbody> -->
+								<!-- 									</table> -->
+								<!-- 								</div> -->
+								<!-- 							</div> -->
+								<!-- ==================================系统记录================================== -->
+
+								<div id="menu22" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 在线会员
+										</h4>
+										<span style="float: right;"> <input type="button"
+											name="" value="查询">
+										</span> <input style="float: right;" type="text"
+											placeholder="请输入用户编号" name="">
+										<table
+											class="table table-bordered table-striped table-condensed">
+											<thead>
+												<tr>
+													<th></th>
+													<th>用户编号</th>
+													<th>用户昵称</th>
+													<th>用户状态</th>
+													<th>余额</th>
+													<th>最后登录IP</th>
+													<th>登录时间</th>
+													<th>创建时间</th>
+													<th>操作</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div id="menu23" class="tab-pane fade">
+									<div class="model content-panel ">
+										<div class="col-xs-12 col-sm-6">
+											<h4 style="display: inline-block;">
+												<i class="fa fa-angle-right"></i> 日志
+											</h4>
+											<div class="btn-group">
+												<a href="#" class="btn btn-default" role="button"> <i
+													class="fa fa-arrow-down"></i> 导出EXCEL
+												</a>
+											</div>
+										</div>
+										<div class="col-xs-12 col-sm-6">
+											<span> <input type="text" placeholder="请输入搜索内容"
+												name="">
+											</span> <span> <input type="text" placeholder="请输入用户编号"
+												name="">
+											</span> <select class="newObj" name="newObj">
+												<option value="" disabled selected>记录类型</option>
+												<option value="">123</option>
+												<option value="">321</option>
+												<option value="">9453</option>
+												<option value="">9487</option>
+											</select> <span> 时间： <input type="text" class="datepicker">
+											</span> <span> 至 <input type="text" class="datepicker">
+											</span> <span> <input type="button" name="" value="查询">
+											</span>
+										</div>
+										<table
+											class="table table-bordered table-striped table-condensed">
+											<thead>
+												<tr>
+													<th></th>
+													<th>编号</th>
+													<th>用户类型</th>
+													<th>用户编号</th>
+													<th>用户昵称</th>
+													<th>类型</th>
+													<th>操作对象</th>
+													<th>描述</th>
+													<th>登录IP</th>
+													<th>登录时间</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<!-- ==================================系统管理=================================== -->
+
+								<div id="menu24" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 权限设定
+										</h4>
+									</div>
+								</div>
+								<!-- 							<div id="menu25" class="tab-pane fade"> -->
+								<!-- 								<div class="model content-panel "> -->
+								<!-- 									<h4> -->
+								<!-- 										<i class="fa fa-angle-right"></i> -->
+								<!-- 										密码修改 -->
+								<!-- 									</h4> -->
+								<!-- 									<div class="mini-toolbar" style="border-bottom: 0; padding: 0px; width: 100%;"> -->
+								<!-- 										<h1> -->
+								<!-- 											【 -->
+								<!-- 											<span id="name_title">a0808</span> -->
+								<!-- 											】密码修改 -->
+								<!-- 										</h1> -->
+								<!-- 										<form id="form1" method="post"> -->
+								<!-- 											<input type="hidden" class="mini-hidden" name="ID"> -->
+								<!-- 											<table> -->
+								<!-- 												<tbody> -->
+								<!-- 													<tr> -->
+								<!-- 														<td> -->
+								<!-- 															<label>账户名：</label> -->
+								<!-- 														</td> -->
+								<!-- 														<td> -->
+								<!-- 															<input name="loginname" readonly=""> -->
+								<!-- 														</td> -->
+								<!-- 													</tr> -->
+								<!-- 													<tr> -->
+								<!-- 														<td> -->
+								<!-- 															<label>*旧密码：</label> -->
+								<!-- 														</td> -->
+								<!-- 														<td> -->
+								<!-- 															<input type="password" name="pwd_o"> -->
+								<!-- 														</td> -->
+								<!-- 														<td id="pwdr_error" class="errorText"></td> -->
+								<!-- 													</tr> -->
+								<!-- 													<tr> -->
+								<!-- 														<td> -->
+								<!-- 															<label>*新密码：</label> -->
+								<!-- 														</td> -->
+								<!-- 														<td> -->
+								<!-- 															<input type="password" name="pwd"> -->
+								<!-- 														</td> -->
+								<!-- 														<td id="pwd_error" class="errorText"></td> -->
+								<!-- 													</tr> -->
+								<!-- 													<tr> -->
+								<!-- 														<td> -->
+								<!-- 															<label>*确认密码：</label> -->
+								<!-- 														</td> -->
+								<!-- 														<td> -->
+								<!-- 															<input type="password" name="pwd_r"> -->
+								<!-- 														</td> -->
+								<!-- 														<td id="pwd_r_error" class="errorText"></td> -->
+								<!-- 													</tr> -->
+								<!-- 													<tr> -->
+								<!-- 														<td></td> -->
+								<!-- 														<td> -->
+								<!-- 															<span> -->
+								<!-- 																<input type="button" name="" value="确定"> -->
+								<!-- 															</span> -->
+								<!-- 														</td> -->
+								<!-- 													</tr> -->
+								<!-- 												</tbody> -->
+								<!-- 											</table> -->
+								<!-- 										</form> -->
+								<!-- 									</div> -->
+								<!-- 									<hr width="500px" align="left" style="margin-left: 5px;"> -->
+								<!-- 									<div class="description"> -->
+								<!-- 										<h3>Description</h3> -->
+								<!-- 										<p>1、密码设置必须六位字符以上</p> -->
+								<!-- 										<p>2、密码修改后，敬请牢记密码，避免不必要的过失导致损失。</p> -->
+								<!-- 									</div> -->
+								<!-- 								</div> -->
+								<!-- 							</div> -->
+								<div id="menu26" class="tab-pane fade">
+									<div class="model content-panel ">
+										<div class="col-xs-12 col-sm-9">
+											<h4 style="display: inline-block;">
+												<i class="fa fa-angle-right"></i> 登陆日志
+											</h4>
+										</div>
+										<div class="col-xs-12 col-sm-3">
+											<span> 时间： <input type="text" class="datepicker">
+											</span> <span> 至 <input type="text" class="datepicker">
+											</span> <span> <input type="button" name="" value="查询">
+											</span>
+										</div>
+										<table
+											class="table table-bordered table-striped table-condensed">
+											<thead>
+												<tr>
+													<th></th>
+													<th>编号</th>
+													<th>用户类型</th>
+													<th>账号</th>
+													<th>登录IP</th>
+													<th>登录时间</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div id="menu27" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 下注限额设置
+										</h4>
+										<table
+											class="table table-bordered table-striped table-condensed">
+											<thead>
+												<tr>
+													<th></th>
+													<th>游戏类型</th>
+													<th>玩法组</th>
+													<th>下注组</th>
+													<th>下限</th>
+													<th>上限</th>
+													<th>状态</th>
+													<th>备注</th>
+													<th>操作</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div id="menu28" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 收款设置
+										</h4>
+										<table
+											class="table table-bordered table-striped table-condensed">
+											<thead>
+												<tr>
+													<th rowspan="2"></th>
+													<th rowspan="2">标示</th>
+													<th rowspan="2">银行</th>
+													<th rowspan="2">持卡人</th>
+													<th rowspan="2">帐号</th>
+													<th rowspan="2">状态</th>
+													<th colspan="3">操作</th>
+													<th rowspan="2">绑定</th>
+												</tr>
+												<tr>
+													<th>关闭</th>
+													<th>修改</th>
+													<th>删除</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</c:if>
+							<c:if test="${type.contains(\"1\") }">
+								<div id="menu29" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 会员管理
+										</h4>
+
+
+										<table
+											class="table table-bordered table-striped table-condensed">
+											<thead>
+												<tr>
+													<th></th>
+													<th>用户编号</th>
+													<th>用户账户</th>
+													<th>用户密码</th>
+													<th>用户昵称</th>
+													<th>余额</th>
+													<th>登录IP</th>
+													<th>登录时间</th>
+													<th>身分</th>
+													<th>状态</th>
+													<th>上級</th>
+													<th>操作</th>
+
+												</tr>
+											</thead>
+											<%@ include file="/page/page1.file"%>
+
+											<c:forEach var="member" items="${search}"
+												begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+
+												<tbody>
+													<tr>
+														<td></td>
+														<td class='memberNo'>${member.memberNo}</td>
+														<td class='account'>${member.account}</td>
+														<td class='password'>${member.password}</td>
+														<td class='name'>${member.name}</td>
+														<td>${member.balance }</td>
+														<td>${member.loginIP }</td>
+														<td>${member.loginTime }</td>
+														<td class='level'>${member.level}</td>
+														<td>${member.state }</td>
+														<td>${member.superior}</td>
+
+														<td><input type="submit"
+															class="btn btn-warning change_Btn" value='修改'>
+															<form action="member.do" method="Post"
+																style='display: inline-block'>
+																<input type="hidden" name='memberNo'
+																	value="${member.memberNo}"> <input
+																	type="hidden" name='memberVONo'
+																	value="${memberVO.account}"> <input
+																	type="hidden" name='action' value="enableMember">
+																<input type="hidden" name='state' value="启用"> <input
+																	type="hidden" name='url' value="menu29"> <input
+																	type="submit" class="nobtn btn btn-primary btn-sm"
+																	value='复权'>
+															</form>
+															<form action="member.do" method="Post"
+																style='display: inline-block'>
+																<input type="hidden" name='memberNo'
+																	value="${member.memberNo}"> <input
+																	type="hidden" name='memberVONo'
+																	value="${memberVO.account}"> <input
+																	type="hidden" name='action' value="disableMember">
+																<input type="hidden" name='state' value="停用"> <input
+																	type="hidden" name='url' value="menu29"> <input
+																	type="submit" class="yesbtn btn btn-primary btn-sm"
+																	value='停权'>
+															</form></td>
+													</tr>
+												</tbody>
+
+											</c:forEach>
+											<%@include file="/page/page2.file"%>
+
+										</table>
+
+										<div class="changeMember" style="display: none;">
+											<hr>
+											<h4>
+												<i class="fa fa-angle-right"></i> 修改会员
+											</h4>
+											<div class="container" style="max-width: 400px;">
+												<form action="member.do" method="post">
+													<table
+														class="table table-bordered table-striped table-condensed">
+														<thead>
+															<tr>
+																<th></th>
+																<th></th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>用户编号</td>
+																<td><input type="text" name="memberNo"
+																	readonly="readonly" class='memberNo'></td>
+															</tr>
+															<tr>
+																<td>用户账户</td>
+																<td><input type="text" name="account"
+																	readonly="readonly" class='account'></td>
+															</tr>
+															<tr>
+																<td>用户密码</td>
+																<!--<td><input type="text" name="password"></td>-->
+																
+																<td><input type="text" name="password"
+																	placeholder="请输入密码" required
+																	pattern="[A-Za-z0-9]{3,12}" maxlength='12'
+																	title='由英文或数字所组成的3~12字元'></td>
+															</tr>
+															<tr>
+																<td>用户昵称</td>
+																<td><input type="text" name="name" class='name'>
+																</td>
+															</tr>
+															<tr>
+																<td>身分</td>
+
+																<c:if test="${type.contains(\"1\") }">
+																	<td><select name="level">
+																			<option value="总代理">总代理</option>
+																			<option value="代理">代理</option>
+																	</select></td>
+																</c:if>
+																<c:if
+																	test="${type.contains(\"2\")||type.contains(\"3\") }">
+																	<td><select name="level">
+
+																			<option value="代理">代理</option>
+																	</select></td>
+																</c:if>
+
+															</tr>
+															<tr>
+																<td><input type="hidden" name='memberNo'
+																	value="${member.memberNo}"> <input
+																	type="hidden" name="memberVONo"
+																	value="${memberVO.account}"> <input
+																	type="hidden" name="url" value="menu29"> <input
+																	type="hidden" name="action" value="memberUpdate">
+																</td>
+																<td><input type="submit" name="" value="送出">
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</form>
+											</div>
+										</div>
 										<hr>
 										<h4>
-											<i class="fa fa-angle-right"></i> 修改会员
+											<i class="fa fa-angle-right"></i> 新增会员
 										</h4>
-										<div class="container" style="max-width: 400px;">
+										<div class="container" style="max-width: 400px;`">
 											<form action="member.do" method="post">
 												<table
 													class="table table-bordered table-striped table-condensed">
@@ -2271,29 +2374,19 @@
 													</thead>
 													<tbody>
 														<tr>
-															<td>用户编号</td>
-															<td><input type="text" name="memberNo"
-																readonly="readonly" class='memberNo'></td>
+															<td>账户</td>
+															<td>帐号系统会自行产生</td>
 														</tr>
 														<tr>
-															<td>用户账户</td>
-															<td><input type="text" name="account"
-																readonly="readonly" class='account'></td>
+															<td>密码</td>
+															<td><input type="password" name="password"></td>
 														</tr>
 														<tr>
-															<td>用户密码</td>
-																
-															<td><input type="text" name="password" placeholder="请输入密码" 
-																 required pattern="[A-Za-z0-9]{3,12}" maxlength='12' title='由英文或数字所组成的3~12字元' ></td>
+															<td>名称</td>
+															<td><input type="text" name="name"></td>
 														</tr>
 														<tr>
-															<td>用户昵称</td>
-															<td><input type="text" name="name" class='name'>
-															</td>
-														</tr>
-														<tr>
-															<td>身分</td>
-
+															<td>权限</td>
 															<c:if test="${type.contains(\"1\") }">
 																<td><select name="level">
 																		<option value="总代理">总代理</option>
@@ -2307,13 +2400,15 @@
 																		<option value="代理">代理</option>
 																</select></td>
 															</c:if>
-
 														</tr>
 														<tr>
-															<td><input type="hidden" name="url" value="menu29">
-																<input type="hidden" name="action" value="memberUpdate">
+															<td><input type="hidden" name="superior"
+																value="${memberVO.superior},"> <input
+																type="hidden" name="acc" value="${memberVO.account}">
+																<input type="hidden" name="action" value="memInsert">
+																<input type="hidden" name="url" value="menu29">
 															</td>
-															<td><input type="submit" name="" value="送出">
+															<td><input type="submit" name="" value="新增">
 															</td>
 														</tr>
 													</tbody>
@@ -2321,66 +2416,8 @@
 											</form>
 										</div>
 									</div>
-									<hr>
-									<h4>
-										<i class="fa fa-angle-right"></i> 新增会员
-									</h4>
-									<div class="container" style="max-width: 400px;`">
-										<form action="member.do" method="post">
-											<table
-												class="table table-bordered table-striped table-condensed">
-												<thead>
-													<tr>
-														<th></th>
-														<th></th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>账户</td>
-														<td>帐号系统会自行产生</td>
-													</tr>
-													<tr>
-														<td>密码</td>
-														<td><input type="password" name="password"></td>
-													</tr>
-													<tr>
-														<td>名称</td>
-														<td><input type="text" name="name"></td>
-													</tr>
-													<tr>
-														<td>权限</td>
-														<c:if test="${type.contains(\"1\") }">
-															<td><select name="level">
-																	<option value="总代理">总代理</option>
-																	<option value="代理">代理</option>
-															</select></td>
-														</c:if>
-														<c:if
-															test="${type.contains(\"2\")||type.contains(\"3\") }">
-															<td><select name="level">
-
-																	<option value="代理">代理</option>
-															</select></td>
-														</c:if>
-													</tr>
-													<tr>
-														<td><input
-															type="hidden" name="superior"
-															value="${memberVO.superior},"> <input
-															type="hidden" name="acc" value="${memberVO.account}">
-															<input type="hidden" name="action" value="memInsert">
-															<input type="hidden" name="url" value="menu29">
-														</td>
-														<td><input type="submit" name="" value="新增">
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</form>
-									</div>
 								</div>
-							</div></c:if>  
+							</c:if>
 							<!-- ==================================系统管理=================================== -->
 							<div id="menu30" class="tab-pane fade">
 								<div class="model content-panel ">
@@ -2396,119 +2433,119 @@
 									<p>会员/用户：玩家</p>
 								</div>
 							</div>
-							 <c:if test="${type.contains(\"3\")}">
-							 
-							 <div id="menu5" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 权限不足
-									</h4>
-								
+							<c:if test="${type.contains(\"3\")}">
+
+								<div id="menu5" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 权限不足
+										</h4>
+
+									</div>
 								</div>
-							</div>
-							 
-							 
-							 </c:if>
-							 
-							 <c:if test="${type.contains(\"2\")||type.contains(\"3\")}">
-						 <div id="menu15" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 权限不足
-									</h4>
-								
+
+
+							</c:if>
+
+							<c:if test="${type.contains(\"2\")||type.contains(\"3\")}">
+								<div id="menu15" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 权限不足
+										</h4>
+
+									</div>
 								</div>
-							</div>
-							<div id="menu18" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 权限不足
-									</h4>
-								
+								<div id="menu18" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 权限不足
+										</h4>
+
+									</div>
 								</div>
-							</div>
-							<div id="menu19" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 权限不足
-									</h4>
-								
+								<div id="menu19" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 权限不足
+										</h4>
+
+									</div>
 								</div>
-							</div>
-							<div id="menu20" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 权限不足
-									</h4>
-							 	  
+								<div id="menu20" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 权限不足
+										</h4>
+
+									</div>
 								</div>
-							</div>
-							<div id="menu21" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 权限不足
-									</h4>
-								
+								<div id="menu21" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 权限不足
+										</h4>
+
+									</div>
 								</div>
-							</div>
-						 
-						 
-						 <div id="menu22" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 权限不足
-									</h4>
-								
+
+
+								<div id="menu22" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 权限不足
+										</h4>
+
+									</div>
 								</div>
-							</div>
-						 <div id="menu23" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 权限不足
-									</h4>
-								
+								<div id="menu23" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 权限不足
+										</h4>
+
+									</div>
 								</div>
-							</div>
-						 <div id="menu24" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 权限不足
-									</h4>
-								
+								<div id="menu24" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 权限不足
+										</h4>
+
+									</div>
 								</div>
-							</div>
-						 <div id="menu26" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 权限不足
-									</h4>
-								
+								<div id="menu26" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 权限不足
+										</h4>
+
+									</div>
 								</div>
-							</div>
-						 <div id="menu27" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 权限不足
-									</h4>
+								<div id="menu27" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 权限不足
+										</h4>
+									</div>
 								</div>
-							</div>
-							<div id="menu28" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i>权限不足
-									</h4>
-								
+								<div id="menu28" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i>权限不足
+										</h4>
+
+									</div>
 								</div>
-							</div>
-							<div id="menu29" class="tab-pane fade">
-								<div class="model content-panel ">
-									<h4>
-										<i class="fa fa-angle-right"></i> 权限不足
-									</h4>
-								
+								<div id="menu29" class="tab-pane fade">
+									<div class="model content-panel ">
+										<h4>
+											<i class="fa fa-angle-right"></i> 权限不足
+										</h4>
+
+									</div>
 								</div>
-							</div>
-						 </c:if>
+							</c:if>
 						</div>
 					</div>
 					<!-- 結束 -->
@@ -2599,6 +2636,8 @@
 	<script type="application/javascript">
 		
 		
+		
+		
                 $(document).ready(function() {
                     $("#date-popover").popover({ html: true, trigger: "manual" });
                     $("#date-popover").hide();
@@ -2632,6 +2671,8 @@
                     console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
                 }
                 
+	
+	
 	
 	</script>
 </body>

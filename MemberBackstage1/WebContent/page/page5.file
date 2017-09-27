@@ -1,0 +1,37 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%  int rowsPerPage3 = 10;  //每頁的筆數     
+    int rowNumber3=0;     //總筆數
+    int pageNumber3=0;    //總筆數    
+    int whichPage3=1;       //第幾頁
+    int pageIndexArray3[]=null;
+    int pageIndex3=0; 
+%>
+
+<%  
+    rowNumber3=search2.size();
+    if (rowNumber3%rowsPerPage3 !=0)
+     pageNumber3=rowNumber3/rowsPerPage3 +1;
+    else pageNumber3=rowNumber3/rowsPerPage3;    
+    pageIndexArray3=new int[pageNumber3]; 
+    for (int i3=1 ; i3<=pageIndexArray3.length ; i3++)
+    pageIndexArray3[i3-1]=i3*rowsPerPage3-rowsPerPage3;
+%>
+
+<%  try {
+      whichPage3 = Integer.parseInt(request.getParameter("whichPage3"));
+      pageIndex3=pageIndexArray3[whichPage3-1];
+    } catch (NumberFormatException e) { //第一次執行的時候
+       whichPage3=1;
+       pageIndex3=0;
+    } catch (ArrayIndexOutOfBoundsException e) { //總頁數之外的錯誤頁數
+         if (pageNumber3>0){
+              whichPage3=pageNumber3;
+              pageIndex3=pageIndexArray3[pageNumber3-1];
+         }
+    } 
+%>
+
+<%if (pageNumber3>0){%>
+<b><font color= red>現在是第<%=whichPage3%>頁 共有<%=pageNumber3%>頁 </font></b>
+<%}%>
+<p align="right"><b>共有<font color=red><%=rowNumber3%></font>筆資料</b></p> 

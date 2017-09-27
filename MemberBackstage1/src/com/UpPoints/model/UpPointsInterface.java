@@ -10,5 +10,7 @@ public interface UpPointsInterface  {
 	void updateStatus(UpPointsVO uppointsVO);
 	void delete(int addPointsNo);
 	UpPointsVO findByPK(int addPointsNo);
+	List<UpPointsVO> getAll_By_Up();
+	List<UpPointsVO> getAll_By_Down();
 	List<UpPointsVO> getAll();
 }

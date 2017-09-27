@@ -270,48 +270,53 @@ public class MemberServlet extends HttpServlet {
 
 			List<String> checkMsgs = new LinkedList<String>();
 			req.setAttribute("checkMsgs", checkMsgs);
-			
-			int memberNo = Integer.parseInt(req.getParameter("memberNo"));
-			String account = req.getParameter("account");
-			String password = req.getParameter("password");
-			String name = req.getParameter("name");
-			String level = req.getParameter("level");
-			String superior2 = req.getParameter("superior2");
-			String url = req.getParameter("url");
-			
+
 			try {
+				int memberNo = Integer.parseInt(req.getParameter("memberNo"));
+				String memberVONo = req.getParameter("memberVONo");
+				String password = req.getParameter("password");
+				String name = req.getParameter("name");
+				String level = req.getParameter("level");
+				String url = req.getParameter("url");
+				
 
 				if (password.length() < 3 || password.length() > 12) {
 					checkMsgs.add("密码错误");
+					System.out.println("gggggggggg");
 					// req.getRequestDispatcher("login.jsp").forward(req, res);
-				}		
-				
+				}
+
 				MemberService memberService = new MemberService();
 				MemberVO memberVO = memberService.getOneMemberVO(memberNo);
-				memberVO.setAccount(account);
+
 				memberVO.setPassword(password);
 				memberVO.setName(name);
 				memberVO.setLevel(level);
 
+				if (!checkMsgs.isEmpty()) {
+					session.setAttribute("checkMsgs", checkMsgs);
+
+					res.sendRedirect("index.jsp#" + url);
+					return;
+				}
+				
 				memberService.updateMemberVO(memberVO);
+				
+				List<MemberVO> list = memberService.getAllSuperior(memberVONo);
+				session.setAttribute("search", list);
+				List<MemberVO> list2 = memberService.getAllSuperior2(memberVONo);
+				session.setAttribute("search2", list2);
 
 				res.sendRedirect("index.jsp#" + url);
+				return;
 
 			} catch (Exception e) {
 				checkMsgs.add(e.getMessage());
 				req.getRequestDispatcher("login.jsp").forward(req, res);
-			}
-			
-			if (!checkMsgs.isEmpty()) {
-				res.sendRedirect("index.jsp#" + url);
-				session.setAttribute("checkMsgs", checkMsgs);
 				return;
 			}
-			
+
 		}
-		
-		
-		
 
 		if ("logout".equals(action)) {
 

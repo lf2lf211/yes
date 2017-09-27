@@ -3,6 +3,7 @@ package com.UpPoints.model;
 public class UpPointsVO {
 
 	private int memberNo;
+	private String account;
 	private String name;
 	private String loginIP;
 	private String level;
@@ -17,7 +18,7 @@ public class UpPointsVO {
 		super();
 	}
 	
-	public UpPointsVO(int memberNo,String name, String loginIP, String level,int points,String status,String time, int addPointsNo,String type) {
+	public UpPointsVO(int memberNo,String name, String loginIP, String level,int points,String status,String time, int addPointsNo,String type,String account) {
 		super();
 		this.memberNo = memberNo;
 		this.name = name;

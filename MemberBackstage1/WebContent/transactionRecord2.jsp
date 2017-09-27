@@ -9,14 +9,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3><b><center>上分纪录</center></b></h3>
+<h3><b><center>下分纪录</center></b></h3>
 <table
 										class="table table-bordered table-striped table-condensed">
 										<thead>
 											<tr>
 												<th></th>
 												<th rowspan="2">用户编号</th>
-												<th rowspan="2">用户帐号</th>
 												<th rowspan="2">用户暱称</th>
 												<th rowspan="2">类型</th>
 												<th rowspan="2">登录IP</th>
@@ -28,13 +27,11 @@
 												<th rowspan="2">操作</th>
 											</tr>
 										</thead>
-										<c:forEach var="uppoints" items="${uppointsSvc.all_By_Up}">
-										<c:if test=""></c:if>
+										<c:forEach var="uppoints" items="${uppointsSvc.all_By_Down}">
 										<form action="UpPointsServlet.do" method="post">
 										<tbody align="center">
 											<tr><td></td>
 												<td>${uppoints.memberNo }</td>
-												<td>${uppoints.account }</td>
 												<td>${uppoints.name }</td>
 												<td>${uppoints.level }</td>
 												<td>${uppoints.loginIP }</td>
@@ -55,5 +52,7 @@
 										</form>
 										</c:forEach>
 									</table>
+
+
 </body>
 </html>

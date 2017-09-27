@@ -67,7 +67,12 @@ public class UpPointsService {
 		return dao.getAll();
 	}
 	
-	
+	public List<UpPointsVO> getAll_By_Up() {
+		return dao.getAll_By_Up();
+	}
+	public List<UpPointsVO> getAll_By_Down() {
+		return dao.getAll_By_Down();
+	}
 	
 	
 	
