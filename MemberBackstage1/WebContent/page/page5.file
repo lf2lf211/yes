@@ -32,6 +32,5 @@
 %>
 
 <%if (pageNumber3>0){%>
-<b><font color= red>現在是第<%=whichPage3%>頁 共有<%=pageNumber3%>頁 </font></b>
+<b><font color= red>現在是第<%=whichPage3%>頁 </font></b>
 <%}%>
-<p align="right"><b>共有<font color=red><%=rowNumber3%></font>筆資料</b></p> 

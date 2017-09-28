@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.UpPoints.model.UpPointsService;
+import com.UpPoints.model.UpPointsVO;
 import com.member.model.MemberService;
 import com.member.model.MemberVO;
 
@@ -95,16 +97,30 @@ public class MemberServlet extends HttpServlet {
 					mem.setLoginTime(loginTime);
 					System.out.println(mem.getLevel());
 					if ("管理员".equals(mem.getLevel())) {
-
+						
+						UpPointsService svc =new UpPointsService();
+						List<UpPointsVO> list = svc.getAll_By_Up();
+						session.setAttribute("list",list);
+						List<UpPointsVO> list2 = svc.getAll_By_Down();
+						session.setAttribute("list2",list2);
 						session.setAttribute("type", "1");
 					}
 					if ("总代理".equals(mem.getLevel())) {
-
+						UpPointsService svc =new UpPointsService();
+						List<UpPointsVO> list = svc.getAll_By_Up();
+						session.setAttribute("list",list);
 						session.setAttribute("type", "2");
+						List<UpPointsVO> list2 = svc.getAll_By_Down2(mem.getAccount(),mem.getMemberNo());
+						session.setAttribute("list2",list2);
 					}
 					if ("代理".equals(mem.getLevel())) {
-
+						UpPointsService svc =new UpPointsService();
+						List<UpPointsVO> list = svc.getAll_By_Up2(mem.getAccount(),mem.getMemberNo());
+						session.setAttribute("list",list);
+						List<UpPointsVO> list2 = svc.getAll_By_Down2(mem.getAccount(),mem.getMemberNo());
+						session.setAttribute("list2",list2);
 						session.setAttribute("type", "3");
+						
 					}
 					List<MemberVO> list = memberService.getAllSuperior(account);
 					session.setAttribute("search", list);

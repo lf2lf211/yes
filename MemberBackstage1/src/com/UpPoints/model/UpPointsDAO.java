@@ -18,8 +18,8 @@ public class UpPointsDAO implements UpPointsInterface {
 	private static final String PASSWORD = "";
 	
 	private static final String INSERT_STMT = "INSERT INTO uppoints"
-			+ "(memberNo,name,loginIP,level,points,status,time,type)"
-			+ "VALUES(?,? , ? , ? , ?,'未付款',?,?)";
+			+ "(memberNo,name,loginIP,level,points,status,time,type,account)"
+			+ "VALUES(?,? , ? , ? , ?,'未付款',?,?,?)";
 	
 	private static final String UPDATE_STMT = "UPDATE uppoints SET "
 			+ "NAME = ?,"	
@@ -33,6 +33,9 @@ public class UpPointsDAO implements UpPointsInterface {
 	private static final String GET_ALL = "SELECT * FROM uppoints ";
 	private static final String GET_ALL_BY_UP = "SELECT * FROM uppoints where type='上分'";
 	private static final String GET_ALL_BY_DOWN = "SELECT * FROM uppoints where type='下分'";
+	private static final String GET_ALL_BY_UP2 = "SELECT * FROM uppoints where type='上分' and account=? or member=?";
+	private static final String GET_ALL_BY_DOWN2 = "SELECT * FROM uppoints where type='下分' and account=? or member=?";
+	
 	@Override
 	public void add(UpPointsVO uppointsVO) {
 		Connection con = null;
@@ -50,6 +53,7 @@ public class UpPointsDAO implements UpPointsInterface {
 			pstmt.setInt(5, uppointsVO.getPoints());
 			pstmt.setString(6, uppointsVO.getTime());
 			pstmt.setString(7, uppointsVO.getType());
+			pstmt.setString(8, uppointsVO.getAccount());
 			
 			pstmt.executeUpdate();
 
@@ -188,6 +192,7 @@ public class UpPointsDAO implements UpPointsInterface {
 				uppointsVO.setLevel(rs.getString("level"));
 				uppointsVO.setPoints(rs.getInt("points"));
 				uppointsVO.setType(rs.getString("type"));
+				uppointsVO.setAccount(rs.getString("account"));
 			}
 			//Area(area_code, area_adress, area_location, area_name)"
 			
@@ -253,6 +258,7 @@ public class UpPointsDAO implements UpPointsInterface {
 				uppointsVO.setStatus(rs.getString("status"));
 				uppointsVO.setTime(rs.getString("time"));
 				uppointsVO.setType(rs.getString("type"));
+				uppointsVO.setAccount(rs.getString("account"));
 				uppointsList.add(uppointsVO);
 				}
 
@@ -314,6 +320,7 @@ public class UpPointsDAO implements UpPointsInterface {
 				uppointsVO.setStatus(rs.getString("status"));
 				uppointsVO.setTime(rs.getString("time"));
 				uppointsVO.setType(rs.getString("type"));
+				uppointsVO.setAccount(rs.getString("account"));
 				uppointsList.add(uppointsVO);
 				}
 
@@ -375,6 +382,139 @@ public class UpPointsDAO implements UpPointsInterface {
 				uppointsVO.setStatus(rs.getString("status"));
 				uppointsVO.setTime(rs.getString("time"));
 				uppointsVO.setType(rs.getString("type"));
+				uppointsVO.setAccount(rs.getString("account"));
+				uppointsList.add(uppointsVO);
+				}
+
+		} catch (ClassNotFoundException ce) {
+			throw new RuntimeException("嚙碾嚙瘤 嚙瞌嚙踝蕭嚙羯 " + ce.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("嚙璀嚙踝蕭嚙踝蕭嚙踝蕭嚙踝蕭嚙瞋嚙豬潘蕭嚙踝蕭嚙瘤  嚙踝蕭嚙瞌嚙磊嚙踝蕭嚙踝蕭 " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return uppointsList;
+	}
+	
+	
+	@Override
+	public List<UpPointsVO> getAll_By_Down2(String account,int memberNo) {
+		List<UpPointsVO> uppointsList = new ArrayList<>();
+		UpPointsVO uppointsVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			pstmt = con.prepareStatement(GET_ALL_BY_DOWN2);
+			pstmt.setString(1, account);
+			pstmt.setInt(2, memberNo);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				uppointsVO = new UpPointsVO();
+				uppointsVO.setAddPointsNo(rs.getInt("addPointsNo"));
+				uppointsVO.setMemberNo(rs.getInt("memberNO"));
+				uppointsVO.setName(rs.getString("name"));
+				uppointsVO.setLoginIP(rs.getString("loginIP"));
+				uppointsVO.setLevel(rs.getString("level"));
+				uppointsVO.setPoints(rs.getInt("points"));
+				uppointsVO.setStatus(rs.getString("status"));
+				uppointsVO.setTime(rs.getString("time"));
+				uppointsVO.setType(rs.getString("type"));
+				uppointsVO.setAccount(rs.getString("account"));
+				uppointsList.add(uppointsVO);
+				}
+
+		} catch (ClassNotFoundException ce) {
+			throw new RuntimeException("嚙碾嚙瘤 嚙瞌嚙踝蕭嚙羯 " + ce.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("嚙璀嚙踝蕭嚙踝蕭嚙踝蕭嚙踝蕭嚙瞋嚙豬潘蕭嚙踝蕭嚙瘤  嚙踝蕭嚙瞌嚙磊嚙踝蕭嚙踝蕭 " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return uppointsList;
+	}
+	
+	@Override
+	public List<UpPointsVO> getAll_By_Up2(String account,int memberNo) {
+		List<UpPointsVO> uppointsList = new ArrayList<>();
+		UpPointsVO uppointsVO = null;
+		Connection con = null;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rs = null;
+		
+		try {
+
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			pstmt = con.prepareStatement(GET_ALL_BY_UP2);
+			pstmt.setString(1, account);
+			pstmt.setInt(2, memberNo);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				uppointsVO = new UpPointsVO();
+				uppointsVO.setAddPointsNo(rs.getInt("addPointsNo"));
+				uppointsVO.setMemberNo(rs.getInt("memberNO"));
+				uppointsVO.setName(rs.getString("name"));
+				uppointsVO.setLoginIP(rs.getString("loginIP"));
+				uppointsVO.setLevel(rs.getString("level"));
+				uppointsVO.setPoints(rs.getInt("points"));
+				uppointsVO.setStatus(rs.getString("status"));
+				uppointsVO.setTime(rs.getString("time"));
+				uppointsVO.setType(rs.getString("type"));
+				uppointsVO.setAccount(rs.getString("account"));
 				uppointsList.add(uppointsVO);
 				}
 
