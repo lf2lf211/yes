@@ -1229,7 +1229,7 @@
 															<td>用户昵称</td>
 															<td><input type="text" name="name"
 																required="required" placeholder="请输入用户昵称" maxlength='12'>
-																<input type="button" name="check" value="检查昵称"
+																<input type="button" id="checkAjax" name="check" value="检查昵称"
 																onclick="javascript:document.nameCheck.submit()"></td>
 														</tr>
 														<tr>

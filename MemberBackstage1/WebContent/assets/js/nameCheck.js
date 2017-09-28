@@ -3,13 +3,13 @@
  */
 
 $(function nameCheck() {
-		('.name').on('click', function() {
+		$("#checkAjax").on('click', function() {
 			$.ajax({
 				url : "/AjaxServlet.do",
-				type : 'POST',
-				dataType : 'json',
+				type : "POST",
+				dataType : "json",
 				data : {
-					name : $('#name').val()
+					name : $("#name").val()
 				},
 				success : function(response) {
 					if (response == '1') {

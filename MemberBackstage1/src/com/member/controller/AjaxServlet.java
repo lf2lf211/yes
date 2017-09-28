@@ -33,8 +33,8 @@ public class AjaxServlet extends HttpServlet {
 
 		String name = request.getParameter("name");
 		
-		MemberService memberService = new MemberService();
-		List<MemberVO> memberVO= memberService.getAllName(name);
+//		MemberService memberService = new MemberService();
+//		List<MemberVO> memberVO= memberService.getAllName(name);
 		
 		
 		
