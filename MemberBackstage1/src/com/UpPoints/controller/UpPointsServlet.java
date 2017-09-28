@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.UpPoints.model.UpPointsService;
+import com.UpPoints.model.UpPointsVO;
 import com.db.Jdbcmysql;
 import com.member.model.MemberService;
 import com.member.model.MemberVO;
@@ -51,6 +53,7 @@ public class UpPointsServlet extends HttpServlet {
 			
 			
 			int memberNo = Integer.parseInt(req.getParameter("memberNo"));
+
 			String name = req.getParameter("name");
 			String loginIP = req.getParameter("loginIP");
 			String level = req.getParameter("level");
@@ -75,6 +78,32 @@ public class UpPointsServlet extends HttpServlet {
 			
 			upPointsSvc.addUpPointsVO(memberNo,name, loginIP, level, points,status,time,type,account);
 			
+			MemberService memberService = new MemberService();
+			MemberVO mem = memberService.getOneMemberVO(memberNo);
+			
+			if ("管理员".equals(mem.getLevel())) {
+				
+				UpPointsService svc =new UpPointsService();
+				List<UpPointsVO> list = svc.getAll_By_Up();
+				session.setAttribute("list",list);
+				List<UpPointsVO> list2 = svc.getAll_By_Down();
+				session.setAttribute("list2",list2);
+
+			}
+			if ("总代理".equals(mem.getLevel())) {
+				UpPointsService svc =new UpPointsService();
+				List<UpPointsVO> list = svc.getAll_By_Up();
+				session.setAttribute("list",list);	
+				List<UpPointsVO> list2 = svc.getAll_By_Down2(mem.getAccount());
+				session.setAttribute("list2",list2);
+			}
+			if ("代理".equals(mem.getLevel())) {
+				UpPointsService svc =new UpPointsService();
+				List<UpPointsVO> list = svc.getAll_By_Up2(mem.getAccount());
+				session.setAttribute("list",list);
+				List<UpPointsVO> list2 = svc.getAll_By_Down2(mem.getAccount());
+				session.setAttribute("list2",list2);
+			}
 			
 			session.removeAttribute("errorMsgs");
 			
@@ -87,13 +116,41 @@ public class UpPointsServlet extends HttpServlet {
 	
 	
 		if("updateStatus".equals(action)){
+		
 			String status = req.getParameter("status").trim();
+			Integer memberNo = new Integer(req.getParameter("memberNo").trim());
 			//Integer addPointsNo = Integer.parseInt(req.getParameter("addPointsNo"));
 			Integer addPointsNo = new Integer(req.getParameter("addPointsNo"));
 			UpPointsService upPointsSvc = new UpPointsService();
 			upPointsSvc.updateStatus(status, addPointsNo);
+			MemberService memberService = new MemberService();
+			MemberVO mem = memberService.getOneMemberVO(memberNo);
+
+			if ("管理员".equals(mem.getLevel())) {
+				
+				UpPointsService svc =new UpPointsService();
+				List<UpPointsVO> list = svc.getAll_By_Up();
+				session.setAttribute("list",list);
+				List<UpPointsVO> list2 = svc.getAll_By_Down();
+				session.setAttribute("list2",list2);
+
+			}
+			if ("总代理".equals(mem.getLevel())) {
+				UpPointsService svc =new UpPointsService();
+				List<UpPointsVO> list = svc.getAll_By_Up();
+				session.setAttribute("list",list);	
+				List<UpPointsVO> list2 = svc.getAll_By_Down2(mem.getAccount());
+				session.setAttribute("list2",list2);
+			}
+			if ("代理".equals(mem.getLevel())) {
+				UpPointsService svc =new UpPointsService();
+				List<UpPointsVO> list = svc.getAll_By_Up2(mem.getAccount());
+				session.setAttribute("list",list);
+				List<UpPointsVO> list2 = svc.getAll_By_Down2(mem.getAccount());
+				session.setAttribute("list2",list2);
+			}
 			
-			res.sendRedirect("index.jsp#menu18");
+			res.sendRedirect("index.jsp#menu8");
 			return;
 		
 		}	

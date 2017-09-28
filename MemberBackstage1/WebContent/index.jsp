@@ -5,10 +5,15 @@
 <jsp:useBean id="search" scope="session" type="java.util.List" />
 <jsp:useBean id="search2" scope="session" type="java.util.List" />
 <%@ page import="java.util.*"%>
+<%@ page import="com.UpPoints.model.*"%>
+<%@ page import="com.member.model.*"%>
+<%@ page import="java.util.*"%>
 <jsp:useBean id="uppointsSvc" scope="page"
 	class="com.UpPoints.model.UpPointsService" />
 <jsp:useBean id="memSvc" scope="page"
 	class="com.member.model.MemberService" />
+<jsp:useBean id="list" scope="session" type="java.util.List" />
+<jsp:useBean id="list2" scope="session" type="java.util.List" />
 
 
 <!DOCTYPE html>
@@ -842,6 +847,7 @@
 												<td><input type="submit">
 												<input type="hidden" name="action" value="addUpPoints" >
 												<input type="hidden" name="memberNo" value="${myMem.memberNo }" >
+												<input type="hidden" name="memberNo2" value="${memberVO.memberNo }" >
 												<input type="hidden" name="name" value="${myMem.name }">
 												<input type="hidden" name="level" value="${myMem.level }">
 
@@ -962,15 +968,17 @@
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-6">
-										<span>用户编号:</span> <span> <input type="text"
-											placeholder="请输入用户编号" name="">
-										</span> <span>方式</span> <select class="newObj" name="newObj">
-											<option value="" disabled selected>支付方式</option>									
-											<option value="微信">微信</option>
-											<option value="支付宝">支付宝</option>
-											<option value="银行卡">银行卡</option>
-											<option value="QQ钱包">QQ钱包</option>
-										</select> <select class="newObj" name="newObj">
+										
+									</div>
+									<div>
+										<div>
+											<div>
+												<h3><b>上分纪录</b></h3>
+											</div><br>
+											<div><span>用户编号:</span> <span> <input type="text"
+												placeholder="请输入用户编号" name="">
+											</span> <span>状态</span>
+										 <select class="newObj" name="newObj">
 											<option value="" disabled selected>状态</option>
 											<option value="成功">成功</option>
 											<option value="失敗">失敗</option>
@@ -978,13 +986,138 @@
 										</select> <span> 时间： <input type="text" class="datepicker">
 										</span> <span> 至 <input type="text" class="datepicker">
 										</span> <span> <input type="button" name="" value="查询">
-										</span>
+										</span></div><br>
+
+										<table
+										class="table table-bordered table-striped table-condensed">
+										<thead>
+											<tr>
+												<th></th>
+												<th rowspan="2">申请编号</th>
+												<th rowspan="2">用户编号</th>
+												
+												<th rowspan="2">用户暱称</th>
+												<th rowspan="2">类型</th>
+												<th rowspan="2">登录IP</th>
+												<th rowspan="2">分数</th>
+												<th rowspan="2">状态</th>
+												<th rowspan="2">申请时间</th>
+												<th rowspan="2">类别</th>
+												<th rowspan="2">更新状态</th>
+												<th rowspan="2">操作</th>
+											</tr>
+										</thead>
+											<%@ include file="/page/page7.file" %> 
+										<c:forEach var="uppoints" items="${list}" begin="<%=pageIndex4%>" end="<%=pageIndex4+rowsPerPage4-1%>">
+
+									
+										<form action="UpPointsServlet.do" method="post">
+										<tbody align="center">
+											<tr><td></td>
+												<td>${uppoints.addPointsNo}</td>
+												<td>${uppoints.memberNo }</td>
+												
+												<td>${uppoints.name }</td>
+												<td>${uppoints.level }</td>
+												<td>${uppoints.loginIP }</td>
+												<td>${uppoints.points }</td>
+												<td>${uppoints.status }</td>
+												<td>${uppoints.time }</td>
+												<td>${uppoints.type }</td>
+												<td><select name="status">
+														<option value="成功"> 成功</option>
+														<option value="未付款"> 未付款</option>
+														<option value="失败"> 失败</option>
+													</select></td>
+												<td><input type="submit">
+												<input type="hidden" name="action" value="updateStatus" >
+												<input type="hidden" name="memberNo" value="${memberVO.memberNo }" >
+												<input type="hidden" name="addPointsNo" value="${uppoints.addPointsNo}" ></td>
+											</tr>
+										</tbody>
+										</form>
+											
+									
+										</c:forEach>
+											<%@ include file="/page/page8.file" %> 
+									</table>
+
+										<hr><div>
+												<div><h3><b>下分纪录</b></h3></div>
+												<div><span>用户编号:</span> <span> <input type="text"
+												placeholder="请输入用户编号" name="">
+												</span> <span>方式</span> <select class="newObj" name="newObj">
+													<option value="" disabled selected>支付方式</option>									
+													<option value="微信">微信</option>
+													<option value="支付宝">支付宝</option>
+													<option value="银行卡">银行卡</option>
+													<option value="QQ钱包">QQ钱包</option>
+												</select> <select class="newObj" name="newObj">
+													<option value="" disabled selected>状态</option>
+													<option value="成功">成功</option>
+													<option value="失敗">失敗</option>
+		
+												</select> <span> 时间： <input type="text" class="datepicker">
+												</span> <span> 至 <input type="text" class="datepicker">
+												</span> <span> <input type="button" name="" value="查询">
+												</span></div><br>
+		
+		
+		
+												<table
+												class="table table-bordered table-striped table-condensed">
+												<thead>
+													<tr>
+														<th></th>
+														<th rowspan="2">用户编号</th>
+														<th rowspan="2">用户暱称</th>
+														<th rowspan="2">类型</th>
+														<th rowspan="2">登录IP</th>
+														<th rowspan="2">分数</th>
+														<th rowspan="2">状态</th>
+														<th rowspan="2">申请时间</th>
+														<th rowspan="2">类别</th>
+														<th rowspan="2">更新状态</th>
+														<th rowspan="2">操作</th>
+													</tr>
+												</thead>
+												<%@ include file="/page/page9.file" %> 
+												<c:forEach var="uppoints" items="${list2}">
+													<c:if test="${uppoints.account==memberVO.account||uppoints.memberNo==memberVO.memberNo}">
+											
+												<form action="UpPointsServlet.do" method="post">
+												<tbody align="center">
+													<tr><td></td>
+														<td>${uppoints.memberNo }</td>
+														<td>${uppoints.name }</td>
+														<td>${uppoints.level }</td>
+														<td>${uppoints.loginIP }</td>
+														<td>${uppoints.points }</td>
+														<td>${uppoints.status }</td>
+														<td>${uppoints.time }</td>
+														<td>${uppoints.type }</td>
+														<td><select name="status">
+																<option value="成功"> 成功</option>
+																<option value="未付款"> 未付款</option>
+																<option value="失败"> 失败</option>
+															</select></td>
+														<td><input type="submit">
+														<input type="hidden" name="action" value="updateStatus" >
+														<input type="hidden" name="memberNo" value="${memberVO.memberNo }" >
+														<input type="hidden" name="addPointsNo" value="${uppoints.addPointsNo}" ></td>
+													</tr>
+												</tbody>
+												</form>
+												</c:if>
+												</c:forEach>
+												<%@ include file="/page/page10.file" %> 
+											</table>
+											</div>
+										<hr><div><%@include file="/transactionRecord3.jsp"%> </div>
 									</div>
-									<span onclick="up('1');">上分　　　</span>　　　<span onclick="down('1');">下分　　　</span>　　　<span onclick="three('1');">第三方交易　　　</span>
-									<div id="transactionRecord1">
-<%-- 									<%@ include file="transactionRecord.jsp"%> --%>
-									</div>
+									
 								</div>
+							</div>
 							</div>
 							<!-- =========================层级===================================== -->
 							<div id="menu9" class="tab-pane fade">
@@ -1193,10 +1326,12 @@
 																readonly="readonly" class='account'></td>
 														</tr>
 														<tr>
-															<td>用户密码</td>
-															<td><input type="text" name="password"
-																class='password'></td>
-														</tr>
+											               <td>用户密码</td>
+											               <td><input type="text" name="password"
+											                 placeholder="请输入密码" required
+											                 pattern="[A-Za-z0-9]{3,12}" maxlength='12'
+											                 title='由英文或数字所组成的3~12字元'></td>
+											            </tr>
 														<tr>
 															<td>用户昵称</td>
 															<td><input type="text" name="name" class='name'>
@@ -1567,36 +1702,21 @@
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-6">
-										<span>用户编号:</span> <span> <input type="text"
-											placeholder="请输入用户编号" name="">
-										</span> <span>方式</span> <select class="newObj" name="newObj">
-											<option value="" disabled selected>支付方式</option>
-											<option value="">123</option>
-											<option value="">321</option>
-											<option value="">9453</option>
-											<option value="">9487</option>
-										</select> <select class="newObj" name="newObj">
-											<option value="" disabled selected>成功</option>
-											<option value="">123</option>
-											<option value="">321</option>
-											<option value="">9453</option>
-											<option value="">9487</option>
-										</select> <span> 时间： <input type="text" class="datepicker">
-										</span> <span> 至 <input type="text" class="datepicker">
-										</span> <span> <input type="button" name="" value="查询">
-										</span>
+										
 									</div>
-									
 									<div>
-									<span onclick="up('2');">上分　　　</span>　　　<span onclick="down('2');">下分　　　</span>　　　<span onclick="three('2');">第三方交易　　　</span>
-									<div id="transactionRecord2">
-								
-									</div>
+<%-- 										<div><%@include file="/transactionRecord4.jsp"%> </div> --%>
+<!-- 										<hr> -->
+<%-- 										<div><%@include file="/transactionRecord5.jsp"%> </div> --%>
+<%-- 										<hr><div><%@include file="/transactionRecord6.jsp"%> </div> --%>
+									
 									
 									</div>
 									
 								</div>
+									
 							</div>
+							
 							<div id="menu19" class="tab-pane fade">
 								<div class="model content-panel ">
 									<div class="col-xs-12 col-sm-6">
@@ -2259,10 +2379,12 @@
 																readonly="readonly" class='account'></td>
 														</tr>
 														<tr>
-															<td>用户密码</td>
-															<td><input type="text" name="password"
-																class='password'></td>
-														</tr>
+											               <td>用户密码</td>
+											               <td><input type="text" name="password"
+											                 placeholder="请输入密码" required
+											                 pattern="[A-Za-z0-9]{3,12}" maxlength='12'
+											                 title='由英文或数字所组成的3~12字元'></td>
+											            </tr>
 														<tr>
 															<td>用户昵称</td>
 															<td><input type="text" name="name" class='name'>

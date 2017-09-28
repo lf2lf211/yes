@@ -1,0 +1,37 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%  int rowsPerPage5 = 7;  //每頁的筆數     
+    int rowNumber5=0;     //總筆數
+    int pageNumber5=0;    //總筆數    
+    int whichPage5=1;       //第幾頁
+    int pageIndexArray5[]=null;
+    int pageIndex5=0; 
+%>
+
+<%  
+    rowNumber5=list2.size();
+    if (rowNumber5%rowsPerPage5 !=0)
+     pageNumber5=rowNumber5/rowsPerPage5 +1;
+    else pageNumber5=rowNumber5/rowsPerPage5;    
+    pageIndexArray5=new int[pageNumber5]; 
+    for (int i5=1 ; i5<=pageIndexArray5.length ; i5++)
+    pageIndexArray5[i5-1]=i5*rowsPerPage5-rowsPerPage5;
+%>
+
+<%  try {
+      whichPage5 = Integer.parseInt(request.getParameter("whichPage5"));
+      pageIndex5=pageIndexArray5[whichPage5-1];
+    } catch (NumberFormatException e) { //第一次執行的時候
+       whichPage5=1;
+       pageIndex5=0;
+    } catch (ArrayIndexOutOfBoundsException e) { //總頁數之外的錯誤頁數
+         if (pageNumber5>0){
+              whichPage5=pageNumber5;
+              pageIndex5=pageIndexArray5[pageNumber5-1];
+         }
+    } 
+%>
+
+<%if (pageNumber5>0){%>
+<b><font color= red>現在是第<%=whichPage5%>頁 </font></b>
+<%}%>
+

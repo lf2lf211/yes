@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.UpPoints.model.UpPointsService;
+import com.UpPoints.model.UpPointsVO;
 import com.member.model.MemberService;
 import com.member.model.MemberVO;
 
@@ -29,8 +31,9 @@ import com.member.model.MemberVO;
  */
 @WebServlet("/member.do")
 public class MemberServlet extends HttpServlet {
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doPost(request, response);
 	}
 
@@ -40,11 +43,9 @@ public class MemberServlet extends HttpServlet {
 			rtvalue = "";
 			for (int i = 0; i < count; i++)
 				if (frontORback)
-					rtvalue = String.valueOf(rtvalue)
-							+ String.valueOf(fillChar);
+					rtvalue = String.valueOf(rtvalue) + String.valueOf(fillChar);
 				else
-					rtvalue = String.valueOf(fillChar)
-							+ String.valueOf(rtvalue);
+					rtvalue = String.valueOf(fillChar) + String.valueOf(rtvalue);
 		} else {
 			int len = rtvalue.length();
 			if (len > count) {
@@ -53,11 +54,9 @@ public class MemberServlet extends HttpServlet {
 				int a = count - len;
 				for (int i = 0; i < a; i++)
 					if (frontORback)
-						rtvalue = String.valueOf(rtvalue)
-								+ String.valueOf(fillChar);
+						rtvalue = String.valueOf(rtvalue) + String.valueOf(fillChar);
 					else
-						rtvalue = String.valueOf(fillChar)
-								+ String.valueOf(rtvalue);
+						rtvalue = String.valueOf(fillChar) + String.valueOf(rtvalue);
 			}
 		}
 		return rtvalue;
@@ -100,26 +99,39 @@ public class MemberServlet extends HttpServlet {
 					mem.setLoginTime(loginTime);
 					System.out.println(mem.getLevel());
 					if ("管理员".equals(mem.getLevel())) {
-
+						
+						UpPointsService svc =new UpPointsService();
+						List<UpPointsVO> list = svc.getAll_By_Up();
+						session.setAttribute("list",list);
+						List<UpPointsVO> list2 = svc.getAll_By_Down();
+						session.setAttribute("list2",list2);
 						session.setAttribute("type", "1");
 					}
 					if ("总代理".equals(mem.getLevel())) {
-
+						UpPointsService svc =new UpPointsService();
+						List<UpPointsVO> list = svc.getAll_By_Up();
+						session.setAttribute("list",list);
 						session.setAttribute("type", "2");
+						List<UpPointsVO> list2 = svc.getAll_By_Down2(mem.getAccount());
+						session.setAttribute("list2",list2);
 					}
 					if ("代理".equals(mem.getLevel())) {
-
+						UpPointsService svc =new UpPointsService();
+						List<UpPointsVO> list = svc.getAll_By_Up2(mem.getAccount());
+						session.setAttribute("list",list);
+						List<UpPointsVO> list2 = svc.getAll_By_Down2(mem.getAccount());
+						session.setAttribute("list2",list2);
 						session.setAttribute("type", "3");
+						
 					}
 					List<MemberVO> list = memberService.getAllSuperior(account);
 					session.setAttribute("search", list);
 					List<MemberVO> list2 = memberService.getAllSuperior2(account);
-					
-					
+
 					session.setAttribute("search2", list2);
 
 					memberService.updateMemberVO(mem);
-		
+
 					req.getSession().setAttribute("memberVO", mem);
 					res.sendRedirect("index.jsp");
 					return;
@@ -137,64 +149,60 @@ public class MemberServlet extends HttpServlet {
 
 		}
 
-///////////////
+		///////////////
 
-		if("searchMyMember".equals(action)){
+		if ("searchMyMember".equals(action)) {
 
-			String url =req.getParameter("url");
+			String url = req.getParameter("url");
 			MemberService memberService = new MemberService();
-			Integer memberNo =new Integer( req.getParameter("memberNo"));
-		MemberVO mem=memberService.getOneMemberVO(memberNo);
-		
-	//String	applyTime = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime());
-	req.getSession().setAttribute("myMem", mem);
-//	req.getSession().setAttribute("applyTime", applyTime);
+			Integer memberNo = new Integer(req.getParameter("memberNo"));
+			MemberVO mem = memberService.getOneMemberVO(memberNo);
+
+			// String applyTime = new
+			// SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime());
+			req.getSession().setAttribute("myMem", mem);
+			// req.getSession().setAttribute("applyTime", applyTime);
 			res.sendRedirect("index.jsp#" + url);
 			return;
 		}
-		
-		
-		
-		
-			/////////////////////////////////存新增會員值
+
+		///////////////////////////////// 存新增會員值
 		// 新增會員 代理
 		if ("memInsert".equals(action)) {
 
-			 String account;
-				
-			String a="1";
-			 try {
-				  String pathname = "D:\\don.txt"; // 绝对路径或相对路径都可以，这里是绝对路径，写入文件时演示相对路径  
-		          File filename = new File(pathname); // 要读取以上路径的input。txt文件  
-		          InputStreamReader reader = new InputStreamReader(  
-		                  new FileInputStream(filename)); // 建立一个输入流对象reader  
-		          BufferedReader br = new BufferedReader(reader); // 建立一个对象，它把文件内容转成计算机能读懂的语言  
-		          String line = "";  
-		          line = br.readLine();  
-		          int intValue = Integer.valueOf(line);
-		          intValue=intValue+1;
-		          a=String.valueOf(intValue);
-			} catch (Exception e) {
-				 File writename = new File("D:\\don.txt"); // 相对路径，如果没有则要建立一个新的output。txt文件  
-		          writename.createNewFile(); // 创建新文件  
-		          BufferedWriter out = new BufferedWriter(new FileWriter(writename));  
-		          out.write("1"); // \r\n即为换行  
-		          out.flush(); // 把缓存区内容压入文件  
-		          out.close(); // 最后记得关闭文件  
-			}	
-			String outString="";  
-							
-			outString=fillStr(a, 5, false, "0");  
+			String account;
 
-			account=("YB"+outString);  
-							  
-			File writename = new File("D:\\don.txt"); // 相对路径，如果没有则要建立一个新的output。txt文件  
-			writename.createNewFile(); // 创建新文件  
-			BufferedWriter out = new BufferedWriter(new FileWriter(writename));  
-			out.write(a); // \r\n即为换行  
-			out.flush(); // 把缓存区内容压入文件  
-			out.close(); // 最后记得关闭文件  
-				
+			String a = "1";
+			try {
+				String pathname = "D:\\don.txt"; // 绝对路径或相对路径都可以，这里是绝对路径，写入文件时演示相对路径
+				File filename = new File(pathname); // 要读取以上路径的input。txt文件
+				InputStreamReader reader = new InputStreamReader(new FileInputStream(filename)); // 建立一个输入流对象reader
+				BufferedReader br = new BufferedReader(reader); // 建立一个对象，它把文件内容转成计算机能读懂的语言
+				String line = "";
+				line = br.readLine();
+				int intValue = Integer.valueOf(line);
+				intValue = intValue + 1;
+				a = String.valueOf(intValue);
+			} catch (Exception e) {
+				File writename = new File("D:\\don.txt"); // 相对路径，如果没有则要建立一个新的output。txt文件
+				writename.createNewFile(); // 创建新文件
+				BufferedWriter out = new BufferedWriter(new FileWriter(writename));
+				out.write("1"); // \r\n即为换行
+				out.flush(); // 把缓存区内容压入文件
+				out.close(); // 最后记得关闭文件
+			}
+			String outString = "";
+
+			outString = fillStr(a, 5, false, "0");
+
+			account = ("YB" + outString);
+
+			File writename = new File("D:\\don.txt"); // 相对路径，如果没有则要建立一个新的output。txt文件
+			writename.createNewFile(); // 创建新文件
+			BufferedWriter out = new BufferedWriter(new FileWriter(writename));
+			out.write(a); // \r\n即为换行
+			out.flush(); // 把缓存区内容压入文件
+			out.close(); // 最后记得关闭文件
 
 			List<String> checkMsgs = new LinkedList<String>();
 			req.setAttribute("checkMsgs", checkMsgs);
@@ -212,13 +220,14 @@ public class MemberServlet extends HttpServlet {
 			int comcommission = 0;
 
 			MemberService memberService = new MemberService();
-			
-			memberService.addMemberVO(account, password, name, balance, loginIP, loginTime, level, state, superior,superior2, comcommission);
+
+			memberService.addMemberVO(account, password, name, balance, loginIP, loginTime, level, state, superior,
+					superior2, comcommission);
 
 			String acc = req.getParameter("acc");// 查看下線
 			List<MemberVO> list = memberService.getAllSuperior(memberService.CheckOneMemberVO(acc).getAccount());
 			List<MemberVO> list2 = memberService.getAllSuperior2(memberService.CheckOneMemberVO(acc).getAccount());
-			
+
 			session.setAttribute("search", list);
 			session.setAttribute("search2", list2);
 
@@ -245,7 +254,7 @@ public class MemberServlet extends HttpServlet {
 				req.getRequestDispatcher("login.jsp").forward(req, res);
 			}
 		}
-		
+
 		if ("enableMember".equals(action) || "disableMember".equals(action)) {
 
 			List<String> checkMsgs = new LinkedList<String>();
@@ -262,7 +271,7 @@ public class MemberServlet extends HttpServlet {
 				List<MemberVO> list = memberService.getAllSuperior(memberVONo);
 				session.setAttribute("search", list);
 				List<MemberVO> list2 = memberService.getAllSuperior2(memberVONo);
-				
+
 				session.setAttribute("search2", list2);
 				System.out.println("update member succes");
 				res.sendRedirect("index.jsp#" + url);
@@ -274,30 +283,55 @@ public class MemberServlet extends HttpServlet {
 		}
 
 		if ("memberUpdate".equals(action)) {
-			int memberNo = Integer.parseInt(req.getParameter("memberNo"));
-			String memberVONo = req.getParameter("memberVONo");
-			String password = req.getParameter("password");
-			String name = req.getParameter("name");
-			String level = req.getParameter("level");
-		
 
-			MemberService memberService = new MemberService();
-			MemberVO memberVO = memberService.getOneMemberVO(memberNo);
+			List<String> checkMsgs = new LinkedList<String>();
+			req.setAttribute("checkMsgs", checkMsgs);
 
-			memberVO.setPassword(password);
-			memberVO.setName(name);
-			memberVO.setLevel(level);
-			
-			
-			memberService.updateMemberVO(memberVO);
-			List<MemberVO> list = memberService.getAllSuperior(memberVONo);
-			session.setAttribute("search", list);
-			List<MemberVO> list2 = memberService.getAllSuperior2(memberVONo);
-			session.setAttribute("search2", list2);
-			
-			String url = req.getParameter("url");
+			try {
+				int memberNo = Integer.parseInt(req.getParameter("memberNo"));
+				String memberVONo = req.getParameter("memberVONo");
+				String password = req.getParameter("password");
+				String name = req.getParameter("name");
+				String level = req.getParameter("level");
+				String url = req.getParameter("url");
+				
 
-			res.sendRedirect("index.jsp#" + url);
+				if (password.length() < 3 || password.length() > 12) {
+					checkMsgs.add("密码错误");
+					System.out.println("gggggggggg");
+					// req.getRequestDispatcher("login.jsp").forward(req, res);
+				}
+
+				MemberService memberService = new MemberService();
+				MemberVO memberVO = memberService.getOneMemberVO(memberNo);
+
+				memberVO.setPassword(password);
+				memberVO.setName(name);
+				memberVO.setLevel(level);
+
+				if (!checkMsgs.isEmpty()) {
+					session.setAttribute("checkMsgs", checkMsgs);
+
+					res.sendRedirect("index.jsp#" + url);
+					return;
+				}
+				
+				memberService.updateMemberVO(memberVO);
+				
+				List<MemberVO> list = memberService.getAllSuperior(memberVONo);
+				session.setAttribute("search", list);
+				List<MemberVO> list2 = memberService.getAllSuperior2(memberVONo);
+				session.setAttribute("search2", list2);
+
+				res.sendRedirect("index.jsp#" + url);
+				return;
+
+			} catch (Exception e) {
+				checkMsgs.add(e.getMessage());
+				req.getRequestDispatcher("login.jsp").forward(req, res);
+				return;
+			}
+
 		}
 
 		if ("logout".equals(action)) {
