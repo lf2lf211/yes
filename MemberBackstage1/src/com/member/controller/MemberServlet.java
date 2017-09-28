@@ -8,11 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -331,7 +329,6 @@ public class MemberServlet extends HttpServlet {
 				req.getRequestDispatcher("login.jsp").forward(req, res);
 				return;
 			}
-
 		}
 
 		if ("logout".equals(action)) {

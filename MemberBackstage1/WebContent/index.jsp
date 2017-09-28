@@ -42,8 +42,16 @@
 <link href="assets/css/style.css" rel="stylesheet">
 <link href="assets/css/style-responsive.css" rel="stylesheet">
 <link href="assets/css/bow.css" rel="stylesheet">
+
+<!-- 加載Ajax -->
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+
+<!-- js -->
 <script src="assets/js/chart-master/Chart.js"></script>
 <script src="assets/js/updown.js"></script>
+<script src="assets/js/nameCheck.js"></script>
+
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -778,6 +786,7 @@
 							</div>
 							<!-- =================================储值============================== -->
 							<c:if test="${type.contains(\"2\")||type.contains(\"1\")}">
+
 							<div id="menu5" class="tab-pane fade">
 								<div class="model content-panel ">
 									<h4>
@@ -796,6 +805,7 @@
 									<input type="submit" id="recharge_con">
 									</form>
 									
+
 								</div>
 							</div>
 							<div id="menu39" class="tab-pane fade">
@@ -1297,8 +1307,12 @@
 									
 
 									</table>
-									
-									
+
+
+									<form name="nameCheck"   ACTION="/AjaxServlet.do"  method=post>
+										<input type="hidden" name="action" value="nameCheck" />
+									</form>
+
 									<div class="changeMember" style="display: none;">
 										<hr>
 										<h4>
@@ -1326,20 +1340,21 @@
 																readonly="readonly" class='account'></td>
 														</tr>
 														<tr>
-											               <td>用户密码</td>
-											               <td><input type="text" name="password"
-											                 placeholder="请输入密码" required
-											                 pattern="[A-Za-z0-9]{3,12}" maxlength='12'
-											                 title='由英文或数字所组成的3~12字元'></td>
-											            </tr>
+
+															<td>用户密码</td>
+															<td><input type="text" name="password"
+																placeholder="请输入密码" required pattern="[A-Za-z0-9]{3,12}"
+																maxlength='12' title='由英文或数字所组成的3~12字元'></td>
+														</tr>
 														<tr>
 															<td>用户昵称</td>
-															<td><input type="text" name="name" class='name'>
-															</td>
+															<td><input type="text" name="name"
+																required="required" placeholder="请输入用户昵称" maxlength='12'>
+																<input type="button" name="check" value="检查昵称"
+																onclick="javascript:document.nameCheck.submit()"></td>
 														</tr>
 														<tr>
 															<td>身分</td>
-
 															<c:if test="${type.contains(\"1\") }">
 																<td><select name="level">
 																		<option value="总代理">总代理</option>
@@ -1349,11 +1364,9 @@
 															<c:if
 																test="${type.contains(\"2\")||type.contains(\"3\") }">
 																<td><select name="level">
-
 																		<option value="代理">代理</option>
 																</select></td>
 															</c:if>
-
 														</tr>
 														<tr>
 															<td>
@@ -1362,8 +1375,8 @@
 																<input type="hidden" name="memberVONo" value="${memberVO.account}">
 																<input type="hidden" name="action" value="memberUpdate">
 															</td>
-															<td><input type="submit" name="" value="送出">
-															</td>
+
+															<td><input type="submit" name="" value="送出"></td>
 														</tr>
 													</tbody>
 												</table>
@@ -1391,11 +1404,16 @@
 													</tr>
 													<tr>
 														<td>密码</td>
-														<td><input type="password" name="password"></td>
+														<td><input type="password" name="password"
+															placeholder="请输入密码" required pattern="[A-Za-z0-9]{3,12}"
+															maxlength='12' title='由英文或数字所组成的3~12字元'></td>
+
 													</tr>
 													<tr>
 														<td>名称</td>
-														<td><input type="text" name="name"></td>
+														<td><input type="text" name="name"
+															required="required" placeholder="请输入用户昵称" maxlength='12'>
+															<input type="button" name="check" value="检查昵称"></td>
 													</tr>
 													<tr>
 														<td>权限</td>
@@ -2357,6 +2375,7 @@
 									</table>
 									
 									<div class="changeMember" style="display: none;">
+
 										<hr>
 										<h4>
 											<i class="fa fa-angle-right"></i> 修改会员
@@ -2378,21 +2397,23 @@
 																readonly="readonly" class='memberNo'></td>
 														</tr>
 														<tr>
+
 															<td>用户账户</td>
 															<td><input type="text" name="account"
 																readonly="readonly" class='account'></td>
+
+															<td>密码</td>
+															<td><input type="password" name="password"
+																placeholder="请输入密码" required pattern="[A-Za-z0-9]{3,12}"
+																maxlength='12' title='由英文或数字所组成的3~12字元'></td>
+
 														</tr>
-														<tr>
-											               <td>用户密码</td>
-											               <td><input type="text" name="password"
-											                 placeholder="请输入密码" required
-											                 pattern="[A-Za-z0-9]{3,12}" maxlength='12'
-											                 title='由英文或数字所组成的3~12字元'></td>
-											            </tr>
-														<tr>
-															<td>用户昵称</td>
-															<td><input type="text" name="name" class='name'>
-															</td>
+														
+														
+															<td>名称</td>
+															<td><input type="text" name="name"
+																required="required" placeholder="请输入用户昵称" maxlength='12'>
+																<input type="button" name="check" value="检查昵称"></td>
 														</tr>
 														<tr>
 															<td>身分</td>
@@ -2706,6 +2727,17 @@
 	<script type="application/javascript">
 		
 		
+<<<<<<< HEAD
+=======
+		
+		
+		
+		
+		
+		
+		
+		
+>>>>>>> refs/remotes/origin/bigfatfatfatfatwu
                 $(document).ready(function() {
                     $("#date-popover").popover({ html: true, trigger: "manual" });
                     $("#date-popover").hide();
@@ -2739,8 +2771,15 @@
                     console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
                 }
                 
+<<<<<<< HEAD
+=======
+
+	
+	
+>>>>>>> refs/remotes/origin/bigfatfatfatfatwu
 	
 	</script>
+
 </body>
 
 </html>
