@@ -33,8 +33,8 @@ public class UpPointsDAO implements UpPointsInterface {
 	private static final String GET_ALL = "SELECT * FROM uppoints ";
 	private static final String GET_ALL_BY_UP = "SELECT * FROM uppoints where type='上分'";
 	private static final String GET_ALL_BY_DOWN = "SELECT * FROM uppoints where type='下分'";
-	private static final String GET_ALL_BY_UP2 = "SELECT * FROM uppoints where type='上分' and account=? or account=?";
-	private static final String GET_ALL_BY_DOWN2 = "SELECT * FROM uppoints where type='下分' and account=? or account=?";
+	private static final String GET_ALL_BY_UP2 = "SELECT * FROM uppoints where type='上分' and account=? or member=?";
+	private static final String GET_ALL_BY_DOWN2 = "SELECT * FROM uppoints where type='下分' and account=? or member=?";
 	
 	@Override
 	public void add(UpPointsVO uppointsVO) {
@@ -420,7 +420,7 @@ public class UpPointsDAO implements UpPointsInterface {
 	
 	
 	@Override
-	public List<UpPointsVO> getAll_By_Down2(String account) {
+	public List<UpPointsVO> getAll_By_Down2(String account,int memberNo) {
 		List<UpPointsVO> uppointsList = new ArrayList<>();
 		UpPointsVO uppointsVO = null;
 		Connection con = null;
@@ -433,7 +433,7 @@ public class UpPointsDAO implements UpPointsInterface {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(GET_ALL_BY_DOWN2);
 			pstmt.setString(1, account);
-			pstmt.setString(2, account);
+			pstmt.setInt(2, memberNo);
 
 			rs = pstmt.executeQuery();
 
@@ -485,7 +485,7 @@ public class UpPointsDAO implements UpPointsInterface {
 	}
 	
 	@Override
-	public List<UpPointsVO> getAll_By_Up2(String account) {
+	public List<UpPointsVO> getAll_By_Up2(String account,int memberNo) {
 		List<UpPointsVO> uppointsList = new ArrayList<>();
 		UpPointsVO uppointsVO = null;
 		Connection con = null;
@@ -500,7 +500,7 @@ public class UpPointsDAO implements UpPointsInterface {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(GET_ALL_BY_UP2);
 			pstmt.setString(1, account);
-			pstmt.setString(2, account);
+			pstmt.setInt(2, memberNo);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {

@@ -74,11 +74,11 @@ public class UpPointsService {
 	public List<UpPointsVO> getAll_By_Down() {
 		return dao.getAll_By_Down();
 	}
-	public List<UpPointsVO> getAll_By_Up2(String account) {
-		return dao.getAll_By_Up2(account);
+	public List<UpPointsVO> getAll_By_Up2(String account,int memberNo) {
+		return dao.getAll_By_Up2(account,memberNo);
 	}
-	public List<UpPointsVO> getAll_By_Down2(String account) {
-		return dao.getAll_By_Down2(account);
+	public List<UpPointsVO> getAll_By_Down2(String account,int memberNo) {
+		return dao.getAll_By_Down2(account,memberNo);
 	}
 	
 	

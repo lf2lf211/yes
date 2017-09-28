@@ -112,14 +112,14 @@ public class MemberServlet extends HttpServlet {
 						List<UpPointsVO> list = svc.getAll_By_Up();
 						session.setAttribute("list",list);
 						session.setAttribute("type", "2");
-						List<UpPointsVO> list2 = svc.getAll_By_Down2(mem.getAccount());
+						List<UpPointsVO> list2 = svc.getAll_By_Down2(mem.getAccount(),mem.getMemberNo());
 						session.setAttribute("list2",list2);
 					}
 					if ("代理".equals(mem.getLevel())) {
 						UpPointsService svc =new UpPointsService();
-						List<UpPointsVO> list = svc.getAll_By_Up2(mem.getAccount());
+						List<UpPointsVO> list = svc.getAll_By_Up2(mem.getAccount(),mem.getMemberNo());
 						session.setAttribute("list",list);
-						List<UpPointsVO> list2 = svc.getAll_By_Down2(mem.getAccount());
+						List<UpPointsVO> list2 = svc.getAll_By_Down2(mem.getAccount(),mem.getMemberNo());
 						session.setAttribute("list2",list2);
 						session.setAttribute("type", "3");
 						

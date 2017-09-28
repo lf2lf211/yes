@@ -1502,7 +1502,7 @@
 											<tr>
 												<th></th>
 												<th>用户编号</th>
-												<th>所属上级</th>
+												<th>上级</th>
 												<th>用户帐号</th>
 												<th>用户名称</th>
 												<th>阶层</th>
@@ -1691,30 +1691,34 @@
 							<!-- ==================================帐务=================================== -->
 							<div id="menu18" class="tab-pane fade">
 								<div class="model content-panel ">
-									<div class="col-xs-12 col-sm-6">
-										<h4 style="display: inline-block;">
-											<i class="fa fa-angle-right"></i> 营收报表
-										</h4>
-										<div class="btn-group">
-											<a href="#" class="btn btn-default" role="button"> <i
-												class="fa fa-arrow-down"></i> 导出EXCEL
-											</a>
-										</div>
-									</div>
-									<div class="col-xs-12 col-sm-6">
-										
-									</div>
 									<div>
+										<div class="col-xs-12 col-sm-6">
+											<h4 style="display: inline-block;">
+												<i class="fa fa-angle-right"></i> 营收报表
+											</h4>
+											<div class="btn-group">
+												<a href="#" class="btn btn-default" role="button"> <i
+													class="fa fa-arrow-down"></i> 导出EXCEL
+												</a>
+											</div>
+										</div>
+									
+										<div class="col-xs-12 col-sm-6">
+										
+										</div>
+										<div>
+									
+									
 <%-- 										<div><%@include file="/transactionRecord4.jsp"%> </div> --%>
 <!-- 										<hr> -->
 <%-- 										<div><%@include file="/transactionRecord5.jsp"%> </div> --%>
 <%-- 										<hr><div><%@include file="/transactionRecord6.jsp"%> </div> --%>
 									
 									
+										</div>
+									
 									</div>
-									
-								</div>
-									
+								</div>	
 							</div>
 							
 							<div id="menu19" class="tab-pane fade">
