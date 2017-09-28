@@ -36,7 +36,9 @@ public class MemberDAO implements MemberInterface {
 	private static final String FIND_BY_ACCOUNT = "SELECT * FROM MEMber WHERE account = ?";
 	private static final String GET_ALL_BY_SUPERIOR = "SELECT * FROM MEMber where superior like ?  order by memberNO";
 	private static final String GET_ALL_BY_SUPERIOR2 = "SELECT * FROM MEMber where superior2 like ?  order by memberNO";
-	private static final String GET_ALL = "SELECT * FROM MEMber ";
+	private static final String GET_ALL = "SELECT * FROM Member ";
+	private static final String GET_ALL_NAME = "SELECT name FROM Member WHERE name= ?";
+
 
 	@Override
 	public void add(MemberVO memberVO) {
@@ -503,12 +505,67 @@ public class MemberDAO implements MemberInterface {
 		}
 		return memList;
 	}
+	
+	@Override
+	public List<MemberVO> getAllName(String name) {
+		List<MemberVO> nameList = new ArrayList<>();
+		MemberVO memberVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			pstmt = con.prepareStatement(GET_ALL_NAME);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				memberVO = new MemberVO();
+				memberVO.setName(rs.getString("name"));
+				nameList.add(memberVO);
+				}
+
+		} catch (ClassNotFoundException ce) {
+			throw new RuntimeException(" " + ce.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException(" " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return nameList;
+	}
+	
 
 	public static void main(String[] args) {
 		// end of while
 		// 新增会员test ok
-//		MemberDAO memberDAO = new MemberDAO();
-//		MemberVO memberVO = new MemberVO();
+		MemberDAO memberDAO = new MemberDAO();
+		MemberVO memberVO = new MemberVO();
 		// memberVO.setAccount("aaa");
 		// memberVO.setBalance(1000.00);
 		// memberVO.setPassword("123");
@@ -547,6 +604,13 @@ public class MemberDAO implements MemberInterface {
 //		for(MemberVO mem : memList){
 //			System.out.println(mem.getAccount());
 //		}
+		
+		
+		//getAllName 
+		List<MemberVO> nameList = new ArrayList<>();
+		nameList= memberDAO.getAllName("aaa");
+		System.out.println(nameList.iterator().next().getName());
+
 
 	}
 }

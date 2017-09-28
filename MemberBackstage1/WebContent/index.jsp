@@ -797,6 +797,7 @@
 
 
 
+
 													
 												</c:forEach>
 											</select> <input type="hidden" name="url" value="menu39"> <input
@@ -1187,6 +1188,11 @@
 										<%@ include file="/page/page6.file"%>
 
 									</table>
+
+									<form name="nameCheck"   ACTION="/AjaxServlet.do"  method=post>
+										<input type="hidden" name="action" value="nameCheck" />
+									</form>
+
 									<div class="changeMember" style="display: none;">
 										<hr>
 										<h4>
@@ -1223,9 +1229,8 @@
 															<td>用户昵称</td>
 															<td><input type="text" name="name"
 																required="required" placeholder="请输入用户昵称" maxlength='12'>
-																<input type="button" name="check" value="检查昵称"></td>
-
-
+																<input type="button" name="check" value="检查昵称"
+																onclick="javascript:document.nameCheck.submit()"></td>
 														</tr>
 														<tr>
 															<td>身分</td>
@@ -2664,6 +2669,7 @@
 		
 		
 		
+		
                 $(document).ready(function() {
                     $("#date-popover").popover({ html: true, trigger: "manual" });
                     $("#date-popover").hide();
@@ -2698,6 +2704,7 @@
                 }
                 
 
+	
 	
 	
 	</script>

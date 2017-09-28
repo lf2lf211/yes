@@ -72,4 +72,8 @@ public class MemberService {
 	public MemberVO CheckOneMemberVO(String mem_account) {
 		return dao.findByAC(mem_account);
 	}
+	public List<MemberVO> getAllName(String name){
+		return dao.getAllName(name);
+	}
+	
 }
