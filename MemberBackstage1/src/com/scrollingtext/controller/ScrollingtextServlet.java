@@ -50,9 +50,26 @@ public class ScrollingtextServlet extends HttpServlet {
 				System.out.println("GET scrollingtext ERROR CAUSE ::" + e.toString());
 			}
 		}
-
+		
+		
+		
+		if(action.equals("add")){
+			
+			try{
+				String scrollingText = request.getParameter("scrollingText");
+				String url = request.getParameter("url");
+				sql = "INSERT INTO  mari.scrollingtext  (textContent) VALUES("+scrollingText+")"; 
+				db.doSqlUpdate(sql);
+				response.sendRedirect("index.jsp#" + url);
+			} catch (Exception e) {
+				System.out.println("GET scrollingtext ERROR CAUSE ::" + e.toString());
+			}
+				
+		}
+		
+		
 		if (action.equals("updateScoll")) {
-			// 執行此程式將跑马灯捞出
+			
 			try {
 
 				String scrollingText = request.getParameter("scrollingText");
@@ -71,7 +88,33 @@ public class ScrollingtextServlet extends HttpServlet {
 			}
 		}
 
+		
+		if (action.equals("addScoll")) {
+			
+			try {
+
+				String scrollingText = request.getParameter("scrollingText");
+				String url = request.getParameter("url");
+				
+				
+				scrollingText = new String(scrollingText.getBytes("ISO-8859-1"), "UTF-8");
+				System.out.println(scrollingText);
+				sql = "INSERT INTO   mari.scrollingtext (textContent)  VALUES(" +scrollingText +")"; 
+				db.doSqlUpdate(sql);
+
+				response.sendRedirect("index.jsp#" + url);
+
+			} catch (Exception e) {
+				System.out.println("GET scrollingtext ERROR CAUSE ::" + e.toString());
+			}
+		}
+
 	}
+		
+		
+	
+	
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

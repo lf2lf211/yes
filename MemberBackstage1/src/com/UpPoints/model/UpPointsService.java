@@ -1,5 +1,6 @@
 package com.UpPoints.model;
 import java.util.List;
+import java.util.Map;
 
 
 
@@ -81,7 +82,9 @@ public class UpPointsService {
 		return dao.getAll_By_Down2(account,memberNo);
 	}
 	
-	
+	public List<UpPointsVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
+	}
 	
 	
 	

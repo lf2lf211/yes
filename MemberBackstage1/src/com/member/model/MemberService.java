@@ -1,6 +1,9 @@
 package com.member.model;
 
 import java.util.List;
+import java.util.Map;
+
+import com.UpPoints.model.UpPointsVO;
 
 public class MemberService {
 	private MemberDAO dao;
@@ -75,5 +78,7 @@ public class MemberService {
 	public List<MemberVO> getAllName(String name){
 		return dao.getAllName(name);
 	}
-	
+	public List<MemberVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
+	}
 }

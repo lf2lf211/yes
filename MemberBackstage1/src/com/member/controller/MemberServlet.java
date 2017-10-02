@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -67,6 +68,78 @@ public class MemberServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		String action = req.getParameter("action");
 
+		
+		if ("查詢3".equals(action)) { // 來自select_page.jsp的複合查詢請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			String url = req.getParameter("url");
+		
+			try {
+				
+				/***************************1.將輸入資料轉為Map**********************************/ 
+				//採用Map<String,String[]> getParameterMap()的方法 
+				//注意:an immutable java.util.Map 
+				//Map<String, String[]> map = req.getParameterMap();
+				Map<String, String[]> map = req.getParameterMap();
+				
+				/***************************2.開始複合查詢***************************************/
+				MemberService memberSvc =new MemberService();
+				List<MemberVO> list  = memberSvc.getAll(map);
+				
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				session.setAttribute("search", list); // 資料庫取出的list物件,存入request
+				res.sendRedirect("index.jsp#"+url);
+				return;	
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e) {
+				
+			}
+		}
+		
+		if ("查詢4".equals(action)) { // 來自select_page.jsp的複合查詢請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			String url = req.getParameter("url");
+		
+			try {
+				
+				/***************************1.將輸入資料轉為Map**********************************/ 
+				//採用Map<String,String[]> getParameterMap()的方法 
+				//注意:an immutable java.util.Map 
+				//Map<String, String[]> map = req.getParameterMap();
+				Map<String, String[]> map = req.getParameterMap();
+				
+				/***************************2.開始複合查詢***************************************/
+				MemberService memberSvc =new MemberService();
+				List<MemberVO> list  = memberSvc.getAll(map);
+				
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				session.setAttribute("search2", list); // 資料庫取出的list物件,存入request
+				res.sendRedirect("index.jsp#"+url);
+				return;	
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e) {
+				
+			}
+		}
+		
+		
+		if("link".equals(action)){
+			
+			String superior = req.getParameter("superior");
+			String link="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80c45f3549697bf9&redirect_uri=http%3a%2f%2fwww2.8d8dpay.com%2f8d8d%2fLoginServlet&response_type=code&scope=snsapi_userinfo&state="+superior+"#wechat_redirect";
+			String url = req.getParameter("url");
+			session.setAttribute("link", link);
+			res.sendRedirect("index.jsp#"+url);
+			return;
+		}
+		
 		if ("login".equals(action)) {
 			List<String> checkMsgs = new LinkedList<String>();
 			req.setAttribute("checkMsgs", checkMsgs);
@@ -167,12 +240,12 @@ public class MemberServlet extends HttpServlet {
 		///////////////////////////////// 存新增會員值
 		// 新增會員 代理
 		if ("memInsert".equals(action)) {
-
+			
 			String account;
 
 			String a = "1";
 			try {
-				String pathname = "D:\\don.txt"; // 绝对路径或相对路径都可以，这里是绝对路径，写入文件时演示相对路径
+				String pathname = "/var/lib/tomcat7/webapps/MemberBackstage/don.txt"; // 绝对路径或相对路径都可以，这里是绝对路径，写入文件时演示相对路径
 				File filename = new File(pathname); // 要读取以上路径的input。txt文件
 				InputStreamReader reader = new InputStreamReader(new FileInputStream(filename)); // 建立一个输入流对象reader
 				BufferedReader br = new BufferedReader(reader); // 建立一个对象，它把文件内容转成计算机能读懂的语言
@@ -182,7 +255,7 @@ public class MemberServlet extends HttpServlet {
 				intValue = intValue + 1;
 				a = String.valueOf(intValue);
 			} catch (Exception e) {
-				File writename = new File("D:\\don.txt"); // 相对路径，如果没有则要建立一个新的output。txt文件
+				File writename = new File("/var/lib/tomcat7/webapps/MemberBackstage/don.txt"); // 相对路径，如果没有则要建立一个新的output。txt文件
 				writename.createNewFile(); // 创建新文件
 				BufferedWriter out = new BufferedWriter(new FileWriter(writename));
 				out.write("1"); // \r\n即为换行
@@ -195,7 +268,7 @@ public class MemberServlet extends HttpServlet {
 
 			account = ("YB" + outString);
 
-			File writename = new File("D:\\don.txt"); // 相对路径，如果没有则要建立一个新的output。txt文件
+			File writename = new File("/var/lib/tomcat7/webapps/MemberBackstage/don.txt"); // 相对路径，如果没有则要建立一个新的output。txt文件
 			writename.createNewFile(); // 创建新文件
 			BufferedWriter out = new BufferedWriter(new FileWriter(writename));
 			out.write(a); // \r\n即为换行
@@ -215,12 +288,17 @@ public class MemberServlet extends HttpServlet {
 			String url = req.getParameter("url");
 			String superior = req.getParameter("superior") + account;
 			String superior2 = req.getParameter("superior2");
-			int comcommission = 0;
-
+			Integer commission = Integer.parseInt(req.getParameter("commission"));
+			
+			if("总代理".equals(level)){
+				commission=85;
+			}
+			
+	
 			MemberService memberService = new MemberService();
 
 			memberService.addMemberVO(account, password, name, balance, loginIP, loginTime, level, state, superior,
-					superior2, comcommission);
+					superior2, commission);
 
 			String acc = req.getParameter("acc");// 查看下線
 			List<MemberVO> list = memberService.getAllSuperior(memberService.CheckOneMemberVO(acc).getAccount());

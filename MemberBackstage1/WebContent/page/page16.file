@@ -1,0 +1,22 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>    
+<%if ( pageNumber8 > 1) {%>
+<center>
+<table border="0">   
+ <tr> 
+        <td>　　　　　　　　　　　　　　
+        </td> 
+   <FORM METHOD="post" ACTION="<%=request.getRequestURI()%>#menu8" style="display: inline;">   
+        <td>
+           <select size="1" class="btn btn-info" name="whichPage8">
+        <%for (int i8=1; i8<=pageNumber8; i8++){%>
+       
+           <option class="btn btn-info" value="<%=i8%>">跳至第<%=i8%>頁
+        <%}%> 
+           </select>
+           <input type="submit" class="btn btn-info" value="確定" >  
+        </td>
+   </FORM>
+ </tr>
+</table>
+</center>
+<%}%>

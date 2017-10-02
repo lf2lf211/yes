@@ -3,7 +3,9 @@ package com.UpPoints.controller;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -39,8 +41,68 @@ public class UpPointsServlet extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		HttpSession session = req.getSession();
 		String action = req.getParameter("action");
-	
-	
+		
+		if ("查詢".equals(action)) { // 來自select_page.jsp的複合查詢請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			String url = req.getParameter("url");
+			try {
+				
+				/***************************1.將輸入資料轉為Map**********************************/ 
+				//採用Map<String,String[]> getParameterMap()的方法 
+				//注意:an immutable java.util.Map 
+				//Map<String, String[]> map = req.getParameterMap();
+				Map<String, String[]> map = req.getParameterMap();
+				
+				
+				/***************************2.開始複合查詢***************************************/
+				UpPointsService upPointsSvc =new UpPointsService();
+				List<UpPointsVO> list  = upPointsSvc.getAll(map);
+				
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				session.setAttribute("list", list); // 資料庫取出的list物件,存入request
+				res.sendRedirect("index.jsp#"+url);
+				return;	
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e) {
+				
+			}
+		}
+				
+		
+		if ("查詢2".equals(action)) { // 來自select_page.jsp的複合查詢請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			String url = req.getParameter("url");
+			try {
+				
+				/***************************1.將輸入資料轉為Map**********************************/ 
+				//採用Map<String,String[]> getParameterMap()的方法 
+				//注意:an immutable java.util.Map 
+				//Map<String, String[]> map = req.getParameterMap();
+				Map<String, String[]> map = req.getParameterMap();
+				
+				
+				/***************************2.開始複合查詢***************************************/
+				UpPointsService upPointsSvc =new UpPointsService();
+				List<UpPointsVO> list  = upPointsSvc.getAll(map);
+				
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				session.setAttribute("list2", list); // 資料庫取出的list物件,存入request
+				res.sendRedirect("index.jsp#"+url);
+				return;	
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e) {
+				
+			}
+		}
+		
 		if("addUpPoints".equals(action)){
 			Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
 			
@@ -58,9 +120,12 @@ public class UpPointsServlet extends HttpServlet {
 			String loginIP = req.getParameter("loginIP");
 			String level = req.getParameter("level");
 			String url = req.getParameter("url");
-			String status = req.getParameter("status");
-			String time = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime());
+			String status;
+			String time =  new SimpleDateFormat("yyyy-MM-dd,HH:mm:ss").format(Calendar.getInstance().getTime());
 			String type = req.getParameter("type");
+			if(type.equals("上分")){
+				 status = "成功";
+			}else{ status = "未付款";}
 			MemberService member =new MemberService();
 			
 			String account = member.getOneMemberVO(memberNo).getSuperior2();
@@ -156,9 +221,19 @@ public class UpPointsServlet extends HttpServlet {
 		}	
 
 	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
-
+	
 
 
 //	public static void main(String[] args) {

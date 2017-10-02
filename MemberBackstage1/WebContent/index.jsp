@@ -7,6 +7,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.UpPoints.model.*"%>
 <%@ page import="com.member.model.*"%>
+<%@ page import="com.thirdpartypayment.model.*"%>
 <%@ page import="java.util.*"%>
 <jsp:useBean id="uppointsSvc" scope="page"
 	class="com.UpPoints.model.UpPointsService" />
@@ -14,8 +15,13 @@
 	class="com.member.model.MemberService" />
 <jsp:useBean id="list" scope="session" type="java.util.List" />
 <jsp:useBean id="list2" scope="session" type="java.util.List" />
-
-
+<jsp:useBean id="ttpSvc" scope="page"
+	class="com.thirdpartypayment.model.ThirdPartyPaymentSvc" />
+<%
+ThirdPartyPaymentSvc ThirdPartyPaymentSvc = new ThirdPartyPaymentSvc();
+    List<ThirdPartyPaymentVO> list3 = ThirdPartyPaymentSvc.getAll();
+    pageContext.setAttribute("list3",list3);
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -739,48 +745,26 @@
 										<legend>
 											<h3>【生成推广连结】</h3>
 										</legend>
-										<!--     <div class="div">
-                <table>
-                  <tbody><tr>
-                    <td style="text-align: right;width:30%;">前端客服欢迎语：</td>
-                    <td>
-                    <textarea cols="45" rows="10" placeholder="" name="welcome" style="height: 48px;"></textarea>
-                    <input type="hidden">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="text-align: right;">分享名片图标：</td>
-                    <td>
-                    <textarea cols="45" rows="10" placeholder="" id="img_14$text" name="sharelogo" style="height: 48px;"></textarea>
-                    <input type="hidden">
-                    <input type="file" id="upload_14" multiple="multiple" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" style="display: inline-block;">
-                      <input type="button" id="show" value="上传"></td>
-                  </tr>
-                  <tr>
-                    <td style="text-align: right;">分享名片欢迎语：</td>
-                    <td>
-                    <textarea cols="45" rows="10" placeholder="" name="desc" style="height: 48px;"></textarea>
-                    <input type="hidden">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">
-                    <div style="text-align:center;padding:10px;">
-                        <a class="mini-button" href="javascript:void(0)" style="width: 60px; margin-right: 20px;">
-                        <input type="button" id="show" value="保存">
-                        </a>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-                </table>
-              </div> -->
+										
+										
+										
+										
+				
 										<div style="text-align: center; padding: 10px;">
+										<form action="member.do" method="post">
 											<a class="mini-button" href="javascript:void(0)"
-												style="width: 60px; margin-right: 20px;"> <input
-												type="button" id="show" value="连结生成">
+												style="width: 60px; margin-right: 20px;"> 
+												<input type="submit" id="show" value="连结生成">
+												<input type="hidden" name="superior" value="${memberVO.account }">
+												<input type="hidden" name="url" value="menu4">
+												<input type="hidden" name="action" value="link">
 											</a>
+										</form>
+										<div >${link}</div><br>
 										</div>
+										
+									
+									
 									</fieldset>
 								</div>
 							</div>
@@ -926,44 +910,45 @@
 									</form>
 								</div>
 							</div>
-<!-- 							<div id="menu7" class="tab-pane fade"> -->
-<!-- 								<div class="model content-panel "> -->
-<!-- 									<h4> -->
-<!-- 										<i class="fa fa-angle-right"></i> 结算纪录 -->
-<!-- 									</h4> -->
-<!-- 									<table -->
-<!-- 										class="table table-bordered table-striped table-condensed"> -->
-<!-- 										<thead> -->
-<!-- 											<tr> -->
-<!-- 												<th></th> -->
-<!-- 												<th>用户类型</th> -->
-<!-- 												<th>用户编号</th> -->
-<!-- 												<th>用户暱称</th> -->
-<!-- 												<th>馀额</th> -->
-<!-- 												<th>状态</th> -->
-<!-- 												<th>登录IP</th> -->
-<!-- 												<th>登录时间</th> -->
-<!-- 												<th>创建时间</th> -->
-<!-- 												<th>操作</th> -->
-<!-- 											</tr> -->
-<!-- 										</thead> -->
-<!-- 										<tbody> -->
-<!-- 											<tr> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 												<td></td> -->
-<!-- 											</tr> -->
-<!-- 										</tbody> -->
-<!-- 									</table> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
+							
+							<div id="menu7" class="tab-pane fade">
+								<div class="model content-panel ">
+									<h4>
+										<i class="fa fa-angle-right"></i> 结算纪录
+									</h4>
+									<table
+										class="table table-bordered table-striped table-condensed">
+										<thead>
+											<tr>
+												<th></th>
+												<th>用户类型</th>
+												<th>用户编号</th>
+												<th>用户暱称</th>
+												<th>馀额</th>
+												<th>状态</th>
+												<th>登录IP</th>
+												<th>登录时间</th>
+												<th>创建时间</th>
+												<th>操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
 
 							<div id="menu8" class="tab-pane fade">
 								<div class="model content-panel ">
@@ -985,18 +970,22 @@
 											<div>
 												<h3><b>上分纪录</b></h3>
 											</div><br>
-											<div><span>用户编号:</span> <span> <input type="text"
-												placeholder="请输入用户编号" name="">
-											</span> <span>状态</span>
-										 <select class="newObj" name="newObj">
-											<option value="" disabled selected>状态</option>
-											<option value="成功">成功</option>
-											<option value="失敗">失敗</option>
-
-										</select> <span> 时间： <input type="text" class="datepicker">
-										</span> <span> 至 <input type="text" class="datepicker">
-										</span> <span> <input type="button" name="" value="查询">
-										</span></div><br>
+											<form action="UpPointsServlet.do" method="post">
+												<div><span>用户编号:</span> <span> <input type="text"
+												placeholder="请输入用户编号" name="memberNo">
+												</span> <span>状态</span>
+												 <select class="newObj" name="status">
+												 	<option value="">請選擇</option>
+													<option value="成功">成功</option>
+													<option value="失敗">失敗</option>
+													<option value="未付款">未付款</option>
+												</select> <span> 时间： <input type="text" class="datepicker" name="time">
+												</span> <span> 至 <input type="text" class="datepicker" name="time2">
+												</span> <span><input type="hidden" name="url" value="menu8">
+												<input type="hidden" name="action" value="查詢"> 
+												<input type="hidden" name="type" value="上分">
+												<input type="submit" name="" value="查询">
+										</span></div><br></form>
 
 										<table
 										class="table table-bordered table-striped table-condensed">
@@ -1051,26 +1040,26 @@
 										</c:forEach>
 											<%@ include file="/page/page8.file" %> 
 									</table>
-
-										<hr><div>
-												<div><h3><b>下分纪录</b></h3></div>
+									</div>
+										<hr>
+										<div>
+												<div><h3><b>下分纪录</b></h3><br>
+												<form action="UpPointsServlet.do" method="post">
 												<div><span>用户编号:</span> <span> <input type="text"
-												placeholder="请输入用户编号" name="">
-												</span> <span>方式</span> <select class="newObj" name="newObj">
-													<option value="" disabled selected>支付方式</option>									
-													<option value="微信">微信</option>
-													<option value="支付宝">支付宝</option>
-													<option value="银行卡">银行卡</option>
-													<option value="QQ钱包">QQ钱包</option>
-												</select> <select class="newObj" name="newObj">
-													<option value="" disabled selected>状态</option>
+												placeholder="请输入用户编号" name="memberNo">
+												</span> <span>状态</span>
+												 <select class="newObj" name="status">
+												 	<option value="">請選擇</option>
 													<option value="成功">成功</option>
 													<option value="失敗">失敗</option>
-		
-												</select> <span> 时间： <input type="text" class="datepicker">
-												</span> <span> 至 <input type="text" class="datepicker">
-												</span> <span> <input type="button" name="" value="查询">
-												</span></div><br>
+													<option value="未付款">未付款</option>
+												</select> <span> 时间： <input type="text" class="datepicker" name="time">
+												</span> <span> 至 <input type="text" class="datepicker" name="time2">
+												</span> <span><input type="hidden" name="url" value="menu8">
+												<input type="hidden" name="action" value="查詢2"> 
+												<input type="hidden" name="type" value="下分">
+												<input type="submit" name="" value="查询">
+										</span></div><br></form></div><br>
 		
 		
 		
@@ -1092,7 +1081,7 @@
 													</tr>
 												</thead>
 												<%@ include file="/page/page9.file" %> 
-												<c:forEach var="uppoints" items="${list2}">
+												<c:forEach var="uppoints" items="${list2}" begin="<%=pageIndex5%>" end="<%=pageIndex4+rowsPerPage5-1%>">
 													<c:if test="${uppoints.account==memberVO.account||uppoints.memberNo==memberVO.memberNo}">
 											
 												<form action="UpPointsServlet.do" method="post">
@@ -1123,18 +1112,111 @@
 												<%@ include file="/page/page10.file" %> 
 											</table>
 											</div>
-										<hr><div><%@include file="/transactionRecord3.jsp"%> </div>
+										<hr>
+										<div><div><h3><b>第三方交易</b></h3></div>
+										<div><span>用户编号:</span> <span> <input type="text"
+											placeholder="请输入用户编号" name="">
+										</span> <span>方式</span> <select class="newObj" name="newObj">
+											<option value="" disabled selected>支付方式</option>									
+											<option value="微信">微信</option>
+											<option value="支付宝">支付宝</option>
+											<option value="银行卡">银行卡</option>
+											<option value="QQ钱包">QQ钱包</option>
+										</select> <select class="newObj" name="newObj">
+											<option value="" disabled selected>状态</option>
+											<option value="成功">成功</option>
+											<option value="失敗">失敗</option>
+
+										</select> <span> 时间： <input type="text" class="datepicker">
+										</span> <span> 至 <input type="text" class="datepicker">
+										</span> <span> <input type="button" name="" value="查询">
+										</span></div><br>
+										<table
+										class="table table-bordered table-striped table-condensed">
+										<thead>
+											<tr>
+												<th rowspan="2"></th>	
+												<th rowspan="2">订单编号</th>
+												<th rowspan="2">用户暱称</th>
+												<th rowspan="2">登录IP</th>
+												<th rowspan="2">交易号</th>
+												<th rowspan="2">进款</th>
+												<th rowspan="2">出款</th>
+												<th rowspan="2">馀额</th>
+												<th rowspan="2">状态</th>
+												<th rowspan="2">支付方式</th>
+<!-- 												<th rowspan="2">描述</th> -->
+<!-- 												<th rowspan="2">操作人</th> -->
+<!-- 												<th rowspan="2">修改时间</th> -->
+												<th rowspan="2">申请时间</th>
+											</tr>
+<!-- 											<tr> -->
+<!-- 												<th>支付方式</th> -->
+<!-- 												<th>支付标题</th> -->
+<!-- 												<th>支付名称</th> -->
+<!-- 												<th>支付帐号</th> -->
+<!-- 											</tr> -->
+										</thead>
+										<%@ include file="/page/page11.file" %> 
+										<c:forEach var="tppSvc" items="${list3}" begin="<%=pageIndex6%>" end="<%=pageIndex6+rowsPerPage6-1%>" >
+										<tbody>
+											<tr>
+												<td></td>
+												<td>${tppSvc.orderNo}</td>
+												
+												<td>${tppSvc.name}</td>
+												<td>${tppSvc.loginIP }</td>
+												<td>交易号</td>
+												<td>进款</td>
+												<td>出款</td>
+												<td>${tppSvc.balance }</td>
+												<td>${tppSvc.state}</td>
+												<td>${tppSvc.payType}</td>
+												<td>${tppSvc.requestTime}</td>
+												<td>${tppSvc.responseTime}</td>
+											
+											</tr>
+										</tbody>
+											</c:forEach>
+											<%@ include file="/page/page12.file" %> 
+									</table></div>
 									</div>
 									
 								</div>
 							</div>
-							</div>
+							
 							<!-- =========================层级===================================== -->
 							<div id="menu9" class="tab-pane fade">
 								<div class="model content-panel ">
 									<h4>
 										<i class="fa fa-angle-right"></i> 代理层级
 									</h4>
+									
+									<div><br>
+												<form action="member.do" method="post">
+												<div><span>用户编号:</span> <span> <input type="text"
+												placeholder="请输入用户编号" name="memberNo">
+												</span>
+												<span>用户帳號:</span> <span> <input type="text"
+												placeholder="请输入用户帐号" name="account">
+												</span>
+												 <span>状态</span>
+												 <select class="newObj" name="state">
+												 	<option value="">請選擇</option>
+													<option value="启用">启用</option>
+													<option value="停权">停权</option>
+												</select> <span> 身分: <select class="newObj" name="level">
+												 	<option value="">請選擇</option>
+													<option value="总代理">总代理</option>
+													<option value="代理">代理</option>
+												</select>
+												</span> <span>
+												<input type="hidden" name="superior" value="${memberVO.account }">
+												<input type="hidden" name="url" value="menu9">
+												<input type="hidden" name="action" value="查詢3"> 
+												<input type="submit" name="" value="查询">
+										</span></div><br></form></div><br>
+									
 									<table
 										class="table table-bordered table-striped table-condensed">
 										<thead>
@@ -1235,6 +1317,31 @@
 								<h4>
 										<i class="fa fa-angle-right"></i> 会员管理
 									</h4>
+									
+									<div><br>
+												<form action="member.do" method="post">
+												<div><span>用户编号:</span> <span> <input type="text"
+												placeholder="请输入用户编号" name="memberNo">
+												</span>
+												<span>用户帳號:</span> <span> <input type="text"
+												placeholder="请输入用户帐号" name="account">
+												</span>
+												 <span>状态</span>
+												 <select class="newObj" name="state">
+												 	<option value="">請選擇</option>
+													<option value="启用">启用</option>
+													<option value="停权">停权</option>
+												</select> <span> 身分: <select class="newObj" name="level">
+												 	<option value="">請選擇</option>
+													<option value="总代理">总代理</option>
+													<option value="代理">代理</option>
+												</select>
+												</span> <span>
+												<input type="hidden" name="superior2" value="${memberVO.account }">
+												<input type="hidden" name="url" value="menu11">
+												<input type="hidden" name="action" value="查詢4"> 
+												<input type="submit" name="" value="查询">
+										</span></div><br></form></div><br>
 									<table
 										class="table table-bordered table-striped table-condensed">
 										<thead>
@@ -1276,180 +1383,188 @@
 													<td><input type="submit"
 														class="btn btn-warning change_Btn" value='修改'>
 														
-														<form action="member.do" method="Post"
-															style='display: inline-block'>
-															<input type="hidden" name='memberNo'
-																value="${member.memberNo}">
-																<input type="hidden" name='memberVONo'
-																value="${memberVO.account}"> <input type="hidden"
-																name='action' value="enableMember"> <input
-																type="hidden" name='state' value="启用"> <input
-																type="hidden" name='url' value="menu11"> <input
-																type="submit" class="nobtn btn btn-primary btn-sm"
-																value='复权'>
-														</form>
-														<form action="member.do" method="Post"
-															style='display: inline-block'>
-															<input type="hidden" name='memberNo' value="${member.memberNo}"> 
-																<input type="hidden" name='memberVONo'
-																value="${memberVO.account}">
-																<input type="hidden" name='action' value="disableMember"> 
-																<input type="hidden" name='state' value="停用"> 
-																<input type="hidden" name='url' value="menu11"> 
-																<input type="submit" class="yesbtn btn btn-primary btn-sm"
-																value='停权'>
-														</form></td>
-												</tr>
-											</tbody>
-
-										</c:forEach>
-						<%@ include file="/page/page6.file" %> 
+													  <form action="member.do" method="Post" style='display: inline-block'>
+											               <input type="hidden" name='memberNo'
+											                value="${member.memberNo}"> <input type="hidden"
+											                name='memberVONo' value="${memberVO.account}"> <input
+											                type="hidden" name='action' value="changeState">
+											               <input type="hidden" name='state' value="${member.state}">
+											               <input type="hidden" name='url' value="menu11">
+											               <c:if test="${member.state==\"停用\"}">
+											                	<input type="submit"
+											                 	class="nobtn btn btn-primary btn-sm" value='复权'>
+											               </c:if>
+											               <c:if test="${member.state==\"启用\"}">
+											                	<input type="submit"
+											                 	class="nobtn btn btn-primary btn-sm" value='停权'>
+											               </c:if>
+										              </form>
+										              </td>
+										            </tr>
+										           </tbody>
+										
+										          </c:forEach>
+										          <%@ include file="/page/page6.file"%>
 									
 
 									</table>
 
 
-									<form name="nameCheck"   ACTION="/AjaxServlet.do"  method=post>
-										<input type="hidden" name="action" value="nameCheck" />
-									</form>
 
-									<div class="changeMember" style="display: none;">
-										<hr>
-										<h4>
-											<i class="fa fa-angle-right"></i> 修改会员
-										</h4>
-										<div class="container" style="max-width: 400px;">
-											<form action="member.do" method="post">
-												<table
-													class="table table-bordered table-striped table-condensed">
-													<thead>
-														<tr>
-															<th></th>
-															<th></th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>用户编号</td>
-															<td><input type="text" name="memberNo"
-																readonly="readonly" class='memberNo'></td>
-														</tr>
-														<tr>
-															<td>用户账户</td>
-															<td><input type="text" name="account"
-																readonly="readonly" class='account'></td>
-														</tr>
-														<tr>
-
-															<td>用户密码</td>
-															<td><input type="text" name="password"
-																placeholder="请输入密码" required pattern="[A-Za-z0-9]{3,12}"
-																maxlength='12' title='由英文或数字所组成的3~12字元'></td>
-														</tr>
-														<tr>
-															<td>用户昵称</td>
-															<td><input type="text" name="name"
-																required="required" placeholder="请输入用户昵称" maxlength='12'>
-																<input type="button" name="check" value="检查昵称"
-																onclick="javascript:document.nameCheck.submit()"></td>
-														</tr>
-														<tr>
-															<td>身分</td>
-															<c:if test="${type.contains(\"1\") }">
-																<td><select name="level">
-																		<option value="总代理">总代理</option>
-																		<option value="代理">代理</option>
-																</select></td>
-															</c:if>
-															<c:if
-																test="${type.contains(\"2\")||type.contains(\"3\") }">
-																<td><select name="level">
-																		<option value="代理">代理</option>
-																</select></td>
-															</c:if>
-														</tr>
-														<tr>
-															<td>
-															<input type="hidden" name="url" value="menu11">
-																<input type="hidden" name='memberNo' value="${member.memberNo}"> 
-																<input type="hidden" name="memberVONo" value="${memberVO.account}">
-																<input type="hidden" name="action" value="memberUpdate">
-															</td>
-
-															<td><input type="submit" name="" value="送出"></td>
-														</tr>
-													</tbody>
-												</table>
-											</form>
-										</div>
-									</div>
-									<hr>
-									<h4>
-										<i class="fa fa-angle-right"></i> 新增会员
-									</h4>
-									<div class="container" style="max-width: 400px;`">
-										<form action="member.do" method="post">
-											<table
-												class="table table-bordered table-striped table-condensed">
-												<thead>
-													<tr>
-														<th></th>
-														<th></th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>账户</td>
-														<td>帐号系统会自行产生</td>
-													</tr>
-													<tr>
-														<td>密码</td>
-														<td><input type="password" name="password"
-															placeholder="请输入密码" required pattern="[A-Za-z0-9]{3,12}"
-															maxlength='12' title='由英文或数字所组成的3~12字元'></td>
-
-													</tr>
-													<tr>
-														<td>名称</td>
-														<td><input type="text" name="name"
-															required="required" placeholder="请输入用户昵称" maxlength='12'>
-															<input type="button" name="check" value="检查昵称"></td>
-													</tr>
-													<tr>
-														<td>权限</td>
-														<c:if test="${type.contains(\"1\") }">
-															<td><select name="level">
-																	<option value="总代理">总代理</option>
-																	<option value="代理">代理</option>
-															</select></td>
-														</c:if>
-														<c:if
-															test="${type.contains(\"2\")||type.contains(\"3\") }">
-															<td><select name="level">
-
-																	<option value="代理">代理</option>
-															</select></td>
-														</c:if>
-													</tr>
-													<tr>
-														<td><input
-															type="hidden" name="superior"
-															value="${memberVO.superior},">
-															<input type="hidden" name="superior2"
-															value="${memberVO.account}"> <input
-															type="hidden" name="acc" value="${memberVO.account}">
-															<input type="hidden" name="action" value="memInsert">
-															<input type="hidden" name="url" value="menu11">
-														</td>
-														<td><input type="submit" name="" value="新增">
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</form>
-									</div>
-								</div>
-							</div>
+									  <!-- Ajax Check name -->
+			         <form name="nameCheck" ACTION="ajaxservlet.do" method=post>
+			
+			        	 <input type="hidden" name="action" value="nameCheck" />
+			         </form>
+			
+			         <div class="changeMember" style="display: none;">
+			         <hr>
+			          	<h4>
+			           		<i class="fa fa-angle-right"></i> 修改会员
+			         	</h4>
+			          	<div class="container" style="max-width: 400px;">
+			           		<form action="member.do" method="post">
+					            <table
+					             class="table table-bordered table-striped table-condensed">
+						             <thead>
+						              <tr>
+						               <th></th>
+						               <th></th>
+						              </tr>
+						             </thead>
+						             <tbody>
+						              <tr>
+						               <td>用户编号</td>
+						               <td><input type="text" name="memberNo"
+						                readonly="readonly" class='memberNo'></td>
+						              </tr>
+						              <tr>
+						               <td>用户账户</td>
+						               <td><input type="text" name="account"
+						                readonly="readonly" class='account'></td>
+						              </tr>
+						              <!--  
+						              <tr>
+						
+						               <td>用户密码</td>
+						               <td><input type="text" name="password"
+						                placeholder="请输入密码" required pattern="[A-Za-z0-9]{3,12}"
+						                maxlength='12' title='由英文或数字所组成的3~12字元'></td>
+						              </tr>
+						              <tr>
+						               <td>用户昵称</td>
+						               <td><input type="text" name="name"
+						                required="required" placeholder="请输入用户昵称" maxlength='12'>
+						                <input type="button" id="checkAjax" name="check"
+						                value="检查昵称"
+						                onclick="javascript:document.nameCheck.submit()"></td>
+						              </tr>
+						              <tr>
+						               <td>身分</td>
+						               <c:if test="${type.contains(\"1\") }">
+						                <td><select name="level">
+						                  <option value="总代理">总代理</option>
+						                  <option value="代理">代理</option>
+						                </select></td>
+						               </c:if>
+						               <c:if
+						                test="${type.contains(\"2\")||type.contains(\"3\") }">
+						                <td><select name="level">
+						                  <option value="代理">代理</option>
+						                </select></td>
+						               </c:if>
+						              </tr>
+						              -->
+						
+						              <!--  抓值 select的value  判斷是否是代理 若是 show出input欄位 輸入費率 -->
+						              <tr>
+						               <td>费率</td>
+						               <td><input type="text" name="commission"></td>
+						              </tr>
+						
+						              <tr>
+						               <td><input type="hidden" name="url" value="menu11">
+						                <input type="hidden" name='memberNo'
+						                value="${member.memberNo}"> <input type="hidden"
+						                name="memberVONo" value="${memberVO.account}"> <input
+						                type="hidden" name="action" value="memberUpdate">
+						               </td>
+						
+						               <td><input type="submit" name="" value="送出"></td>
+						              </tr>
+						             </tbody>
+						            </table>
+						           </form>
+						          </div>
+						         </div>
+						         <hr>
+						         <h4>
+						          	<i class="fa fa-angle-right"></i> 新增会员
+						         </h4>
+						         <div class="container" style="max-width: 400px;`">
+						          <form action="member.do" method="post">
+						           <table
+						            class="table table-bordered table-striped table-condensed">
+						            <thead>
+						             <tr>
+						              <th></th>
+						              <th></th>
+						             </tr>
+						            </thead>
+						            <tbody>
+						             <tr>
+						              <td>账户</td>
+						              <td>帐号系统会自行产生</td>
+						             </tr>
+						             <tr>
+						              <td>密码</td>
+						              <td><input type="password" name="password"
+						               placeholder="请输入密码" required pattern="[A-Za-z0-9]{3,12}"
+						               maxlength='12' title='由英文或数字所组成的3~12字元'></td>
+						             </tr>
+						             <tr>
+						              <td>名称</td>
+						              <td><input type="text" name="name"
+						               required="required" placeholder="请输入用户昵称" maxlength='12'>
+						              </td>
+						             </tr>
+						             <tr>
+						              <td>权限</td>
+						              <c:if test="${type.contains(\"1\") }">
+						               <td><select name="level">
+						                 <option value="总代理">总代理</option>
+						                 <option value="代理">代理</option>
+						               </select></td>
+						              </c:if>
+						              <c:if
+						               test="${type.contains(\"2\")||type.contains(\"3\") }">
+						               <td><select name="level">
+						                 <option value="代理">代理</option>
+						               </select></td>
+						              </c:if>
+						             </tr>
+						             <tr>
+						              <!--  抓值 select的value  判斷是否是代理 若是 show出input欄位 輸入費率 -->
+						              <td>费率</td>
+						              <td><input type="text" name="commission"></td>
+						             </tr>
+						             <tr>
+						              <td><input type="hidden" name="superior"
+						               value="${memberVO.superior},"> <input
+						               type="hidden" name="superior2"
+						               value="${memberVO.account}"> <input type="hidden"
+						               name="acc" value="${memberVO.account}"> <input
+						               type="hidden" name="action" value="memInsert"> <input
+						               type="hidden" name="url" value="menu11"></td>
+						              <td><input type="submit" name="" value="新增">
+						              </td>
+						             </tr>
+						            </tbody>
+					           </table>
+			          </form>
+			         </div>
+			        </div>
+			       </div>
 							<!-- =========================else=============================== -->
 <!-- 							<div id="menu12" class="tab-pane fade"> -->
 <!-- 								<div class="model content-panel "> -->
@@ -1641,17 +1756,19 @@
 										<thead>
 											<tr>
 												<th></th>
-												<th>内容</th>
+												<th >内容</th>
 <!-- 												<th>修改时间</th> -->
 												<th>操作</th>
 											</tr>
 										</thead>
 										
 										<tbody>
+											
+											
 											<tr>
 												<form action="scrollingtext.do" method='get'>
 													<td></td>
-													<td><textarea class="Marquee" cols="100" rows="3"
+													<td ><textarea class="Marquee" cols="50" rows="5"
 														id="scrollingtext"	name='scrollingText'>${scrollingText}</textarea></td>
 <%-- 													<td>${updateTime}</td> --%>
 													<td><input type="hidden" name='action'value='updateScoll'>
@@ -1709,7 +1826,6 @@
 							<!-- ==================================帐务=================================== -->
 							<div id="menu18" class="tab-pane fade">
 								<div class="model content-panel ">
-									<div>
 										<div class="col-xs-12 col-sm-6">
 											<h4 style="display: inline-block;">
 												<i class="fa fa-angle-right"></i> 营收报表
@@ -1721,22 +1837,223 @@
 											</div>
 										</div>
 									
-										<div class="col-xs-12 col-sm-6">
+									<div class="col-xs-12 col-sm-6">
 										
-										</div>
-										<div>
-									
-									
-<%-- 										<div><%@include file="/transactionRecord4.jsp"%> </div> --%>
-<!-- 										<hr> -->
-<%-- 										<div><%@include file="/transactionRecord5.jsp"%> </div> --%>
-<%-- 										<hr><div><%@include file="/transactionRecord6.jsp"%> </div> --%>
-									
-									
-										</div>
-									
 									</div>
-								</div>	
+									<div>
+										<div>
+											<div>
+												<h3><b>上分纪录</b></h3>
+											</div><br>
+											<div><span>用户编号:</span> <span> <input type="text"
+												placeholder="请输入用户编号" name="">
+											</span> <span>状态</span>
+										 <select class="newObj" name="newObj">
+											<option value="" disabled selected>状态</option>
+											<option value="成功">成功</option>
+											<option value="失敗">失敗</option>
+
+										</select> <span> 时间： <input type="text" class="datepicker">
+										</span> <span> 至 <input type="text" class="datepicker">
+										</span> <span> <input type="button" name="" value="查询">
+										</span></div><br>
+
+										<table
+										class="table table-bordered table-striped table-condensed">
+										<thead>
+											<tr>
+												<th></th>
+												<th rowspan="2">申请编号</th>
+												<th rowspan="2">用户编号</th>
+												
+												<th rowspan="2">用户暱称</th>
+												<th rowspan="2">类型</th>
+												<th rowspan="2">登录IP</th>
+												<th rowspan="2">分数</th>
+												<th rowspan="2">状态</th>
+												<th rowspan="2">申请时间</th>
+												<th rowspan="2">类别</th>
+												<th rowspan="2">更新状态</th>
+												<th rowspan="2">操作</th>
+											</tr>
+										</thead>
+											<%@ include file="/page/page13.file" %> 
+										<c:forEach var="uppoints" items="${list}" begin="<%=pageIndex4%>" end="<%=pageIndex4+rowsPerPage4-1%>">
+
+									
+										<form action="UpPointsServlet.do" method="post">
+										<tbody align="center">
+											<tr><td></td>
+												<td>${uppoints.addPointsNo}</td>
+												<td>${uppoints.memberNo }</td>
+												
+												<td>${uppoints.name }</td>
+												<td>${uppoints.level }</td>
+												<td>${uppoints.loginIP }</td>
+												<td>${uppoints.points }</td>
+												<td>${uppoints.status }</td>
+												<td>${uppoints.time }</td>
+												<td>${uppoints.type }</td>
+												<td><select name="status">
+														<option value="成功"> 成功</option>
+														<option value="未付款"> 未付款</option>
+														<option value="失败"> 失败</option>
+													</select></td>
+												<td><input type="submit">
+												<input type="hidden" name="action" value="updateStatus" >
+												<input type="hidden" name="memberNo" value="${memberVO.memberNo }" >
+												<input type="hidden" name="addPointsNo" value="${uppoints.addPointsNo}" ></td>
+											</tr>
+										</tbody>
+										</form>
+											
+									
+										</c:forEach>
+											<%@ include file="/page/page14.file" %> 
+									</table>
+
+										<hr><div>
+												<div><h3><b>下分纪录</b></h3></div>
+												<div><span>用户编号:</span> <span> <input type="text"
+												placeholder="请输入用户编号" name="">
+												</span> <span>方式</span> <select class="newObj" name="newObj">
+													<option value="" disabled selected>支付方式</option>									
+													<option value="微信">微信</option>
+													<option value="支付宝">支付宝</option>
+													<option value="银行卡">银行卡</option>
+													<option value="QQ钱包">QQ钱包</option>
+												</select> <select class="newObj" name="newObj">
+													<option value="" disabled selected>状态</option>
+													<option value="成功">成功</option>
+													<option value="失敗">失敗</option>
+		
+												</select> <span> 时间： <input type="text" class="datepicker">
+												</span> <span> 至 <input type="text" class="datepicker">
+												</span> <span> <input type="button" name="" value="查询">
+												</span></div><br>
+		
+		
+		
+												<table
+												class="table table-bordered table-striped table-condensed">
+												<thead>
+													<tr>
+														<th></th>
+														<th rowspan="2">用户编号</th>
+														<th rowspan="2">用户暱称</th>
+														<th rowspan="2">类型</th>
+														<th rowspan="2">登录IP</th>
+														<th rowspan="2">分数</th>
+														<th rowspan="2">状态</th>
+														<th rowspan="2">申请时间</th>
+														<th rowspan="2">类别</th>
+														<th rowspan="2">更新状态</th>
+														<th rowspan="2">操作</th>
+													</tr>
+												</thead>
+												<%@ include file="/page/page15.file" %> 
+												<c:forEach var="uppoints" items="${list2}" begin="<%=pageIndex5%>" end="<%=pageIndex4+rowsPerPage5-1%>">
+													<c:if test="${uppoints.account==memberVO.account||uppoints.memberNo==memberVO.memberNo}">
+											
+												<form action="UpPointsServlet.do" method="post">
+												<tbody align="center">
+													<tr><td></td>
+														<td>${uppoints.memberNo }</td>
+														<td>${uppoints.name }</td>
+														<td>${uppoints.level }</td>
+														<td>${uppoints.loginIP }</td>
+														<td>${uppoints.points }</td>
+														<td>${uppoints.status }</td>
+														<td>${uppoints.time }</td>
+														<td>${uppoints.type }</td>
+														<td><select name="status">
+																<option value="成功"> 成功</option>
+																<option value="未付款"> 未付款</option>
+																<option value="失败"> 失败</option>
+															</select></td>
+														<td><input type="submit">
+														<input type="hidden" name="action" value="updateStatus" >
+														<input type="hidden" name="memberNo" value="${memberVO.memberNo }" >
+														<input type="hidden" name="addPointsNo" value="${uppoints.addPointsNo}" ></td>
+													</tr>
+												</tbody>
+												</form>
+												</c:if>
+												</c:forEach>
+												<%@ include file="/page/page16.file" %> 
+											</table>
+											</div>
+										<hr>
+										<div><div><h3><b>第三方交易</b></h3></div>
+										<div><span>用户编号:</span> <span> <input type="text"
+											placeholder="请输入用户编号" name="">
+										</span> <span>方式</span> <select class="newObj" name="newObj">
+											<option value="" disabled selected>支付方式</option>									
+											<option value="微信">微信</option>
+											<option value="支付宝">支付宝</option>
+											<option value="银行卡">银行卡</option>
+											<option value="QQ钱包">QQ钱包</option>
+										</select> <select class="newObj" name="newObj">
+											<option value="" disabled selected>状态</option>
+											<option value="成功">成功</option>
+											<option value="失敗">失敗</option>
+
+										</select> <span> 时间： <input type="text" class="datepicker">
+										</span> <span> 至 <input type="text" class="datepicker">
+										</span> <span> <input type="button" name="" value="查询">
+										</span></div><br>
+										<table
+										class="table table-bordered table-striped table-condensed">
+										<thead>
+											<tr>
+												<th rowspan="2"></th>	
+												<th rowspan="2">订单编号</th>
+												<th rowspan="2">用户暱称</th>
+												<th rowspan="2">登录IP</th>
+												<th rowspan="2">交易号</th>
+												<th rowspan="2">进款</th>
+												<th rowspan="2">出款</th>
+												<th rowspan="2">馀额</th>
+												<th rowspan="2">状态</th>
+												<th rowspan="2">支付方式</th>
+<!-- 												<th rowspan="2">描述</th> -->
+<!-- 												<th rowspan="2">操作人</th> -->
+<!-- 												<th rowspan="2">修改时间</th> -->
+												<th rowspan="2">申请时间</th>
+											</tr>
+<!-- 											<tr> -->
+<!-- 												<th>支付方式</th> -->
+<!-- 												<th>支付标题</th> -->
+<!-- 												<th>支付名称</th> -->
+<!-- 												<th>支付帐号</th> -->
+<!-- 											</tr> -->
+										</thead>
+										<%@ include file="/page/page17.file" %> 
+										<c:forEach var="tppSvc" items="${list3}" begin="<%=pageIndex6%>" end="<%=pageIndex6+rowsPerPage6-1%>" >
+										<tbody>
+											<tr>
+												<td></td>
+												<td>${tppSvc.orderNo}</td>
+												
+												<td>${tppSvc.name}</td>
+												<td>${tppSvc.loginIP }</td>
+												<td>交易号</td>
+												<td>进款</td>
+												<td>出款</td>
+												<td>${tppSvc.balance }</td>
+												<td>${tppSvc.state}</td>
+												<td>${tppSvc.payType}</td>
+												<td>${tppSvc.requestTime}</td>
+												<td>${tppSvc.responseTime}</td>
+											
+											</tr>
+										</tbody>
+											</c:forEach>
+											<%@ include file="/page/page18.file" %> 
+									</table></div>
+									</div>
+								</div>
+							</div>	
 							</div>
 							
 							<div id="menu19" class="tab-pane fade">
@@ -2340,174 +2657,189 @@
 													<td class='level'>${member.level}</td>
 													<td>${member.state }</td>
 													<td>${member.superior}</td>
-
-													<td><input type="submit"
-														class="btn btn-warning change_Btn" value='修改'>
-														<form action="member.do" method="Post"
-															style='display: inline-block'>
-															<input type="hidden" name='memberNo'
-																value="${member.memberNo}">
-																<input type="hidden" name='memberVONo'
-																value="${memberVO.account}"> <input type="hidden"
-																name='action' value="enableMember"> <input
-																type="hidden" name='state' value="启用"> <input
-																type="hidden" name='url' value="menu29"> <input
-																type="submit" class="nobtn btn btn-primary btn-sm"
-																value='复权'>
-														</form>
-														<form action="member.do" method="Post"
-															style='display: inline-block'>
-															<input type="hidden" name='memberNo' value="${member.memberNo}"> 
-																<input type="hidden" name='memberVONo'
-																value="${memberVO.account}">
-																<input type="hidden" name='action' value="disableMember"> 
-																<input type="hidden" name='state' value="停用"> 
-																<input type="hidden" name='url' value="menu29"> 
-																<input type="submit" class="yesbtn btn btn-primary btn-sm"
-																value='停权'>
-														</form></td>
-												</tr>
-											</tbody>
-
-										</c:forEach>
-										<%@include file="/page/page2.file"%> 
+							     <!--  
+							              <td><input type="submit"
+							               class="btn btn-warning change_Btn" value='修改'>
+							               <form action="member.do" method="Post" style='display: inline-block'>
+							                <input type="hidden" name='memberNo' value="${member.memberNo}"> 
+							                <input type="hidden" name='memberVONo' value="${memberVO.account}"> 
+							                <input type="hidden" name='action' value="enableMember">
+							                <input type="hidden" name='state' value="启用"> 
+							                <input type="hidden" name='url' value="menu29">
+							                <input type="submit" class="nobtn btn btn-primary btn-sm" value='复权'>
+							               </form>
+							               <form action="member.do" method="Post"
+							                style='display: inline-block'>
+							                <input type="hidden" name='memberNo'
+							                 value="${member.memberNo}"> <input
+							                 type="hidden" name='memberVONo'
+							                 value="${memberVO.account}"> 
+							                <input type="hidden" name='action' value="disableMember">
+							                <input type="hidden" name='state' value="停用"> 
+							                <input type="hidden" name='url' value="menu29">
+							                <input type="submit" class="yesbtn btn btn-primary btn-sm" value='停权'>
+							               </form></td>
+							-->
+							
+							              <td><input type="submit"
+							               		class="btn btn-warning change_Btn" value='修改'>
+							
+							               		<form action="member.do" method="Post"
+									                style='display: inline-block'>
+									                <input type="hidden" name='memberNo'
+									                 value="${member.memberNo}"> <input
+									                 type="hidden" name='memberVONo'
+									                 value="${memberVO.account}"> <input
+									                 type="hidden" name='action' value="changeState">
+									                <input type="hidden" name='state'
+									                 value="${member.state}"> <input type="hidden"
+									                 name='url' value="menu29">
+									                <c:if test="${member.state==\"停用\"}">
+									                 <input type="submit"
+									                  class="nobtn btn btn-primary btn-sm" value='复权'>
+									                </c:if>
+									                <c:if test="${member.state==\"启用\"}">
+									                 <input type="submit"
+									                  class="nobtn btn btn-primary btn-sm" value='停权'>
+									                </c:if>
+									            </form>
+									         </td>
+							             </tr>
+							            </tbody>
+							           </c:forEach>
+							           <%@include file="/page/page2.file"%>
 							
 									</table>
-									
-									<div class="changeMember" style="display: none;">
 
-										<hr>
-										<h4>
-											<i class="fa fa-angle-right"></i> 修改会员
-										</h4>
-										<div class="container" style="max-width: 400px;">
-											<form action="member.do" method="post">
-												<table
-													class="table table-bordered table-striped table-condensed">
-													<thead>
-														<tr>
-															<th></th>
-															<th></th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>用户编号</td>
-															<td><input type="text" name="memberNo"
-																readonly="readonly" class='memberNo'></td>
-														</tr>
-														<tr>
-
-															<td>用户账户</td>
-															<td><input type="text" name="account"
-																readonly="readonly" class='account'></td>
-
-															<td>密码</td>
-															<td><input type="password" name="password"
-																placeholder="请输入密码" required pattern="[A-Za-z0-9]{3,12}"
-																maxlength='12' title='由英文或数字所组成的3~12字元'></td>
-
-														</tr>
-														
-														
-															<td>名称</td>
-															<td><input type="text" name="name"
-																required="required" placeholder="请输入用户昵称" maxlength='12'>
-																<input type="button" name="check" value="检查昵称"></td>
-														</tr>
-														<tr>
-															<td>身分</td>
-
-															<c:if test="${type.contains(\"1\") }">
-																<td><select name="level">
-																		<option value="总代理">总代理</option>
-																		<option value="代理">代理</option>
-																</select></td>
-															</c:if>
-															<c:if
-																test="${type.contains(\"2\")||type.contains(\"3\") }">
-																<td><select name="level">
-
-																		<option value="代理">代理</option>
-																</select></td>
-															</c:if>
-
-														</tr>
-														<tr>
-															<td>
-															<input type="hidden" name='memberNo' value="${member.memberNo}"> 
-															<input type="hidden" name="memberVONo" value="${memberVO.account}">
-															<input type="hidden" name="url" value="menu29">
-																<input type="hidden" name="action" value="memberUpdate">
-															</td>
-															<td><input type="submit" name="" value="送出">
-															</td>
-														</tr>
-													</tbody>
-												</table>
-											</form>
-										</div>
-									</div>
-									<hr>
-									<h4>
-										<i class="fa fa-angle-right"></i> 新增会员
-									</h4>
-									<div class="container" style="max-width: 400px;`">
-										<form action="member.do" method="post">
-											<table
-												class="table table-bordered table-striped table-condensed">
-												<thead>
-													<tr>
-														<th></th>
-														<th></th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>账户</td>
-														<td>帐号系统会自行产生</td>
-													</tr>
-													<tr>
-														<td>密码</td>
-														<td><input type="password" name="password"></td>
-													</tr>
-													<tr>
-														<td>名称</td>
-														<td><input type="text" name="name"></td>
-													</tr>
-													<tr>
-														<td>权限</td>
-														<c:if test="${type.contains(\"1\") }">
-															<td><select name="level">
-																	<option value="总代理">总代理</option>
-																	<option value="代理">代理</option>
-															</select></td>
-														</c:if>
-														<c:if
-															test="${type.contains(\"2\")||type.contains(\"3\") }">
-															<td><select name="level">
-
-																	<option value="代理">代理</option>
-															</select></td>
-														</c:if>
-													</tr>
-													<tr>
-														<td><input
-															type="hidden" name="superior"
-															value="${memberVO.superior},"> <input
-															type="hidden" name="acc" value="${memberVO.account}">
-															<input type="hidden" name="action" value="memInsert">
-															<input type="hidden" name="url" value="menu29">
-														</td>
-														<td><input type="submit" name="" value="新增">
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</form>
-									</div>
-								</div>
-							</div></c:if>  
+							          <div class="changeMember" style="display: none;">
+							
+							           <hr>
+							           <h4>
+							            <i class="fa fa-angle-right"></i> 修改会员
+							           </h4>
+							           <div class="container" style="max-width: 400px;">
+							            <form action="member.do" method="post">
+							             <table
+							              class="table table-bordered table-striped table-condensed">
+							              <thead>
+							               <tr>
+							                <th></th>
+							                <th></th>
+							               </tr>
+							              </thead>
+							              <tbody>
+							               <tr>
+							                <td>用户编号</td>
+							                <td><input type="text" name="memberNo"
+							                 readonly="readonly" class='memberNo'></td>
+							               </tr>
+							               <tr>
+							                <td>用户账户</td>
+							                <td><input type="text" name="account"
+							                 readonly="readonly" class='account'></td>
+							               </tr>
+							
+							               <!--  
+							               <tr>
+							                <td>名称</td>
+							                <td><input type="text" name="name"
+							                 required="required" placeholder="请输入用户昵称"
+							                 maxlength='12'> <input type="button"
+							                 name="check" value="检查昵称"></td>
+							               </tr>
+							               
+							               <tr>
+							                <td>密码</td>
+							                <td><input type="password" name="password"
+							                 placeholder="请输入密码" required
+							                 pattern="[A-Za-z0-9]{3,12}" maxlength='12'
+							                 title='由英文或数字所组成的3~12字元'></td>
+							               </tr>
+							-->
+							               <!--  抓值 select的value  判斷是否是代理 若是 show出input欄位 輸入費率 -->
+							               <tr>
+							                <td>费率</td>
+							                <td><input type="text" name="commission"></td>
+							               </tr>
+							               <tr>
+							                <td><input type="hidden" name='memberNo'
+							                 value="${member.memberNo}"> <input
+							                 type="hidden" name="memberVONo"
+							                 value="${memberVO.account}"> <input
+							                 type="hidden" name="url" value="menu29"> <input
+							                 type="hidden" name="action" value="memberUpdate">
+							                </td>
+							                <td><input type="submit" name="" value="送出">
+							                </td>
+							               </tr>
+							              </tbody>
+							             </table>
+							            </form>
+							           </div>
+							          </div>
+							          <hr>
+							          <h4>
+							           <i class="fa fa-angle-right"></i> 新增会员
+							          </h4>
+							          <div class="container" style="max-width: 400px;`">
+							           <form action="member.do" method="post">
+							            <table
+							             class="table table-bordered table-striped table-condensed">
+							             <thead>
+							              <tr>
+							               <th></th>
+							               <th></th>
+							              </tr>
+							             </thead>
+							             <tbody>
+							              <tr>
+							               <td>账户</td>
+							               <td>帐号系统会自行产生</td>
+							              </tr>
+							              <tr>
+							               <td>密码</td>
+							               <td><input type="password" name="password"
+							                placeholder="请输入密码" required pattern="[A-Za-z0-9]{3,12}"
+							                maxlength='12' title='由英文或数字所组成的3~12字元'></td>
+							              </tr>
+							              <tr>
+							               <td>名称</td>
+							               <td><input type="text" name="name"
+							                required="required" placeholder="请输入用户昵称" maxlength='12'>
+							               </td>
+							              </tr>
+							              <tr>
+							               <td>权限</td>
+							               <c:if test="${type.contains(\"1\") }">
+							                <td><select name="level" class="level_select">
+							                  <option value="总代理">总代理</option>
+							                  <option value="代理">代理</option>
+							                </select></td>
+							               </c:if>
+							              </tr>
+							              <tr>
+							               <!--  抓值 select的value  判斷是否是代理 若是 show出input欄位 輸入費率 -->
+							               <td>费率</td>
+							               <td><input type="text" name="commission"
+							                class="commission_select" disabled="disabled"></td>
+							              </tr>
+							              <tr>
+							               <td><input type="hidden" name="superior"
+							                value="${memberVO.superior},"> <input
+							                type="hidden" name="acc" value="${memberVO.account}">
+							                <input type="hidden" name="action" value="memInsert">
+							                <input type="hidden" name="url" value="menu29">
+							               </td>
+							               <td><input type="submit" name="" value="新增">
+							               </td>
+							              </tr>
+							             </tbody>
+							            </table>
+							           </form>
+							          </div>
+							         </div>
+							        </div>
+							       </c:if>
 							<!-- ==================================系统管理=================================== -->
 							<div id="menu30" class="tab-pane fade">
 								<div class="model content-panel ">

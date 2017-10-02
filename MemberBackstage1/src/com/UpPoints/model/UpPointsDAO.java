@@ -7,8 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.member.model.MemberVO;
+
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_TR;
 
 public class UpPointsDAO implements UpPointsInterface {
 
@@ -19,7 +22,7 @@ public class UpPointsDAO implements UpPointsInterface {
 	
 	private static final String INSERT_STMT = "INSERT INTO uppoints"
 			+ "(memberNo,name,loginIP,level,points,status,time,type,account)"
-			+ "VALUES(?,? , ? , ? , ?,'未付款',?,?,?)";
+			+ "VALUES(?,? , ? , ? , ?,?,?,?,?)";
 	
 	private static final String UPDATE_STMT = "UPDATE uppoints SET "
 			+ "NAME = ?,"	
@@ -33,8 +36,8 @@ public class UpPointsDAO implements UpPointsInterface {
 	private static final String GET_ALL = "SELECT * FROM uppoints ";
 	private static final String GET_ALL_BY_UP = "SELECT * FROM uppoints where type='上分'";
 	private static final String GET_ALL_BY_DOWN = "SELECT * FROM uppoints where type='下分'";
-	private static final String GET_ALL_BY_UP2 = "SELECT * FROM uppoints where type='上分' and account=? or member=?";
-	private static final String GET_ALL_BY_DOWN2 = "SELECT * FROM uppoints where type='下分' and account=? or member=?";
+	private static final String GET_ALL_BY_UP2 = "SELECT * FROM uppoints where type='上分' and account=? or memberNo=?";
+	private static final String GET_ALL_BY_DOWN2 = "SELECT * FROM uppoints where type='下分' and account=? or memberNO=?";
 	
 	@Override
 	public void add(UpPointsVO uppointsVO) {
@@ -50,10 +53,11 @@ public class UpPointsDAO implements UpPointsInterface {
 			pstmt.setString(2, uppointsVO.getName());
 			pstmt.setString(3, uppointsVO.getLoginIP());
 			pstmt.setString(4, uppointsVO.getLevel());
-			pstmt.setInt(5, uppointsVO.getPoints());
-			pstmt.setString(6, uppointsVO.getTime());
-			pstmt.setString(7, uppointsVO.getType());
-			pstmt.setString(8, uppointsVO.getAccount());
+			pstmt.setString(5, uppointsVO.getStatus());
+			pstmt.setInt(6, uppointsVO.getPoints());
+			pstmt.setString(7, uppointsVO.getTime());
+			pstmt.setString(8, uppointsVO.getType());
+			pstmt.setString(9, uppointsVO.getAccount());
 			
 			pstmt.executeUpdate();
 
@@ -555,4 +559,74 @@ public class UpPointsDAO implements UpPointsInterface {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	@Override
+	public List<UpPointsVO> getAll(Map<String, String[]> map) {
+		List<UpPointsVO> uppointsList = new ArrayList<UpPointsVO>();
+		UpPointsVO uppointsVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			String finalSQL = "select * from uppoints  "
+		          + jdbcUtil_CompositeQuery_TR.get_WhereCondition(map)
+		          + "order by addPointsNo";
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				uppointsVO = new UpPointsVO();
+				uppointsVO.setAddPointsNo(rs.getInt("addPointsNo"));
+				uppointsVO.setMemberNo(rs.getInt("memberNO"));
+				uppointsVO.setName(rs.getString("name"));
+				uppointsVO.setLoginIP(rs.getString("loginIP"));
+				uppointsVO.setLevel(rs.getString("level"));
+				uppointsVO.setPoints(rs.getInt("points"));
+				uppointsVO.setStatus(rs.getString("status"));
+				uppointsVO.setTime(rs.getString("time"));
+				uppointsVO.setType(rs.getString("type"));
+				uppointsVO.setAccount(rs.getString("account"));
+				uppointsList.add(uppointsVO);
+			}
+	
+			// Handle any SQL errors
+		} catch (ClassNotFoundException ce) {
+			throw new RuntimeException("嚙碾嚙瘤 嚙瞌嚙踝蕭嚙羯 " + ce.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("嚙璀嚙踝蕭嚙踝蕭嚙踝蕭嚙踝蕭嚙瞋嚙豬潘蕭嚙踝蕭嚙瘤  嚙踝蕭嚙瞌嚙磊嚙踝蕭嚙踝蕭 " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return uppointsList;
+	}
+	
 }

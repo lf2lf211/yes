@@ -24,8 +24,8 @@ public class Jdbcmysql {
 
 
 			
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/memberbackstage", "root", "");
-//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mari", "root", "@hkhs7396");
+//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/memberbackstage", "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mari", "root", "@hkhs7396");
 
 
 			

@@ -9,6 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import com.UpPoints.model.UpPointsVO;
+
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_TR;
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_member;
 
 public class MemberDAO implements MemberInterface {
 
@@ -560,6 +566,80 @@ public class MemberDAO implements MemberInterface {
 		return nameList;
 	}
 	
+	
+	@Override
+	public List<MemberVO> getAll(Map<String, String[]> map) {
+		List<MemberVO> memebrList = new ArrayList<MemberVO>();
+		MemberVO memberVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			String finalSQL = "select * from member  "
+		          + jdbcUtil_CompositeQuery_member.get_WhereCondition(map)
+		          + "order by memberNo";
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				memberVO = new MemberVO();
+				memberVO.setMemberNo(rs.getInt("memberNO"));
+				memberVO.setAccount(rs.getString("Account"));
+				memberVO.setPassword(rs.getString("Password"));
+				memberVO.setName(rs.getString("name"));
+				memberVO.setBalance(rs.getDouble("balance"));
+				memberVO.setLoginIP(rs.getString("loginIP"));
+				memberVO.setLoginTime(rs.getString("loginTime"));
+				memberVO.setLevel(rs.getString("level"));
+				memberVO.setState(rs.getString("state"));
+				memberVO.setSuperior(rs.getString("superior"));
+				memberVO.setSuperior2(rs.getString("superior2"));				
+				memberVO.setCommission(rs.getInt("commission"));
+				memebrList.add(memberVO);
+				}
+			
+			
+	
+			// Handle any SQL errors
+		} catch (ClassNotFoundException ce) {
+			throw new RuntimeException("嚙碾嚙瘤 嚙瞌嚙踝蕭嚙羯 " + ce.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("嚙璀嚙踝蕭嚙踝蕭嚙踝蕭嚙踝蕭嚙瞋嚙豬潘蕭嚙踝蕭嚙瘤  嚙踝蕭嚙瞌嚙磊嚙踝蕭嚙踝蕭 " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return memebrList;
+	}
+	
+	
 
 	public static void main(String[] args) {
 		// end of while
@@ -613,4 +693,7 @@ public class MemberDAO implements MemberInterface {
 
 
 	}
+	
+	
+	
 }
