@@ -16,7 +16,7 @@ import com.member.model.MemberVO;
 
 import net.sf.json.JSONObject;
 
-@WebServlet("/AjaxServlet.do")
+@WebServlet("/ajaxservlet.do")
 public class AjaxServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -30,33 +30,38 @@ public class AjaxServlet extends HttpServlet {
 
 		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
-
+		System.out.println("-------連接到ajaxServlet----------");
+		
+		//抓取index.jsp name的值
 		String name = request.getParameter("name");
+		System.out.println(name);
 		
 		MemberService memberService = new MemberService();
 		List<MemberVO> memberVO= memberService.getAllName(name);
 		
+		System.out.println(memberVO.isEmpty());
 		
 		
-//		
-//		HashMap<String, String> userInfoMap = new HashMap<String, String>();
-//
-//		userInfoMap.put("name", name);
-////		userInfoMap.put("name1", "名字1");
-////		userInfoMap.put("name2", "名字2");
-////		userInfoMap.put("name3", "名字3");
-//		
-//		String userInfo = userInfoMap.isEmpty()?"0":"1";
-//		//System.out.println("Hashmap is empty?"+userInfoMap.isEmpty());
-//		
-//
-//		JSONObject responseJSONObject = new JSONObject();
-//		responseJSONObject.putAll(userInfoMap);
-//	   // System.out.printf( "JSON: %s",responseJSONObject.toString(2));
 
-		
-//		PrintWriter out = response.getWriter();
-//		out.println(responseJSONObject);
+
+		//
+		// HashMap<String, String> userInfoMap = new HashMap<String, String>();
+		//
+		// userInfoMap.put("name", name);
+		//// userInfoMap.put("name1", "名字1");
+		//// userInfoMap.put("name2", "名字2");
+		//// userInfoMap.put("name3", "名字3");
+		//
+		// String userInfo = userInfoMap.isEmpty()?"0":"1";
+		// //System.out.println("Hashmap is empty?"+userInfoMap.isEmpty());
+		//
+		//
+		// JSONObject responseJSONObject = new JSONObject();
+		// responseJSONObject.putAll(userInfoMap);
+		// // System.out.printf( "JSON: %s",responseJSONObject.toString(2));
+
+		// PrintWriter out = response.getWriter();
+		// out.println(responseJSONObject);
 
 	}
 

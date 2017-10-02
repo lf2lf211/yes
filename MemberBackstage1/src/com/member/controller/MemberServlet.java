@@ -240,7 +240,7 @@ public class MemberServlet extends HttpServlet {
 		///////////////////////////////// 存新增會員值
 		// 新增會員 代理
 		if ("memInsert".equals(action)) {
-			
+
 			String account;
 
 			String a = "1";
@@ -288,7 +288,9 @@ public class MemberServlet extends HttpServlet {
 			String url = req.getParameter("url");
 			String superior = req.getParameter("superior") + account;
 			String superior2 = req.getParameter("superior2");
-			Integer commission = Integer.parseInt(req.getParameter("commission"));
+
+			int commission = Integer.parseInt(req.getParameter("commission"));
+
 			
 			if("总代理".equals(level)){
 				commission=85;
@@ -331,7 +333,7 @@ public class MemberServlet extends HttpServlet {
 			}
 		}
 
-		if ("enableMember".equals(action) || "disableMember".equals(action)) {
+		if ("changeState".equals(action)) {
 
 			List<String> checkMsgs = new LinkedList<String>();
 			req.setAttribute("checkMsgs", checkMsgs);
@@ -340,10 +342,19 @@ public class MemberServlet extends HttpServlet {
 				String state = req.getParameter("state");
 				String url = req.getParameter("url");
 				String memberVONo = req.getParameter("memberVONo");
+				System.out.println(state);
+				
+				if("启用".equals(state)){
+					state = "停用";
+				}else{
+					state = "启用";
+				}
+				
 				MemberService memberService = new MemberService();
 				MemberVO memberVO = memberService.getOneMemberVO(memberNo);
 				memberVO.setState(state);
 				memberService.updateMemberVO(memberVO);
+				
 				List<MemberVO> list = memberService.getAllSuperior(memberVONo);
 				session.setAttribute("search", list);
 				List<MemberVO> list2 = memberService.getAllSuperior2(memberVONo);
@@ -366,24 +377,32 @@ public class MemberServlet extends HttpServlet {
 			try {
 				int memberNo = Integer.parseInt(req.getParameter("memberNo"));
 				String memberVONo = req.getParameter("memberVONo");
-				String password = req.getParameter("password");
-				String name = req.getParameter("name");
-				String level = req.getParameter("level");
+//				String password = req.getParameter("password");
+//				String name = req.getParameter("name");
+//				String level = req.getParameter("level");
 				String url = req.getParameter("url");
+				int commission = Integer.parseInt(req.getParameter("commission"));
+				System.out.println(commission);
 				
-
-				if (password.length() < 3 || password.length() > 12) {
-					checkMsgs.add("密码错误");
-					System.out.println("gggggggggg");
-					// req.getRequestDispatcher("login.jsp").forward(req, res);
-				}
-
+//
+//				if (password.length() < 3 || password.length() > 12) {
+//					checkMsgs.add("密码错误");
+//					System.out.println("gggggggggg");
+//					// req.getRequestDispatcher("login.jsp").forward(req, res);
+//				}
+				
+////				if("总代理".equals(level)){
+//					commission=85;
+//				}
+				
+				System.out.println(commission);
 				MemberService memberService = new MemberService();
 				MemberVO memberVO = memberService.getOneMemberVO(memberNo);
 
-				memberVO.setPassword(password);
-				memberVO.setName(name);
-				memberVO.setLevel(level);
+//				memberVO.setPassword(password);
+//				memberVO.setName(name);
+//				memberVO.setLevel(level);
+				memberVO.setCommission(commission);
 
 				if (!checkMsgs.isEmpty()) {
 					session.setAttribute("checkMsgs", checkMsgs);

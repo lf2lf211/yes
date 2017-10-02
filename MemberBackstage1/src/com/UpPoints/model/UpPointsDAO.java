@@ -37,7 +37,9 @@ public class UpPointsDAO implements UpPointsInterface {
 	private static final String GET_ALL_BY_UP = "SELECT * FROM uppoints where type='上分'";
 	private static final String GET_ALL_BY_DOWN = "SELECT * FROM uppoints where type='下分'";
 	private static final String GET_ALL_BY_UP2 = "SELECT * FROM uppoints where type='上分' and account=? or memberNo=?";
-	private static final String GET_ALL_BY_DOWN2 = "SELECT * FROM uppoints where type='下分' and account=? or memberNO=?";
+
+	private static final String GET_ALL_BY_DOWN2 = "SELECT * FROM uppoints where type='下分' and account=? or memberNo=?";
+
 	
 	@Override
 	public void add(UpPointsVO uppointsVO) {
