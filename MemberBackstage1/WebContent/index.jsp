@@ -3057,19 +3057,8 @@ ThirdPartyPaymentSvc ThirdPartyPaymentSvc = new ThirdPartyPaymentSvc();
 						});
 	</script>
 	<script type="application/javascript">
-		
-		
-<<<<<<< HEAD
-=======
-		
-		
-		
-		
-		
-		
-		
-		
->>>>>>> refs/remotes/origin/bigfatfatfatfatwu
+	
+	
                 $(document).ready(function() {
                     $("#date-popover").popover({ html: true, trigger: "manual" });
                     $("#date-popover").hide();
@@ -3102,14 +3091,6 @@ ThirdPartyPaymentSvc ThirdPartyPaymentSvc = new ThirdPartyPaymentSvc();
                     var to = $("#" + id).data("to");
                     console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
                 }
-                
-<<<<<<< HEAD
-=======
-
-	
-	
->>>>>>> refs/remotes/origin/bigfatfatfatfatwu
-	
 	</script>
 
 </body>
