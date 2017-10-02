@@ -167,7 +167,6 @@ public class MemberServlet extends HttpServlet {
 		///////////////////////////////// 存新增會員值
 		// 新增會員 代理
 		if ("memInsert".equals(action)) {
-			System.out.print("XXXXXXXXXXX");
 			String account;
 
 			String a = "1";
