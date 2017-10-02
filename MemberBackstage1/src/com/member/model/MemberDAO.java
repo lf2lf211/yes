@@ -36,8 +36,8 @@ public class MemberDAO implements MemberInterface {
 	private static final String FIND_BY_ACCOUNT = "SELECT * FROM MEMber WHERE account = ?";
 	private static final String GET_ALL_BY_SUPERIOR = "SELECT * FROM MEMber where superior like ?  order by memberNO";
 	private static final String GET_ALL_BY_SUPERIOR2 = "SELECT * FROM MEMber where superior2 like ?  order by memberNO";
-	private static final String GET_ALL = "SELECT * FROM Member ";
-	private static final String GET_ALL_NAME = "SELECT name FROM Member WHERE name= ?";
+	private static final String GET_ALL = "SELECT * FROM MEMber ";
+	private static final String GET_ALL_NAME = "SELECT name FROM MEMber WHERE name= ?";
 
 
 	@Override
